@@ -1,0 +1,13 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+!lib/*.jar
+
+*.sublime-*
+/build/
+/doc/
+/bin/
