@@ -3,6 +3,7 @@
 	<name>Robot Java 2015</name>
 	<comment></comment>
 	<projects>
+		<project>robolibj</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
