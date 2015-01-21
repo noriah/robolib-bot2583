@@ -4,9 +4,9 @@
 	<classpathentry kind="var" path="networktables" sourcepath="networktables.sources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/robolibj"/>
-	<classpathentry kind="lib" path="/home/wolf/wpilib/java/current/lib/RoboLibJ.jar" sourcepath="/home/wolf/wpilib/java/current/lib/RoboLibJ-sources.jar">
+	<classpathentry kind="lib" path="/robolibj/dist/RoboLibJ.jar" sourcepath="/robolibj/dist/RoboLibJ-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/home/wolf/wpilib/java/current/lib/RoboLibJ-docs.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/robolibj/dist/RoboLibJ-docs.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
