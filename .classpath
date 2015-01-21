@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="var" path="wpilib" sourcepath="wpilib.sources"/>
 	<classpathentry kind="var" path="networktables" sourcepath="networktables.sources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RoboLibJ"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/RoboLibJ"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/robolibj"/>
+	<classpathentry kind="lib" path="/home/wolf/wpilib/java/current/lib/RoboLibJ.jar" sourcepath="/home/wolf/wpilib/java/current/lib/RoboLibJ-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/home/wolf/wpilib/java/current/lib/RoboLibJ-docs.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
