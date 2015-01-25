@@ -39,14 +39,14 @@ public class WestwoodBot extends RoboLibBot {
     public WestwoodBot(){
         super("Stacker", "1.0.0");
         enableDebug(true);
-        TableSender.setEnabled(false);
+        TableSender.setEnabled(true);
     }
 
     public void robotInit(){
        motor1 = new Victor(PWMChannel.Channel0, "Left Motor", PowerChannel.Channel0);
        motor2 = new Victor(PWMChannel.Channel1, "Right Motor", PowerChannel.Channel3);
-       motor1.enableSafety(false);
-       motor2.enableSafety(false);
+       motor1.setSafetyEnabled(false);
+       motor2.setSafetyEnabled(false);
        motor2.setInverted(true);
 
         stick0 = new XBoxController(JSID.JS0);
@@ -90,8 +90,8 @@ public class WestwoodBot extends RoboLibBot {
                b = b * table.getNumber("JS Scaler");
                d = d * table.getNumber("JS Scaler");
 
-               motor1.setSpeed(d);
-               motor2.setSpeed(b);
+               motor1.setSpeed(stick0.getLeftY());
+               motor2.setSpeed(stick0.getRightY());
             }
         };
     }
