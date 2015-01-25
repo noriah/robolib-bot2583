@@ -15,6 +15,7 @@
 
 package org.team2583.rcyclrsh;
 
+import io.github.robolib.control.HIDAxis;
 import io.github.robolib.control.Joystick.JSID;
 import io.github.robolib.control.XBoxController;
 import io.github.robolib.framework.RoboLibBot;
@@ -33,6 +34,7 @@ public class WestwoodBot extends RoboLibBot {
     
     private Victor motor1, motor2;
     private XBoxController stick0;
+    private HIDAxis leftX, leftY, rightX, rightY;
     ITable table;
 
     public WestwoodBot(){
@@ -48,19 +50,27 @@ public class WestwoodBot extends RoboLibBot {
        motor2.setInverted(true);
 
         stick0 = new XBoxController(JSID.JS0);
+        leftX = stick0.getAxis_LeftX();
+        leftY = stick0.getAxis_LeftY();
+        rightX = stick0.getAxis_RightX();
+        rightY = stick0.getAxis_RightY();
+        leftX.setDeadband(0.1);
+        leftY.setDeadband(0.1);
+        rightX.setDeadband(0.1);
+        rightY.setDeadband(0.1);
         table = getRobotTable().getSubTable("JS");
         table.putNumber("JS Scaler", 0.75);
         new TeleopMode(){
 
            double a, b, c, d;
             public void run(){
-                a = b = stick0.getLeftY();
+                a = b = leftY.get();
                 if(a < 0){
                     b = -a;
                 }
                 a = a * b;
 
-                c = d = stick0.getRightX();
+                c = d = rightX.get();
                 if(c < 0){
                     d = -c;
                 }
@@ -88,8 +98,8 @@ public class WestwoodBot extends RoboLibBot {
                b = b * table.getNumber("JS Scaler");
                d = d * table.getNumber("JS Scaler");
 
-               motor1.setSpeed(stick0.getLeftY());
-               motor2.setSpeed(stick0.getRightY());
+               motor1.setSpeed(leftY.get());
+               motor2.setSpeed(rightY.get());
             }
         };
     }
