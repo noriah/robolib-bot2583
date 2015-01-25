@@ -21,7 +21,6 @@ import io.github.robolib.framework.RoboLibBot;
 import io.github.robolib.iface.PWM.PWMChannel;
 import io.github.robolib.output.Victor;
 import io.github.robolib.robot.TeleopMode;
-import io.github.robolib.util.TableSender;
 import io.github.robolib.util.PDP.PowerChannel;
 
 import edu.wpi.first.wpilibj.tables.ITable;
@@ -39,7 +38,6 @@ public class WestwoodBot extends RoboLibBot {
     public WestwoodBot(){
         super("Stacker", "1.0.0");
         enableDebug(true);
-        TableSender.setEnabled(true);
     }
 
     public void robotInit(){
