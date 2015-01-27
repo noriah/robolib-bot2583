@@ -36,6 +36,9 @@ public class LCDManager {
         m_sem = new Object();
         lcd0 = new LCD_LCM1602(Port.kOnboard);
         lcd0.clear();
+        lcd0.noBlink();
+        lcd0.noCursor();
+        lcd0.noAutoscroll();
         m_thread = new Thread(() -> run(), "LCD Manager");
         m_thread.setPriority(((Thread.NORM_PRIORITY + Thread.MAX_PRIORITY) / 2) - 5);
     }
