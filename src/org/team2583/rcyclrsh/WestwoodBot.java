@@ -21,8 +21,11 @@ import io.github.robolib.control.XBoxController;
 import io.github.robolib.framework.RoboLibBot;
 import io.github.robolib.iface.PWM.PWMChannel;
 import io.github.robolib.output.Victor;
+import io.github.robolib.pneumatic.Solenoid;
+import io.github.robolib.pneumatic.SolenoidBase.SolenoidChannel;
 import io.github.robolib.robot.TeleopMode;
 import io.github.robolib.util.PDP.PowerChannel;
+import io.github.robolib.util.TableSender;
 
 import edu.wpi.first.wpilibj.tables.ITable;
 
@@ -35,11 +38,18 @@ public class WestwoodBot extends RoboLibBot {
     private Victor motor1, motor2;
     private XBoxController stick0;
     private HIDAxis leftX, leftY, rightX, rightY;
+    private Solenoid sl0;
+    private Solenoid sl1;
     ITable table;
+    private LCDManager m_lcdManager;
 
     public WestwoodBot(){
         super("Stacker", "1.0.0");
         enableDebug(true);
+        m_lcdManager = new LCDManager();
+        m_lcdManager.startThread();
+
+        TableSender.setEnabled(false);
     }
 
     public void robotInit(){
@@ -58,8 +68,12 @@ public class WestwoodBot extends RoboLibBot {
         leftY.setDeadband(0.1);
         rightX.setDeadband(0.1);
         rightY.setDeadband(0.1);
+        
+        sl0 = new Solenoid(SolenoidChannel.Channel0);
+        sl1 = new Solenoid(SolenoidChannel.Channel1);
         table = getRobotTable().getSubTable("JS");
         table.putNumber("JS Scaler", 0.75);
+
         new TeleopMode(){
 
            double a, b, c, d;
@@ -98,8 +112,10 @@ public class WestwoodBot extends RoboLibBot {
                b = b * table.getNumber("JS Scaler");
                d = d * table.getNumber("JS Scaler");
 
-               motor1.setSpeed(leftY.get());
-               motor2.setSpeed(rightY.get());
+               motor1.setSpeed(d);
+               motor2.setSpeed(b);
+               sl0.set(stick0.getRawButton_A());
+               sl1.set(stick0.getRawButton_B());
             }
         };
     }
