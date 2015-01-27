@@ -17,6 +17,7 @@ package org.team2583.rcyclrsh;
 
 import io.github.robolib.framework.DriverStation;
 import io.github.robolib.iface.I2C.Port;
+import io.github.robolib.util.LCD_LCM1602;
 import io.github.robolib.util.RoboRIO;
 import io.github.robolib.util.StringUtils;
 
