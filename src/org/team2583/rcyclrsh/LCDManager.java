@@ -27,14 +27,14 @@ import io.github.robolib.util.StringUtils;
  */
 public class LCDManager {
     
-    private LCD lcd0;
+    private LCD_LCM1602 lcd0;
     private Object m_sem;
     private static volatile boolean m_run = true;
     private Thread m_thread;
     
     public LCDManager(){
         m_sem = new Object();
-        lcd0 = new LCD(Port.kOnboard);
+        lcd0 = new LCD_LCM1602(Port.kOnboard);
         lcd0.clear();
         m_thread = new Thread(() -> run(), "LCD Manager");
         m_thread.setPriority(((Thread.NORM_PRIORITY + Thread.MAX_PRIORITY) / 2) - 5);
