@@ -17,9 +17,11 @@ package org.team2583.rcyclrsh;
 
 import io.github.robolib.framework.DriverStation;
 import io.github.robolib.iface.I2C.Port;
-import io.github.robolib.util.LCD_LCM1602;
+import io.github.robolib.sensor.HMC5883L;
+import io.github.robolib.sensor.MPU6050;
+import io.github.robolib.util.ArdEx;
 import io.github.robolib.util.RoboRIO;
-import io.github.robolib.util.StringUtils;
+import io.github.robolib.util.Timer;
 
 /**
  * 
@@ -29,17 +31,22 @@ import io.github.robolib.util.StringUtils;
 public class LCDManager {
     
     private LCD_LCM1602 lcd0;
-    private Object m_sem;
+//    private Object m_sem;
     private static volatile boolean m_run = true;
     private Thread m_thread;
+    private HMC5883L mag;
+    private MPU6050 accl;
+    private ArdEx ad0;
     
     public LCDManager(){
-        m_sem = new Object();
+//        m_sem = new Object();
         lcd0 = new LCD_LCM1602(Port.kOnboard);
-        lcd0.clear();
-        lcd0.noBlink();
-        lcd0.noCursor();
-        lcd0.noAutoscroll();
+        accl = new MPU6050(Port.kOnboard);
+        accl.setI2CMasterModeEnabled(false);
+
+        mag = new HMC5883L(Port.kOnboard);
+        
+        ad0 = new ArdEx(Port.kOnboard, (byte)0x05);
         m_thread = new Thread(() -> run(), "LCD Manager");
         m_thread.setPriority(((Thread.NORM_PRIORITY + Thread.MAX_PRIORITY) / 2) - 5);
     }
@@ -55,18 +62,23 @@ public class LCDManager {
     
     private void run(){
         
+        lcd0.clear();
+        lcd0.noBlink();
+        lcd0.noCursor();
+        lcd0.clear();
+        Timer.delay(0.01);
         while(m_run){
             lcd0.home();
-            lcd0.writeString("R: " + StringUtils.getNumber2DWithUnits(RoboRIO.getVoltage(), "V"));
+            lcd0.writeString(String.format("%s %05.2f%s", "R", RoboRIO.getVoltage(), "V"));
+            lcd0.setCursor(1, 0);
+            lcd0.writeString(String.format("%s %06.2f %s", "G",  mag.getHeadingXDeg(), "Deg"));
             
             lcd0.setCursor(3, 0);
             lcd0.writeString("  DS: " + (DriverStation.isDSAttached() ? "Connected" : "Nope     "));
-            synchronized (m_sem) {
-                try {
-                    m_sem.wait(100);
-                } catch (InterruptedException e) {
-                }
-            }
+            ad0.digitalWrite(13, false);
+            Timer.delay(0.075);
+            ad0.digitalWrite(13, true);
+            Timer.delay(0.075);
         }
         
     }
