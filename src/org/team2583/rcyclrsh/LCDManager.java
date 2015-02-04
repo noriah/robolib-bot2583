@@ -16,12 +16,11 @@
 package org.team2583.rcyclrsh;
 
 import io.github.robolib.iface.I2C.Port;
-import io.github.robolib.sensor.HMC5883L;
-import io.github.robolib.sensor.RIO_Accelerometer;
-import io.github.robolib.sensor.mpu6050.MPU6050;
-import io.github.robolib.util.RoboRIO;
+import io.github.robolib.module.RoboRIO;
+import io.github.robolib.module.sensor.HMC5883L;
+import io.github.robolib.module.sensor.RIO_Accelerometer;
+import io.github.robolib.module.sensor.mpu6050.MPU6050;
 import io.github.robolib.util.Timer;
-import io.github.robolib.util.log.Logger;
 
 /**
  * 

@@ -3,45 +3,41 @@ package org.team2583.rcyclrsh.drivetrain;
 import org.team2583.rcyclrsh.RMap;
 
 import io.github.robolib.command.Subsystem;
-import io.github.robolib.output.DriveBase;
-import io.github.robolib.output.SpeedController;
-import io.github.robolib.output.Talon;
+import io.github.robolib.module.DriveBase;
+import io.github.robolib.module.controller.SpeedController;
+import io.github.robolib.module.controller.Talon;
 
 
 /**
  *
  */
-public class SS_Drivetrain extends Subsystem implements RMap {
+public class SS_Drivetrain extends Subsystem {
     
     private SpeedController m_motorFrontLeft;
     private SpeedController m_motorFrontRight;
     private SpeedController m_motorRearLeft;
     private SpeedController m_motorRearRight;
     
+//    private Encoder m_encoderFrontLeft = new Encoder()
+    
     private DriveBase m_driveBase;
+    
+    private static SS_Drivetrain m_instance;
+    
+    public static final SS_Drivetrain getInstance(){
+        return m_instance == null ? m_instance = new SS_Drivetrain() : m_instance;
+    }
     
     private SS_Drivetrain(){
         super("Drive Base Subsystem");
         
-        m_motorFrontLeft = new Talon(
-                DRIVE_BASE_MOTOR_FRONT_LEFT_PWM_CHANNEL,
-                "Front Left Drive Motor",
-                DRIVE_BASE_MOTOR_FRONT_LEFT_POWER_CHANNEL);
+        m_motorFrontLeft = (Talon)RMap.getNewSpeedController("motor_drive_front_left");
         
-        m_motorFrontRight = new Talon(
-                DRIVE_BASE_MOTOR_FRONT_RIGHT_PWM_CHANNEL,
-                "Front Right Drive Motor",
-                DRIVE_BASE_MOTOR_FRONT_RIGHT_POWER_CHANNEL);
+        m_motorFrontRight = (Talon)RMap.getNewSpeedController("motor_drive_front_right");
         
-        m_motorRearLeft = new Talon(
-                DRIVE_BASE_MOTOR_REAR_LEFT_PWM_CHANNEL,
-                "Rear Left Drive Motor",
-                DRIVE_BASE_MOTOR_REAR_LEFT_POWER_CHANNEL);
+        m_motorRearLeft = (Talon)RMap.getNewSpeedController("motor_drive_back_left");
         
-        m_motorRearRight = new Talon(
-                DRIVE_BASE_MOTOR_REAR_RIGHT_PWM_CHANNEL,
-                "Rear RIght Drive Motor",
-                DRIVE_BASE_MOTOR_REAR_RIGHT_POWER_CHANNEL);
+        m_motorRearRight = (Talon)RMap.getNewSpeedController("motor_drive_back_right");
         
         m_driveBase = new DriveBase(
                 m_motorFrontLeft, m_motorFrontRight,
