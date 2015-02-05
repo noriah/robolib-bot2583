@@ -6,6 +6,7 @@ import io.github.robolib.command.Subsystem;
 import io.github.robolib.module.DriveBase;
 import io.github.robolib.module.controller.SpeedController;
 import io.github.robolib.module.controller.Talon;
+import io.github.robolib.util.log.Logger;
 
 
 /**
@@ -42,6 +43,12 @@ public class SS_Drivetrain extends Subsystem {
         m_driveBase = new DriveBase(
                 m_motorFrontLeft, m_motorFrontRight,
                 m_motorRearLeft, m_motorRearRight);
+    }
+    
+    public final void mecanum(double a, double b, double c){
+        m_driveBase.mecanum(a, b, c);
+        Logger.get(this).info(m_motorFrontLeft);
+        Logger.get(this).info(m_motorFrontRight);
     }
 
     public void initDefaultCommand() {

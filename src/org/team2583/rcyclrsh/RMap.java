@@ -130,7 +130,7 @@ public class RMap {
             return (SpeedController) cont.newInstance(
                     PWMChannel.values()[arr.getInt("pwm_channel")],
                     arr.getString("name"),
-                    PowerChannel.values()[arr.getInt("power_channe")]);
+                    PowerChannel.values()[arr.getInt("power_channel")]);
         } catch (NoSuchMethodException | SecurityException
                 | InstantiationException | IllegalAccessException
                 | IllegalArgumentException | InvocationTargetException

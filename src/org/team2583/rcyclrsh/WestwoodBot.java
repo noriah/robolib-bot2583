@@ -34,8 +34,4 @@ public class WestwoodBot extends RoboLibBot {
         TableSender.setEnabled(false);
         RMap.getInstance();
     }
-
-    public void robotInit(){
-    }
-
 }
