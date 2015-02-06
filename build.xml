@@ -104,6 +104,12 @@
       todir="${username}@${target}:${deploy.dir}"
       password="${password}"
       trust="true" />
+  	
+  	<echo>[Project-deploy] Copying RMap file to RoboRIO.</echo>
+  	<scp file="${rmap.file}"
+  	      todir="${username}@${target}:${deploy.dir}"
+  	      password="${password}"
+  	      trust="true" />
 
     <scp file="${wpilib.ant.dir}/robotCommand"
       todir="${username}@${target}:${command.dir}"
