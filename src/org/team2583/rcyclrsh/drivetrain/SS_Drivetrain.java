@@ -1,9 +1,8 @@
 package org.team2583.rcyclrsh.drivetrain;
 
-import org.team2583.rcyclrsh.RMap;
-
 import io.github.robolib.command.Subsystem;
 import io.github.robolib.module.DriveBase;
+import io.github.robolib.module.RobotMap;
 import io.github.robolib.module.controller.SpeedController;
 import io.github.robolib.module.controller.Talon;
 import io.github.robolib.util.log.Logger;
@@ -32,13 +31,10 @@ public class SS_Drivetrain extends Subsystem {
     private SS_Drivetrain(){
         super("Drive Base Subsystem");
         
-        m_motorFrontLeft = (Talon)RMap.getNewSpeedController("motor_drive_front_left");
-        
-        m_motorFrontRight = (Talon)RMap.getNewSpeedController("motor_drive_front_right");
-        
-        m_motorRearLeft = (Talon)RMap.getNewSpeedController("motor_drive_back_left");
-        
-        m_motorRearRight = (Talon)RMap.getNewSpeedController("motor_drive_back_right");
+        m_motorFrontLeft = (Talon)RobotMap.get("motor_drive_front_left");
+        m_motorFrontRight = (Talon)RobotMap.get("motor_drive_front_right");
+        m_motorRearLeft = (Talon)RobotMap.get("motor_drive_back_left");
+        m_motorRearRight = (Talon)RobotMap.get("motor_drive_back_right");
         
         m_driveBase = new DriveBase(
                 m_motorFrontLeft, m_motorFrontRight,
@@ -47,8 +43,6 @@ public class SS_Drivetrain extends Subsystem {
     
     public final void mecanum(double a, double b, double c){
         m_driveBase.mecanum(a, b, c);
-        Logger.get(this).info(m_motorFrontLeft);
-        Logger.get(this).info(m_motorFrontRight);
     }
 
     public void initDefaultCommand() {

@@ -1,32 +1,30 @@
 {
-    "motor_drive_front_left": {
-      "type": "talon",
-      "name": "Front Left Drive Motor",
-      "pwm_channel": 0,
-      "power_channel": 0
-    },
-    "motor_drive_front_right": {
-      "type": "talon",
-      "name": "Front Right Drive Motor",
-      "pwm_channel": 1,
-      "power_channel": 1
-    },
-    "motor_drive_back_left": {
-      "type": "talon",
-      "name": "Rear Left Drive Motor",
-      "pwm_channel": 2,
-      "power_channel": 2
-    },
-    "motor_drive_back_right": {
-      "type": "talon",
-      "name": "Rear Right Drive Motor",
-      "pwm_channel": 3,
-      "power_channel": 3
-    },
-    "motor_drawer": {
-      "type": "victor",
-      "name": "Drawer Motor",
-      "pwm_channel": 4,
-      "power_channel": 4
-    }
+  "motor_drive_front_left": {
+    "type": "speed_controller",
+    "data": ["talon", 0, "Front Left Drive Motor", 0]
+  },
+  "motor_drive_front_right": {
+    "type": "speed_controller",
+    "data": ["talon", 1, "Front Right Drive Motor", 1]
+  },
+  "motor_drive_back_left": {
+    "type": "speed_controller",
+    "data": ["talon", 2, "Rear Left Drive Motor", 2]
+  },
+  "motor_drive_back_right": {
+    "type": "speed_controller",
+    "data": ["talon", 3, "Rear Right Drive Motor", 3]
+  },
+  "motor_drawer": {
+    "type": "speed_controller",
+    "data": ["victor", 4, "Drawer Motor", 4]
+  },
+  "solenoid_tailgate": {
+    "type": "solenoid",
+    "data": ["single", 0]
+  },
+  "solenoid_drawerRaiser": {
+    "type": "solenoid",
+    "data": ["single", 1]
+  }
 }

@@ -1,15 +1,12 @@
 package org.team2583.rcyclrsh.drawer;
 
-import org.team2583.rcyclrsh.RMap;
-
 import io.github.robolib.command.Subsystem;
-import io.github.robolib.iface.DigitalIO.DigitalChannel;
 import io.github.robolib.module.LimitSystem;
+import io.github.robolib.module.RobotMap;
 import io.github.robolib.module.actuator.Solenoid;
-import io.github.robolib.module.actuator.SolenoidBase.SolenoidChannel;
 import io.github.robolib.module.controller.LimitedController;
-import io.github.robolib.module.controller.Talon;
 import io.github.robolib.module.controller.Victor;
+import io.github.robolib.module.iface.DigitalIO.DigitalChannel;
 import io.github.robolib.module.sensor.LimitSwitch;
 import io.github.robolib.module.sensor.LimitSwitch.SwitchType;
 
@@ -23,14 +20,20 @@ import io.github.robolib.module.sensor.LimitSwitch.SwitchType;
 public class SS_Drawer extends Subsystem {
     
     private LimitedController m_drawerMotor;
-    private Solenoid m_tailGate;
+    public Solenoid m_tailGate;
     private Solenoid m_drawerRaiser;
+    
+    private static SS_Drawer m_instance;
+    
+    public static final SS_Drawer getInstance(){
+        return m_instance == null ? m_instance = new SS_Drawer() : m_instance;
+    }
     
     private SS_Drawer(){
         super("Drawer Subsystem");
         
         m_drawerMotor = new LimitedController(
-                (Victor)RMap.getNewSpeedController("motor_drawer"),
+                (Victor)RobotMap.get("motor_drawer"),
                 new LimitSystem(
                         new LimitSwitch(
                                 DigitalChannel.Channel0,
@@ -39,8 +42,8 @@ public class SS_Drawer extends Subsystem {
                                 DigitalChannel.Channel1,
                                 SwitchType.OPEN)));
         
-        m_tailGate = new Solenoid(SolenoidChannel.Channel0);
-        m_drawerRaiser = new Solenoid(SolenoidChannel.Channel1);
+        m_tailGate = (Solenoid)RobotMap.get("solenoid_tailgate");
+        m_drawerRaiser = (Solenoid)RobotMap.get("solenoid_drawerRaiser");
         
     }
     

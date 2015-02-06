@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 noriah <vix@noriah.dev>.
+\ * Copyright (c) 2015 noriah <vix@noriah.dev>.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -15,8 +15,11 @@
 
 package org.team2583.rcyclrsh;
 
+import org.team2583.rcyclrsh.drawer.SS_Drawer;
+import org.team2583.rcyclrsh.drivetrain.SS_Drivetrain;
+
 import io.github.robolib.RoboLibBot;
-import io.github.robolib.util.TableSender;
+import io.github.robolib.module.RobotMap;
 
 /**
  * 
@@ -27,11 +30,13 @@ public class WestwoodBot extends RoboLibBot {
 
     public WestwoodBot(){
         super("Stacker", "1.0.0");
+        RobotMap.setMapFile("/home/lvuser/rmap.json");
         enableDebug(true);
         m_lcdManager = new LCDManager();
         m_lcdManager.startThread();
 
-        TableSender.setEnabled(false);
-        RMap.getInstance();
+//        TableSender.setEnabled(false);
+        SS_Drivetrain.getInstance();
+        SS_Drawer.getInstance();
     }
 }

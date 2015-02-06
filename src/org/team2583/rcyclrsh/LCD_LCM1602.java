@@ -18,7 +18,7 @@ package org.team2583.rcyclrsh;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.github.robolib.iface.I2C;
+import io.github.robolib.module.iface.I2C;
 import io.github.robolib.util.Timer;
 
 /**
