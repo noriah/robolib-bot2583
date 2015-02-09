@@ -13,35 +13,32 @@
  * included in all copies or substantial portions of the Software.
  */
 
-package org.team2583.rcyclrsh;
+package org.team2583.rcyclrsh.drivetrain;
 
-import org.team2583.rcyclrsh.drawer.Drawer;
-import org.team2583.rcyclrsh.drivetrain.Drivetrain;
+import org.team2583.rcyclrsh.drivetrain.Drivetrain.DriveMode;
 
-import io.github.robolib.RoboLibBot;
-import io.github.robolib.module.RobotMap;
-import io.github.robolib.util.TableSender;
+import io.github.robolib.command.Command;
+
 
 /**
- * 
+ *
  * @author noriah <vix@noriah.dev>
  */
-public class WestwoodBot extends RoboLibBot {
-//    private LCDManager m_lcdManager;
+public class CMDChangeDrivemode extends Command {
     
-    public WestwoodBot(){
-        super("Stacker", "1.0.0");
-        RobotMap.setMapFile("/home/lvuser/rmap.json");
-        enableDebug(true);
-//        m_lcdManager = new LCDManager();
-//        m_lcdManager.startThread();
-        
-        new OI();
-        
-
-        TableSender.setEnabled(false);
-        
-        Drivetrain.initialize();
-        Drawer.initialize();
+    private final DriveMode m_mode;
+    
+    public CMDChangeDrivemode(final DriveMode mode){
+        super("C_ChangeDrivemode - " + mode);
+        requires(Drivetrain.getInstance());
+        m_mode = mode;
     }
+
+    protected void initialize(){ m_mode.init(); }
+    
+    protected void execute(){}
+    protected boolean isFinished(){ return true; }
+    protected void end(){}
+    protected void interrupted(){}
+
 }

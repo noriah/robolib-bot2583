@@ -13,35 +13,23 @@
  * included in all copies or substantial portions of the Software.
  */
 
-package org.team2583.rcyclrsh;
+package org.team2583.rcyclrsh.drawer;
 
-import org.team2583.rcyclrsh.drawer.Drawer;
-import org.team2583.rcyclrsh.drivetrain.Drivetrain;
-
-import io.github.robolib.RoboLibBot;
-import io.github.robolib.module.RobotMap;
-import io.github.robolib.util.TableSender;
+import io.github.robolib.command.CommandGroup;
+import io.github.robolib.command.WaitCommand;
 
 /**
  * 
+ *
  * @author noriah <vix@noriah.dev>
  */
-public class WestwoodBot extends RoboLibBot {
-//    private LCDManager m_lcdManager;
+public class CGEjectBoxes extends CommandGroup {
     
-    public WestwoodBot(){
-        super("Stacker", "1.0.0");
-        RobotMap.setMapFile("/home/lvuser/rmap.json");
-        enableDebug(true);
-//        m_lcdManager = new LCDManager();
-//        m_lcdManager.startThread();
-        
-        new OI();
-        
-
-        TableSender.setEnabled(false);
-        
-        Drivetrain.initialize();
-        Drawer.initialize();
+    public CGEjectBoxes(){
+        super("CGEjectBoxes");
+        addSequential(new CMDExtendEjector());
+        addSequential(new WaitCommand(1.0));
+        addSequential(new CMDRetractEjector());
     }
+
 }
