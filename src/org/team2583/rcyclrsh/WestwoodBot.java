@@ -19,8 +19,8 @@ import org.team2583.rcyclrsh.drawer.Drawer;
 import org.team2583.rcyclrsh.drivetrain.Drivetrain;
 
 import io.github.robolib.RoboLibBot;
-import io.github.robolib.module.RobotMap;
 import io.github.robolib.util.TableSender;
+import io.github.robolib.util.mapper.RobotMap;
 
 /**
  * 

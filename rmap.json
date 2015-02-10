@@ -17,7 +17,7 @@
   },
   "motor_drawer": {
     "type": "speed_controller",
-    "data": ["victor", 4, "Drawer Motor", 4]
+    "data": ["canjaguar", 7, "Drawer Motor", 4]
   },
   "solenoid_tailgate": {
     "type": "solenoid",

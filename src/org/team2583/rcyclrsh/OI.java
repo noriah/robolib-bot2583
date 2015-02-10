@@ -15,6 +15,9 @@
 
 package org.team2583.rcyclrsh;
 
+import org.team2583.rcyclrsh.drawer.CGEjectBoxes;
+import org.team2583.rcyclrsh.drawer.CMDDrawerInContinue;
+import org.team2583.rcyclrsh.drawer.CMDDrawerOutContinue;
 import org.team2583.rcyclrsh.drivetrain.CMDChangeDrivemode;
 import org.team2583.rcyclrsh.drivetrain.Drivetrain.DriveMode;
 
@@ -37,6 +40,14 @@ public final class OI {
     public static final HIDAxis AXIS_DRIVER_RIGHT_X;
     public static final HIDAxis AXIS_DRIVER_RIGHT_Y;
     public static final HIDButton BTN_SPEED_SCALE;
+    public static final HIDButton BTN_DRIVEMODE_MECANUM;
+    public static final HIDButton BTN_DRIVEMODE_ARCADE;
+    public static final HIDButton BTN_DRIVEMODE_TANK;
+    
+    public static final HIDButton BTN_EJECT_BOXES;
+    
+    public static final HIDButton BTN_DRAWER_OUT;
+    public static final HIDButton BTN_DRAWER_IN;
     
     static{
 
@@ -46,12 +57,22 @@ public final class OI {
         AXIS_DRIVER_LEFT_Y = JS_DRIVER.getAxisLeftY();
         AXIS_DRIVER_RIGHT_X = JS_DRIVER.getAxisRightX();
         AXIS_DRIVER_RIGHT_Y = JS_DRIVER.getAxisRightY();
+        BTN_DRIVEMODE_MECANUM = JS_DRIVER.getButtonA();
+        BTN_DRIVEMODE_ARCADE = JS_DRIVER.getButtonB();
+        BTN_DRIVEMODE_TANK = JS_DRIVER.getButtonX();
+        BTN_EJECT_BOXES = JS_DRIVER.getButtonY();
+        BTN_DRAWER_OUT = JS_DRIVER.getButtonStart();
+        BTN_DRAWER_IN = JS_DRIVER.getButtonSelect();
         BTN_SPEED_SCALE = JS_DRIVER.getButtonLeftShoulder();
 
-        JS_DRIVER.getButtonA().runWhenPressed(new CMDChangeDrivemode(DriveMode.MECANUM));
-        JS_DRIVER.getButtonB().runWhenPressed(new CMDChangeDrivemode(DriveMode.ARCADE));
-        JS_DRIVER.getButtonX().runWhenPressed(new CMDChangeDrivemode(DriveMode.TANK));
+        BTN_DRIVEMODE_MECANUM.runWhenPressed(new CMDChangeDrivemode(DriveMode.MECANUM));
+        BTN_DRIVEMODE_ARCADE.runWhenPressed(new CMDChangeDrivemode(DriveMode.ARCADE));
+        BTN_DRIVEMODE_TANK.runWhenPressed(new CMDChangeDrivemode(DriveMode.TANK));
         
+        BTN_EJECT_BOXES.runWhenPressed(new CGEjectBoxes());
+        
+        BTN_DRAWER_OUT.runWhileHeld(new CMDDrawerOutContinue());
+        BTN_DRAWER_IN.runWhileHeld(new CMDDrawerInContinue());
     }
     
     

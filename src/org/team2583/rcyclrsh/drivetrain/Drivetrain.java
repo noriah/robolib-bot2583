@@ -18,9 +18,9 @@ package org.team2583.rcyclrsh.drivetrain;
 import io.github.robolib.command.Command;
 import io.github.robolib.command.Subsystem;
 import io.github.robolib.module.DriveBase;
-import io.github.robolib.module.RobotMap;
 import io.github.robolib.module.controller.Talon;
 import io.github.robolib.util.log.Logger;
+import io.github.robolib.util.mapper.RobotMap;
 
 /**
  *

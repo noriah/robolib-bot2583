@@ -17,13 +17,13 @@ package org.team2583.rcyclrsh.drawer;
 
 import io.github.robolib.command.Subsystem;
 import io.github.robolib.module.LimitSystem;
-import io.github.robolib.module.RobotMap;
 import io.github.robolib.module.actuator.Solenoid;
+import io.github.robolib.module.controller.CANJaguar;
 import io.github.robolib.module.controller.LimitedController;
-import io.github.robolib.module.controller.Victor;
 import io.github.robolib.module.iface.DigitalIO.DigitalChannel;
 import io.github.robolib.module.sensor.LimitSwitch;
 import io.github.robolib.module.sensor.LimitSwitch.SwitchType;
+import io.github.robolib.util.mapper.RobotMap;
 
 /**
  * 
@@ -38,7 +38,7 @@ public class Drawer extends Subsystem {
     
     public static final void initialize(){
         m_drawerMotor = new LimitedController(
-                (Victor)RobotMap.get("motor_drawer"),
+                RobotMap.get("motor_drawer", CANJaguar.class),
                 new LimitSystem(
                         new LimitSwitch(
                                 DigitalChannel.Channel0,
