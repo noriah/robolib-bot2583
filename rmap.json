@@ -1,30 +1,36 @@
 {
-  "motor_drive_front_left": {
-    "type": "speed_controller",
-    "data": ["talon", 0, "Front Left Drive Motor", 0]
-  },
-  "motor_drive_front_right": {
-    "type": "speed_controller",
-    "data": ["talon", 1, "Front Right Drive Motor", 1]
-  },
-  "motor_drive_back_left": {
-    "type": "speed_controller",
-    "data": ["talon", 2, "Rear Left Drive Motor", 2]
-  },
-  "motor_drive_back_right": {
-    "type": "speed_controller",
-    "data": ["talon", 3, "Rear Right Drive Motor", 3]
-  },
-  "motor_drawer": {
-    "type": "speed_controller",
-    "data": ["canjaguar", 7, "Drawer Motor", 4]
-  },
-  "solenoid_tailgate": {
-    "type": "solenoid",
-    "data": ["single", 0]
-  },
-  "solenoid_drawerRaiser": {
-    "type": "solenoid",
-    "data": ["single", 1]
-  }
+//  Module Key Name                Motor Type      PWM Port/CAN ID    Motor name for Code debug    Power Channel
+  "motor_drive_front_left":         ["talon",             1,          "Front Left Drive Motor",         2],
+  "motor_drive_front_right":        ["talon",             3,          "Front Right Drive Motor",        0],
+  "motor_drive_back_left":          ["talon",             0,          "Rear Left Drive Motor",          3],
+  "motor_drive_back_right":         ["talon",             2,          "Rear Right Drive Motor",         1],
+  
+  "motor_drawer":                   ["victor",            4,          "Drawer Motor",                   4],
+  
+  "motor_box_lift_left":            ["canjag",            8,          "Left Box Lift",                  8],
+  "motor_box_lift_right":           ["canjag",            1,          "Right Box Lift",                 11],
+  
+  "motor_elevator_left":            ["canjag",            4,          "Left Elevator",                  9],
+  "motor_elevator_right":           ["canjag",            2,          "Right Elevator",                 10],
+
+//  Module Key Name                Solenoid Type    Solenoid Channel    Solenoid Channel 2
+  "solenoid_tailgate":              ["solenoid",          0],
+  "solenoid_drawerRaiser":          ["solenoid",          1],
+  "solenoid_boxEjector":            ["solenoid",          2],
+
+  "solenoid_left_":                 ["solenoid",          3],
+
+//  Module Key Name                Digital Input Type   Digital Channel 
+  "limit_switch_drawer_in":         ["limit_switch",      0,          "open"],
+  "limit_switch_drawer_out":        ["limit_switch",      1,          "open"],
+  "limit_switch_lifter_left":       ["limit_switch",      2,          "open"],
+  "limit_switch_lifter_right":      ["limit_switch",      3,          "open"],
+
+  "limited_controller_drawer": [
+    "limited_controller", "motor_drawer", [
+      "double_limit_system",
+      "limit_switch_drawer_in",
+      "limit_switch_drawer_out"
+    ]
+  ]
 }

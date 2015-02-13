@@ -13,7 +13,7 @@
  * included in all copies or substantial portions of the Software.
  */
 
-package org.team2583.rcyclrsh.elevator;
+package org.team2583.rcyclrsh.boxlift;
 
 import io.github.robolib.command.Subsystem;
 import io.github.robolib.identifier.BooleanSource;
@@ -24,34 +24,35 @@ import io.github.robolib.util.mapper.RobotMap;
  *
  * @author noriah <vix@noriah.dev>
  */
-public class Elevator extends Subsystem {
+public class BoxLift extends Subsystem {
     
-    private static CANJaguar m_motorLeft;
-    private static CANJaguar m_motorRight;
+    private static CANJaguar m_motorLiftLeft;
+    private static CANJaguar m_motorLiftRight;
     
     private static BooleanSource m_limitLeft;
     private static BooleanSource m_limitRight;
+//    private static S
     
     public static final void initialize(){
-        m_motorLeft = RobotMap.getModule("motor_elevator_left");
-        m_motorRight = RobotMap.getModule("motor_elevator_right");
         
-        if(RobotMap.getBoolean(""))
-        m_limitLeft = () -> m_motorLeft.getForwardLimitOK();
-        m_limitRight = () -> m_motorLeft.getForwardLimitOK();
+        m_motorLiftLeft = RobotMap.getModule("motor_box_lift_left");
+        m_motorLiftRight = RobotMap.getModule("motor_box_lift_right");
+        
+        m_limitLeft = () -> m_motorLiftLeft.getForwardLimitOK();
+        m_limitRight = () -> m_motorLiftRight.getForwardLimitOK();
     }
 
-    private static final Elevator m_instance = new Elevator();
+    private static final BoxLift m_instance = new BoxLift();
 
-    public static final Elevator getInstance(){
+    public static final BoxLift getInstance(){
         return m_instance;
     }
 
-    private Elevator(){
-        super("Lifter");
+    private BoxLift(){
+        super("BoxLift");
     }
 
-    public void initDefaultCommand() {
+    public void initDefaultCommand()    {
         //setDefaultCommand();
     }
 }

@@ -16,13 +16,8 @@
 package org.team2583.rcyclrsh.drawer;
 
 import io.github.robolib.command.Subsystem;
-import io.github.robolib.module.LimitSystem;
 import io.github.robolib.module.actuator.Solenoid;
-import io.github.robolib.module.controller.CANJaguar;
 import io.github.robolib.module.controller.LimitedController;
-import io.github.robolib.module.iface.DigitalIO.DigitalChannel;
-import io.github.robolib.module.sensor.LimitSwitch;
-import io.github.robolib.module.sensor.LimitSwitch.SwitchType;
 import io.github.robolib.util.mapper.RobotMap;
 
 /**
@@ -37,19 +32,21 @@ public class Drawer extends Subsystem {
     private static Solenoid m_boxEjector;
     
     public static final void initialize(){
-        m_drawerMotor = new LimitedController(
-                RobotMap.get("motor_drawer", CANJaguar.class),
-                new LimitSystem(
-                        new LimitSwitch(
-                                DigitalChannel.Channel0,
-                                SwitchType.OPEN),
-                        new LimitSwitch(
-                                DigitalChannel.Channel1,
-                                SwitchType.OPEN)));
+//        m_drawerMotor = new LimitedController(
+//                RobotMap.get("motor_drawer"),
+//                new LimitSystem(
+//                        new LimitSwitch(
+//                                DigitalChannel.Channel0,
+//                                SwitchType.OPEN),
+//                        new LimitSwitch(
+//                                DigitalChannel.Channel1,
+//                                SwitchType.OPEN)));
         
-        m_tailGate = RobotMap.get("solenoid_tailgate", Solenoid.class);
-        m_drawerRaiser = RobotMap.get("solenoid_drawerRaiser", Solenoid.class);
-        m_boxEjector = RobotMap.get("solenoid_boxEjector", Solenoid.class);
+        m_drawerMotor = RobotMap.getModule("limited_controller_drawer");
+        
+        m_tailGate = RobotMap.getModule("solenoid_tailgate");
+        m_drawerRaiser = RobotMap.getModule("solenoid_drawerRaiser");
+        m_boxEjector = RobotMap.getModule("solenoid_boxEjector"); 
     }
     
     private static final Drawer m_instance = new Drawer();

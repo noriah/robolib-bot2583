@@ -28,13 +28,15 @@ public class CMDChangeDrivemode extends Command {
     
     private final DriveMode m_mode;
     
-    public CMDChangeDrivemode(final DriveMode mode){
+    public CMDChangeDrivemode(DriveMode mode){
         super("C_ChangeDrivemode - " + mode);
         requires(Drivetrain.getInstance());
         m_mode = mode;
     }
 
-    protected void initialize(){ m_mode.init(); }
+    protected void initialize(){
+        Drivetrain.setDriveMode(m_mode);
+    }
     
     protected void execute(){}
     protected boolean isFinished(){ return true; }

@@ -15,10 +15,11 @@
 
 package org.team2583.rcyclrsh;
 
+import io.github.robolib.module.LCD2004;
 import io.github.robolib.module.RoboRIO;
 import io.github.robolib.module.iface.I2C.Port;
 import io.github.robolib.module.sensor.HMC5883L;
-import io.github.robolib.module.sensor.RIO_Accelerometer;
+import io.github.robolib.module.sensor.InternalAccelerometer;
 import io.github.robolib.module.sensor.mpu6050.MPU6050;
 import io.github.robolib.util.Timer;
 
@@ -29,7 +30,7 @@ import io.github.robolib.util.Timer;
  */
 public class LCDManager {
     
-    private LCD_LCM1602 lcd0;
+    private LCD2004 lcd0;
 //    private Object m_sem;
     private static volatile boolean m_run = true;
     private Thread m_thread;
@@ -69,7 +70,7 @@ public class LCDManager {
         
         mag = new HMC5883L(Port.ONBOARD);
 //        ad0 = new ArdEx(Port.MXP, (byte)0x05);
-        lcd0 = new LCD_LCM1602(Port.MXP);
+        lcd0 = new LCD2004(Port.MXP);
         
         lcd0.clear();
         lcd0.noBlink();
@@ -88,7 +89,7 @@ public class LCDManager {
         byte fifoCount;
         byte mpuIntStatus;
         byte packetSize = (byte) mpu.dmpGetFIFOPacketSize();
-        RIO_Accelerometer ra = new RIO_Accelerometer();
+        InternalAccelerometer ra = new InternalAccelerometer();
         while(m_run){
             lcd0.home();
             lcd0.writeString(String.format("Batt %05.2fV", RoboRIO.getVoltage()));
