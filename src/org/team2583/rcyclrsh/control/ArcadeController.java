@@ -1,7 +1,6 @@
 package org.team2583.rcyclrsh.control;
 
 import io.github.robolib.control.Joystick;
-import io.github.robolib.control.Joystick.JSID;
 
 
 
@@ -30,8 +29,6 @@ public class ArcadeController extends Joystick{
     public static final int BUTTON_FLIPPER_TOGGLE = 2;
     
     public ArcadeController(final JSID port){
-        super(port);
-        addAxisButton(1, 0.5, -1.0);
-        addAxisButton(2, 0.5, -1.0);
+        super(port, 0, 14);
     }
 }

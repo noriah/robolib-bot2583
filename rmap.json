@@ -1,30 +1,110 @@
 {
-//  Module Key Name                Motor Type      PWM Port/CAN ID    Motor name for Code debug    Power Channel
-  "motor_drive_front_left":         ["talon",             1,          "Front Left Drive Motor",         2],
-  "motor_drive_front_right":        ["talon",             3,          "Front Right Drive Motor",        0],
-  "motor_drive_back_left":          ["talon",             0,          "Rear Left Drive Motor",          3],
-  "motor_drive_back_right":         ["talon",             2,          "Rear Right Drive Motor",         1],
+  "motor_drive_front_left": {
+    "type": "talon",
+    "device_channel": 1,
+    "description": "Front Left Drive Motor",
+    "power_channel": 2,
+    "inverted": false
+  },
+  "motor_drive_front_right": {
+    "type": "talon",  
+    "device_channel": 3,
+    "description": "Front Right Drive Motor",
+    "power_channel": 0,
+    "inverted": false
+  },
+  "motor_drive_back_left": {
+    "type": "talon",  
+    "device_channel": 0,
+    "description": "Rear Left Drive Motor", 
+    "power_channel": 3,
+    "inverted": false
+  },
+  "motor_drive_back_right": {
+    "type": "talon",  
+    "device_channel": 2,
+    "description": "Rear Right Drive Motor",
+    "power_channel": 1,
+    "inverted": false
+  },
   
-  "motor_drawer":                   ["victor",            4,          "Drawer Motor",                   4],
+  "motor_drawer": {
+    "type": "victor", 
+    "device_channel": 4,
+    "description": "Drawer Motor",          
+    "power_channel": 4,
+    "inverted": false
+  },
   
-  "motor_box_lift_left":            ["canjag",            8,          "Left Box Lift",                  8],
-  "motor_box_lift_right":           ["canjag",            1,          "Right Box Lift",                 11],
+  "motor_box_lift_left": {
+    "type": "canjag", 
+    "device_channel": 8,
+    "description": "Left Box Lift",         
+    "power_channel": 8,
+    "inverted": false
+  },
+  "motor_box_lift_right": {
+    "type": "canjag", 
+    "device_channel": 1,
+    "description": "Right Box Lift",        
+    "power_channel": 11,
+    "inverted": false
+  },
   
-  "motor_elevator_left":            ["canjag",            4,          "Left Elevator",                  9],
-  "motor_elevator_right":           ["canjag",            2,          "Right Elevator",                 10],
+  "motor_elevator_left": {
+    "type": "canjag", 
+    "device_channel": 4,
+    "description": "Left Elevator",         
+    "power_channel": 9,
+    "inverted": false
+  },
+  "motor_elevator_right": {
+    "type": "canjag", 
+    "device_channel": 2,
+    "description": "Right Elevator",        
+    "power_channel": 10,
+    "inverted": false
+  },
 
 //  Module Key Name                Solenoid Type    Solenoid Channel    Solenoid Channel 2
-  "solenoid_tailgate":              ["solenoid",          0],
-  "solenoid_drawerRaiser":          ["solenoid",          1],
-  "solenoid_boxEjector":            ["solenoid",          2],
-
-  "solenoid_left_":                 ["solenoid",          3],
+  "solenoid_tailgate": {
+    "type": "solenoid",
+    "channel": 0
+  },
+  "solenoid_drawerRaiser": {
+    "type": "solenoid",
+    "channel": 1
+  },
+  "solenoid_boxEjector": {
+    "type": "solenoid",
+    "channel": 2
+  },
+  "solenoid_left_": {
+    "type": "solenoid",
+    "channel": 3
+  },
 
 //  Module Key Name                Digital Input Type   Digital Channel 
-  "limit_switch_drawer_in":         ["limit_switch",      0,          "open"],
-  "limit_switch_drawer_out":        ["limit_switch",      1,          "open"],
-  "limit_switch_lifter_left":       ["limit_switch",      2,          "open"],
-  "limit_switch_lifter_right":      ["limit_switch",      3,          "open"],
+  "limit_switch_drawer_in": {
+    "type": "limit_switch",
+    "channel": 0,
+    "circuit_type": "open"
+  },
+  "limit_switch_drawer_out": {
+    "type": "limit_switch",
+    "channel": 1,
+    "circuit_type": "open"
+  },
+  "limit_switch_lifter_left": {
+    "type": "limit_switch",
+    "channel": 2,
+    "circuit_type": "open"
+  },
+  "limit_switch_lifter_right": {
+    "type": "limit_switch",
+    "channel": 3,
+    "circuit_type": "open"
+  },
 
   "limited_controller_drawer": [
     "limited_controller", "motor_drawer", [

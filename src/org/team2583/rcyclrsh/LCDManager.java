@@ -19,7 +19,6 @@ import io.github.robolib.module.LCD2004;
 import io.github.robolib.module.RoboRIO;
 import io.github.robolib.module.iface.I2C.Port;
 import io.github.robolib.module.sensor.HMC5883L;
-import io.github.robolib.module.sensor.InternalAccelerometer;
 import io.github.robolib.module.sensor.mpu6050.MPU6050;
 import io.github.robolib.util.Timer;
 
@@ -89,7 +88,6 @@ public class LCDManager {
         byte fifoCount;
         byte mpuIntStatus;
         byte packetSize = (byte) mpu.dmpGetFIFOPacketSize();
-        InternalAccelerometer ra = new InternalAccelerometer();
         while(m_run){
             lcd0.home();
             lcd0.writeString(String.format("Batt %05.2fV", RoboRIO.getVoltage()));
