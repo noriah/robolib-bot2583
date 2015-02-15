@@ -30,9 +30,9 @@ public class CMDRetractDrawer extends Command {
     }
 
     protected void initialize(){}
-    protected void execute(){ Drawer.retractDrawer(); }
-    protected boolean isFinished(){ return Drawer.getDrawerRetracted(); }
-    protected void end(){ Drawer.stopDrawer(); }
+    protected void execute(){ Drawer.retract(); }
+    protected boolean isFinished(){ return Drawer.isRetracted(); }
+    protected void end(){ Drawer.stop(); }
     protected void interrupted(){}
 
 }

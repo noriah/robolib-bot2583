@@ -15,16 +15,21 @@
 
 package org.team2583.rcyclrsh;
 
+import org.team2583.rcyclrsh.Hand.CMDLeftHandToggle;
+import org.team2583.rcyclrsh.boxlift.CMDTogglBoxeLift;
 import org.team2583.rcyclrsh.drawer.CGEjectBoxes;
 import org.team2583.rcyclrsh.drawer.CMDDrawerInContinue;
 import org.team2583.rcyclrsh.drawer.CMDDrawerOutContinue;
-import org.team2583.rcyclrsh.drivetrain.CMDChangeDrivemode;
-import org.team2583.rcyclrsh.drivetrain.Drivetrain.DriveMode;
+import org.team2583.rcyclrsh.drawer.CMDToggleTailgate;
+import org.team2583.rcyclrsh.elevator.CMDArmsDownContinue;
+import org.team2583.rcyclrsh.elevator.CMDArmsUpContinue;
 
 import io.github.robolib.control.HIDAxis;
 import io.github.robolib.control.HIDButton;
 import io.github.robolib.control.Joystick.JSID;
 import io.github.robolib.control.XBoxController;
+import io.github.robolib.module.sensor.LimitSwitch;
+import io.github.robolib.util.mapper.RobotMap;
 
 /**
  * The Operator Interface Class. Controls Things that interface with the operator.
@@ -40,14 +45,26 @@ public final class OI {
     public static final HIDAxis AXIS_DRIVER_RIGHT_X;
     public static final HIDAxis AXIS_DRIVER_RIGHT_Y;
     public static final HIDButton BTN_SPEED_SCALE;
-    public static final HIDButton BTN_DRIVEMODE_MECANUM;
-    public static final HIDButton BTN_DRIVEMODE_ARCADE;
-    public static final HIDButton BTN_DRIVEMODE_TANK;
+//    public static final HIDButton BTN_DRIVEMODE_MECANUM;
+//    public static final HIDButton BTN_DRIVEMODE_ARCADE;
+//    public static final HIDButton BTN_DRIVEMODE_TANK;
     
     public static final HIDButton BTN_EJECT_BOXES;
     
     public static final HIDButton BTN_DRAWER_OUT;
     public static final HIDButton BTN_DRAWER_IN;
+    
+    public static final HIDButton BTN_BOXES_TOGGLE;
+    
+    public static final HIDButton BTN_TOGGLE_GATE;
+    
+    public static final HIDButton BTN_ARM_TOGGLE;
+    
+    public static final HIDButton BTN_ARM_UP;
+    
+    public static final HIDButton BTN_ARM_DOWN;
+    
+    public static final LimitSwitch SWITCH_HAND_LEFT;
     
     static{
 
@@ -57,22 +74,40 @@ public final class OI {
         AXIS_DRIVER_LEFT_Y = JS_DRIVER.getAxisLeftY();
         AXIS_DRIVER_RIGHT_X = JS_DRIVER.getAxisRightX();
         AXIS_DRIVER_RIGHT_Y = JS_DRIVER.getAxisRightY();
-        BTN_DRIVEMODE_MECANUM = JS_DRIVER.getButtonA();
-        BTN_DRIVEMODE_ARCADE = JS_DRIVER.getButtonB();
-        BTN_DRIVEMODE_TANK = JS_DRIVER.getButtonX();
+        BTN_TOGGLE_GATE = JS_DRIVER.getButtonA();
+        BTN_BOXES_TOGGLE = JS_DRIVER.getButtonB();
         BTN_EJECT_BOXES = JS_DRIVER.getButtonY();
-        BTN_DRAWER_OUT = JS_DRIVER.getButtonStart();
-        BTN_DRAWER_IN = JS_DRIVER.getButtonSelect();
-        BTN_SPEED_SCALE = JS_DRIVER.getButtonLeftShoulder();
+        BTN_DRAWER_OUT = JS_DRIVER.getButtonSelect();
+        BTN_DRAWER_IN = JS_DRIVER.getButtonStart();
+        BTN_SPEED_SCALE = JS_DRIVER.getButtonRightStick();
+        
+        BTN_ARM_UP = JS_DRIVER.getButtonLeftShoulder();
+        
+        BTN_ARM_DOWN = JS_DRIVER.getButtonRightShoulder();
+        
+        BTN_ARM_TOGGLE = JS_DRIVER.getButtonX();
+        
+        SWITCH_HAND_LEFT = RobotMap.getModule("limit_switch_hand_left");
+//        SWITCH_HAND_RIGHT = RobotMap.getModule("limit_switch_hand_right");
 
-        BTN_DRIVEMODE_MECANUM.runWhenPressed(new CMDChangeDrivemode(DriveMode.MECANUM));
-        BTN_DRIVEMODE_ARCADE.runWhenPressed(new CMDChangeDrivemode(DriveMode.ARCADE));
-        BTN_DRIVEMODE_TANK.runWhenPressed(new CMDChangeDrivemode(DriveMode.TANK));
+//        BTN_DRIVEMODE_MECANUM.runWhenPressed(new CMDChangeDrivemode(DriveMode.MECANUM));
+//        BTN_DRIVEMODE_ARCADE.runWhenPressed(new CMDChangeDrivemode(DriveMode.ARCADE));
+//        BTN_DRIVEMODE_TANK.runWhenPressed(new CMDChangeDrivemode(DriveMode.TANK));
+        
+        BTN_BOXES_TOGGLE.runWhenPressed(new CMDTogglBoxeLift());
+        
+        BTN_TOGGLE_GATE.runWhenPressed(new CMDToggleTailgate());
+        
+        BTN_ARM_TOGGLE.runWhenPressed(new CMDLeftHandToggle());
         
         BTN_EJECT_BOXES.runWhenPressed(new CGEjectBoxes());
         
         BTN_DRAWER_OUT.runWhileHeld(new CMDDrawerOutContinue());
         BTN_DRAWER_IN.runWhileHeld(new CMDDrawerInContinue());
+        
+        BTN_ARM_DOWN.runWhileHeld(new CMDArmsDownContinue());
+        
+        BTN_ARM_UP.runWhileHeld(new CMDArmsUpContinue());
     }
     
     

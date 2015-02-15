@@ -1,4 +1,9 @@
 {
+
+  "drawer_speed": 0.6,
+  "armlift_speed": 1.0,
+  "boxlift_speed": 0.70,
+  
   "motor_drive_front_left": {
     "type": "talon",
     "device_channel": 1,
@@ -36,16 +41,16 @@
     "inverted": false
   },
   
-  "motor_box_lift_left": {
+  "motor_boxlift_left": {
     "type": "canjag", 
-    "device_channel": 8,
+    "device_channel": 4,
     "description": "Left Box Lift",         
     "power_channel": 8,
     "inverted": false
   },
-  "motor_box_lift_right": {
+  "motor_boxlift_right": {
     "type": "canjag", 
-    "device_channel": 1,
+    "device_channel": 2,
     "description": "Right Box Lift",        
     "power_channel": 11,
     "inverted": false
@@ -53,14 +58,14 @@
   
   "motor_elevator_left": {
     "type": "canjag", 
-    "device_channel": 4,
+    "device_channel": 8,
     "description": "Left Elevator",         
     "power_channel": 9,
     "inverted": false
   },
   "motor_elevator_right": {
     "type": "canjag", 
-    "device_channel": 2,
+    "device_channel": 1,
     "description": "Right Elevator",        
     "power_channel": 10,
     "inverted": false
@@ -71,19 +76,18 @@
     "type": "solenoid",
     "channel": 0
   },
-  "solenoid_drawerRaiser": {
+  "solenoid_boxEjector": {
     "type": "solenoid",
     "channel": 1
   },
-  "solenoid_boxEjector": {
+  "solenoid_left_hand": {
     "type": "solenoid",
-    "channel": 2
+    "channel": 4
   },
-  "solenoid_left_": {
+  "solenoid_right_hand": {
     "type": "solenoid",
-    "channel": 3
+    "channel": 5
   },
-
 //  Module Key Name                Digital Input Type   Digital Channel 
   "limit_switch_drawer_in": {
     "type": "limit_switch",
@@ -95,22 +99,24 @@
     "channel": 1,
     "circuit_type": "open"
   },
-  "limit_switch_lifter_left": {
+  "limit_switch_hand_left": {
     "type": "limit_switch",
     "channel": 2,
     "circuit_type": "open"
   },
-  "limit_switch_lifter_right": {
+  "limit_switch_hand_right": {
     "type": "limit_switch",
     "channel": 3,
     "circuit_type": "open"
   },
 
-  "limited_controller_drawer": [
-    "limited_controller", "motor_drawer", [
-      "double_limit_system",
-      "limit_switch_drawer_in",
-      "limit_switch_drawer_out"
-    ]
-  ]
+  "limited_controller_drawer": {
+    "type": "limited_controller",
+    "motor": "motor_drawer",
+    "system": {
+      "type": "double_limit_system",
+      "forward_limit": "limit_switch_drawer_in",
+      "reverse_limit": "limit_switch_drawer_out"
+    }
+  }
 }

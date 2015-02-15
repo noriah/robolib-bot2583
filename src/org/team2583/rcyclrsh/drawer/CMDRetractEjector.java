@@ -26,10 +26,10 @@ public class CMDRetractEjector extends Command {
     
     public CMDRetractEjector(){
         super("CMDRetractEjector");
-        requires(Drawer.getInstance());
+        requires(Ejector.getInstance());
     }
 
-    protected void initialize(){ Drawer.retractEjector(); }
+    protected void initialize(){ Ejector.retract(); }
     protected void execute(){}
     protected boolean isFinished(){ return true; }
     protected void end(){}

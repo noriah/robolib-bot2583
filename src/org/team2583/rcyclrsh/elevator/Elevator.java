@@ -16,7 +16,6 @@
 package org.team2583.rcyclrsh.elevator;
 
 import io.github.robolib.command.Subsystem;
-import io.github.robolib.identifier.BooleanSource;
 import io.github.robolib.module.controller.CANJaguar;
 import io.github.robolib.util.mapper.RobotMap;
 
@@ -29,16 +28,14 @@ public class Elevator extends Subsystem {
     private static CANJaguar m_motorLeft;
     private static CANJaguar m_motorRight;
     
-    private static BooleanSource m_limitLeft;
-    private static BooleanSource m_limitRight;
+    private static double lift_speed;
     
     public static final void initialize(){
         m_motorLeft = RobotMap.getModule("motor_elevator_left");
         m_motorRight = RobotMap.getModule("motor_elevator_right");
         
-        if(RobotMap.getBoolean(""))
-        m_limitLeft = () -> m_motorLeft.getForwardLimitOK();
-        m_limitRight = () -> m_motorLeft.getForwardLimitOK();
+        lift_speed = RobotMap.getNumber("armlift_speed");
+        armStop();
     }
 
     private static final Elevator m_instance = new Elevator();
@@ -49,6 +46,27 @@ public class Elevator extends Subsystem {
 
     private Elevator(){
         super("Lifter");
+    }
+    
+    protected static void armUp(){
+        setMotors(lift_speed);
+    }
+    
+    protected static void armDown(){
+        setMotors(-lift_speed);
+    }
+    
+    protected static void armStop(){
+        setMotors(0);
+    }
+    
+    protected static boolean getBottomLimit(){
+        return m_motorLeft.getReverseLimitOK();
+    }
+    
+    private static void setMotors(double value){
+        m_motorLeft.setSpeed(value);
+//        m_motorRight.setSpeed(value);
     }
 
     public void initDefaultCommand() {

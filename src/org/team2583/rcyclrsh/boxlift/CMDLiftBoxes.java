@@ -13,7 +13,7 @@
  * included in all copies or substantial portions of the Software.
  */
 
-package org.team2583.rcyclrsh.drawer;
+package org.team2583.rcyclrsh.boxlift;
 
 import io.github.robolib.command.Command;
 
@@ -21,32 +21,30 @@ import io.github.robolib.command.Command;
  *
  * @author noriah <vix@noriah.dev>
  */
-public class CMDDrawerInContinue extends Command {
+public class CMDLiftBoxes extends Command {
 
-    public CMDDrawerInContinue() {
-        super("CMDDrawerInContinue");
-        requires(Drawer.getInstance());
+    public CMDLiftBoxes() {
+        super("CMDLiftBoxes");
+        requires(BoxLift.getInstance());
     }
 
     /** Called just before this Command runs the first time */
-    protected void initialize() {
-    }
+    protected void initialize() {}
 
     /** Called repeatedly when this Command is scheduled to run */
     protected void execute() {
-
-        Drawer.retract();
+        BoxLift.liftUp();
     
     }
 
     /** Make this return true when this Command no longer needs to run execute() */
     protected boolean isFinished() {
-        return false;
+        return BoxLift.getTopLimit();
     }
 
     /** Called once after isFinished returns true */
     protected void end() {
-        Drawer.stop();
+        BoxLift.stopMotors();
     }
 
     /**

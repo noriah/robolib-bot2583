@@ -26,13 +26,14 @@ public class CMDExtendDrawer extends Command {
     
     public CMDExtendDrawer(){
         super("CMDExtendDrawer");
+        requires(Drawer.getInstance());
     }
 
     protected void initialize(){}
     
-    protected void execute(){ Drawer.extendDrawer(); }
-    protected boolean isFinished(){ return Drawer.getDrawerExtended(); }
-    protected void end(){ Drawer.stopDrawer(); }
+    protected void execute(){ Drawer.extend(); }
+    protected boolean isFinished(){ return Drawer.isExtended(); }
+    protected void end(){ Drawer.stop(); }
     protected void interrupted(){}
 
 }

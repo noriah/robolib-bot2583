@@ -26,10 +26,10 @@ public class CMDExtendEjector extends Command {
     
     public CMDExtendEjector(){
         super("CMDExtendEjector");
-        requires(Drawer.getInstance());
+        requires(Ejector.getInstance());
     }
 
-    protected void initialize(){ Drawer.extendEjector(); }
+    protected void initialize(){ Ejector.extend(); }
     protected void execute(){}
     protected boolean isFinished(){ return true; }
     protected void end(){}

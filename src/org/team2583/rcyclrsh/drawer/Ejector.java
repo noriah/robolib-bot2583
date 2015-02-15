@@ -16,56 +16,56 @@
 package org.team2583.rcyclrsh.drawer;
 
 import io.github.robolib.command.Subsystem;
-import io.github.robolib.module.controller.LimitedController;
+import io.github.robolib.module.actuator.Solenoid;
 import io.github.robolib.util.mapper.RobotMap;
 
 /**
- * 
+ *
  * @author noriah <vix@noriah.dev>
  */
-public class Drawer extends Subsystem {
+public class Ejector extends Subsystem {
+
+    private static Solenoid m_boxEjector;
     
-    private static LimitedController m_drawerMotor;
-    
-    private static double m_drawerSpeed;
-    
+    private static boolean m_extended;
     
     public static final void initialize(){
-        m_drawerMotor = RobotMap.getModule("limited_controller_drawer");
-        
-        m_drawerSpeed = RobotMap.getNumber("drawer_speed");
+        m_boxEjector = RobotMap.getModule("solenoid_boxEjector"); 
     }
-    
-    private static final Drawer m_instance = new Drawer();
-    
-    public static final Drawer getInstance(){
+
+    private static final Ejector m_instance = new Ejector();
+
+    public static final Ejector getInstance(){
         return m_instance;
     }
-    
-    private Drawer(){
-        super("Drawer Subsystem");
+
+    private Ejector(){
+        super("Ejector");
     }
 
     protected static final void extend(){
-        m_drawerMotor.setSpeed(m_drawerSpeed);
-    }
-    
-    protected static final void stop(){
-        m_drawerMotor.setSpeed(0);
+        m_boxEjector.set(Solenoid.Value.ON);
+        m_extended = true;
     }
     
     protected static final void retract(){
-        m_drawerMotor.setSpeed(-m_drawerSpeed);
+        m_boxEjector.set(Solenoid.Value.OFF);
+        m_extended = false;
     }
     
-    protected static final boolean isExtended(){
-        return m_drawerMotor.atFrontLimit();
+    protected static final void toggle(){
+        if(m_extended)
+            retract();
+        else
+            extend();
     }
     
-    protected static final boolean isRetracted(){
-        return m_drawerMotor.atBackLimit();
+    public static final boolean isExtended(){
+        return m_extended;
     }
 
-    public void initDefaultCommand(){}
+    public void initDefaultCommand() {
+        //setDefaultCommand();
+    }
 }
 

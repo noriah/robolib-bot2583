@@ -26,10 +26,10 @@ public class CMDRaiseTailgate extends Command {
     
     public CMDRaiseTailgate(){
         super("CMDRaiseTailgate");
-        requires(Drawer.getInstance());
+        requires(Tailgate.getInstance());
     }
 
-    protected void initialize(){ Drawer.raiseTailgate(); }
+    protected void initialize(){ Tailgate.raise(); }
     protected void execute(){}
     protected boolean isFinished(){ return true; }
     protected void end(){}
