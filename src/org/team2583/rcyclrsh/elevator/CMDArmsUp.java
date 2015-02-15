@@ -35,7 +35,7 @@ public class CMDArmsUp extends Command {
 
     /** Called repeatedly when this Command is scheduled to run */
     protected void execute() {
-        Elevator.armUp();
+        Elevator.up();
     }
 
     /** Make this return true when this Command no longer needs to run execute() */
@@ -45,7 +45,7 @@ public class CMDArmsUp extends Command {
 
     /** Called once after isFinished returns true */
     protected void end() {
-        Elevator.armStop();
+        Elevator.stop();
     }
 
     /**

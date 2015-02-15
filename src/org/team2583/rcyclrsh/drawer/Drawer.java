@@ -58,6 +58,9 @@ public class Drawer extends Subsystem {
         m_drawerMotor.setSpeed(-m_drawerSpeed);
     }
     
+    protected static final void toggle(){
+    }
+    
     protected static final boolean isExtended(){
         return m_drawerMotor.atFrontLimit();
     }

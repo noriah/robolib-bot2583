@@ -32,7 +32,7 @@ public class CMDTogglBoxeLift extends Command {
 
     /** Called just before this Command runs the first time */
     protected void initialize() {
-        if(BoxLift.getTopLimit()){
+        if(BoxLift.isAtTopLimit()){
             down.start();
         }else{
             up.start();

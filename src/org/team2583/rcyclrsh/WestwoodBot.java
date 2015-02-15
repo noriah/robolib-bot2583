@@ -15,16 +15,15 @@
 
 package org.team2583.rcyclrsh;
 
-import org.team2583.rcyclrsh.Hand.Hands;
 import org.team2583.rcyclrsh.boxlift.BoxLift;
 import org.team2583.rcyclrsh.drawer.Drawer;
 import org.team2583.rcyclrsh.drawer.Ejector;
 import org.team2583.rcyclrsh.drawer.Tailgate;
 import org.team2583.rcyclrsh.drivetrain.Drivetrain;
 import org.team2583.rcyclrsh.elevator.Elevator;
+import org.team2583.rcyclrsh.elevator.Hands;
 
 import io.github.robolib.RoboLibBot;
-import io.github.robolib.util.TableSender;
 import io.github.robolib.util.mapper.RobotMap;
 
 /**

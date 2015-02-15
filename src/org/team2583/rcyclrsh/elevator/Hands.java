@@ -13,7 +13,7 @@
  * included in all copies or substantial portions of the Software.
  */
 
-package org.team2583.rcyclrsh.Hand;
+package org.team2583.rcyclrsh.elevator;
 
 import io.github.robolib.command.Subsystem;
 import io.github.robolib.module.actuator.Solenoid;

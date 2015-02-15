@@ -35,7 +35,7 @@ public class Elevator extends Subsystem {
         m_motorRight = RobotMap.getModule("motor_elevator_right");
         
         lift_speed = RobotMap.getNumber("armlift_speed");
-        armStop();
+        stop();
     }
 
     private static final Elevator m_instance = new Elevator();
@@ -45,28 +45,28 @@ public class Elevator extends Subsystem {
     }
 
     private Elevator(){
-        super("Lifter");
+        super("Elevator");
     }
     
-    protected static void armUp(){
+    protected static void up(){
         setMotors(lift_speed);
     }
     
-    protected static void armDown(){
+    protected static void down(){
         setMotors(-lift_speed);
     }
     
-    protected static void armStop(){
+    protected static void stop(){
         setMotors(0);
     }
     
-    protected static boolean getBottomLimit(){
+    protected static boolean isAtLimit(){
         return m_motorLeft.getReverseLimitOK();
     }
     
     private static void setMotors(double value){
         m_motorLeft.setSpeed(value);
-//        m_motorRight.setSpeed(value);
+        m_motorRight.setSpeed(value);
     }
 
     public void initDefaultCommand() {

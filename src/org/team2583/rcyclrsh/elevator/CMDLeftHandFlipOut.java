@@ -13,7 +13,7 @@
  * included in all copies or substantial portions of the Software.
  */
 
-package org.team2583.rcyclrsh.Hand;
+package org.team2583.rcyclrsh.elevator;
 
 import io.github.robolib.command.Command;
 
@@ -21,19 +21,16 @@ import io.github.robolib.command.Command;
  *
  * @author noriah <vix@noriah.dev>
  */
-public class CMDLeftHandToggle extends Command {
+public class CMDLeftHandFlipOut extends Command {
 
-    public CMDLeftHandToggle() {
-        super("CMDLeftHandToggle");
+    public CMDLeftHandFlipOut() {
+        super("CMDLeftArmFlipOut");
         requires(Hands.getInstance());
     }
 
     /** Called just before this Command runs the first time */
     protected void initialize() {
-        if(Hands.getLeftIn())
-            Hands.flipLeftOut();
-        else
-            Hands.flipLeftIn();
+        Hands.flipLeftOut();
     }
 
     /** Called repeatedly when this Command is scheduled to run */

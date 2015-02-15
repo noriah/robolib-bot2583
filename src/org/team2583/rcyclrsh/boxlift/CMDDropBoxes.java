@@ -33,17 +33,17 @@ public class CMDDropBoxes extends Command {
 
     /** Called repeatedly when this Command is scheduled to run */
     protected void execute() {
-        BoxLift.dropDown();
+        BoxLift.drop();
     }
 
     /** Make this return true when this Command no longer needs to run execute() */
     protected boolean isFinished() {
-        return BoxLift.getBottomLimit();
+        return BoxLift.isAtBottomLimit();
     }
 
     /** Called once after isFinished returns true */
     protected void end() {
-        BoxLift.stopMotors();
+        BoxLift.stop();
     }
 
     /**

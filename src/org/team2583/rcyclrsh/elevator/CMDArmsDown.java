@@ -34,17 +34,17 @@ public class CMDArmsDown extends Command {
 
     /** Called repeatedly when this Command is scheduled to run */
     protected void execute() {
-        Elevator.armDown();
+        Elevator.down();
     }
 
     /** Make this return true when this Command no longer needs to run execute() */
     protected boolean isFinished() {
-        return Elevator.getBottomLimit();
+        return Elevator.isAtLimit();
     }
 
     /** Called once after isFinished returns true */
     protected void end() {
-        Elevator.armStop();
+        Elevator.stop();
     }
 
     /**

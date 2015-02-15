@@ -15,7 +15,6 @@
 
 package org.team2583.rcyclrsh;
 
-import org.team2583.rcyclrsh.Hand.CMDLeftHandToggle;
 import org.team2583.rcyclrsh.boxlift.CMDTogglBoxeLift;
 import org.team2583.rcyclrsh.drawer.CGEjectBoxes;
 import org.team2583.rcyclrsh.drawer.CMDDrawerInContinue;
@@ -23,6 +22,7 @@ import org.team2583.rcyclrsh.drawer.CMDDrawerOutContinue;
 import org.team2583.rcyclrsh.drawer.CMDToggleTailgate;
 import org.team2583.rcyclrsh.elevator.CMDArmsDownContinue;
 import org.team2583.rcyclrsh.elevator.CMDArmsUpContinue;
+import org.team2583.rcyclrsh.elevator.CMDLeftHandToggle;
 
 import io.github.robolib.control.HIDAxis;
 import io.github.robolib.control.HIDButton;

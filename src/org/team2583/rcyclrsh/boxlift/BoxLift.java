@@ -30,24 +30,13 @@ public final class BoxLift extends Subsystem {
     
     private static double lift_speed;
     
-//    private static BooleanSource m_limitLeftTop;
-//    private static BooleanSource m_limitRightTop;
-//    private static BooleanSource m_limitLeftBottom;
-//    private static BooleanSource m_limitRightBottom;
-//    private static S
-    
     public static final void initialize(){
         
         m_motorLeft = RobotMap.getModule("motor_boxlift_left");
         m_motorRight = RobotMap.getModule("motor_boxlift_right");
         
         lift_speed = RobotMap.getNumber("boxlift_speed");
-        stopMotors();
-        
-//        m_limitLeftTop = () -> !m_motorLeft.getForwardLimitOK();
-//        m_limitRightTop = () -> !m_motorRight.getForwardLimitOK();
-//        m_limitLeftBottom = () -> !m_motorLeft.getReverseLimitOK();
-//        m_limitRightBottom = () -> !m_motorRight.getReverseLimitOK();
+        stop();
     }
 
     private static final BoxLift m_instance = new BoxLift();
@@ -65,40 +54,40 @@ public final class BoxLift extends Subsystem {
         m_motorRight.setSpeed(value);
     }
     
-    protected static void liftUp(){
+    protected static void lift(){
         setMotors(lift_speed);
     }
     
-    protected static void dropDown(){
+    protected static void drop(){
         setMotors(-lift_speed);
     }
     
-    protected static void stopMotors(){
+    protected static void stop(){
         setMotors(0);
     }
     
-    public static boolean getLeftTopLimit(){
+    public static boolean isAtTopLeftLimit(){
         return !m_motorLeft.getForwardLimitOK();
     }
     
-    public static boolean getLeftBottomLimit(){
+    public static boolean isAtBottomLeftLimit(){
         return !m_motorLeft.getReverseLimitOK();
     }
     
-    public static boolean getRightTopLimit(){
+    public static boolean isAtTopRightLimit(){
         return !m_motorRight.getForwardLimitOK();
     }
     
-    public static boolean getRightBottomLimit(){
+    public static boolean isAtBottomRightLimit(){
         return !m_motorRight.getReverseLimitOK();
     }
     
-    public static boolean getTopLimit(){
-        return getLeftTopLimit() && getRightTopLimit();
+    public static boolean isAtTopLimit(){
+        return isAtTopLeftLimit() && isAtTopRightLimit();
     }
     
-    public static boolean getBottomLimit(){
-        return getLeftBottomLimit() && getRightBottomLimit();
+    public static boolean isAtBottomLimit(){
+        return isAtBottomLeftLimit() && isAtBottomRightLimit();
     }
     
     public void initDefaultCommand()    {
