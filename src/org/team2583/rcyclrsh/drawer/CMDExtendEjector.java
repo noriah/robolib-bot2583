@@ -15,24 +15,20 @@
 
 package org.team2583.rcyclrsh.drawer;
 
-import io.github.robolib.command.Command;
+import io.github.robolib.command.SingleActionCommand;
 
 
 /**
  *
  * @author noriah <vix@noriah.dev>
  */
-public class CMDExtendEjector extends Command {
+public class CMDExtendEjector extends SingleActionCommand {
     
     public CMDExtendEjector(){
         super("CMDExtendEjector");
         requires(Ejector.getInstance());
     }
 
-    protected void initialize(){ Ejector.extend(); }
-    protected void execute(){}
-    protected boolean isFinished(){ return true; }
-    protected void end(){}
-    protected void interrupted(){}
+    protected void doAction(){ Ejector.extend(); }
 
 }

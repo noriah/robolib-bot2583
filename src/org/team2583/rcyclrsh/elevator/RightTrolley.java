@@ -23,55 +23,44 @@ import io.github.robolib.util.mapper.RobotMap;
  *
  * @author noriah <vix@noriah.dev>
  */
-public final class Hands extends Subsystem {
-    
-    private static Solenoid m_leftHandFlip;
+public class RightTrolley extends Subsystem {
+
     private static Solenoid m_rightHandFlip;
-    
-    private static boolean right_flipped;
-    private static boolean left_flipped;
+
+    private static boolean m_flipped;
     
     public static final void initialize(){
-        m_leftHandFlip = RobotMap.getModule("solenoid_left_hand");
         m_rightHandFlip = RobotMap.getModule("solenoid_right_hand");
     }
 
-    private static final Hands m_instance = new Hands();
+    private static final RightTrolley m_instance = new RightTrolley();
 
-    public static final Hands getInstance(){
+    public static final RightTrolley getInstance(){
         return m_instance;
     }
 
-    private Hands(){
-        super("Hands");
-    }
+    private RightTrolley(){ super("RightTrolley"); }
     
-    protected static void flipLeftIn(){
-        m_leftHandFlip.set(Solenoid.Value.ON);
-        left_flipped = true;
-    }
     
-    protected static void flipLeftOut(){
-        m_leftHandFlip.set(Solenoid.Value.OFF);
-        left_flipped = false;
-    }
-    
-    protected static void flipRightIn(){
+    protected static void flipIn(){
         m_rightHandFlip.set(Solenoid.Value.ON);
-        right_flipped = true;
+        m_flipped = true;
     }
     
-    protected static void flipRightOut(){
+    protected static void flipOut(){
         m_rightHandFlip.set(Solenoid.Value.OFF);
-        right_flipped = false;
+        m_flipped = false;
     }
     
-    public static boolean getLeftIn(){
-        return left_flipped;
+    protected static void toggle(){
+        if(m_flipped)
+            flipOut();
+        else
+            flipIn();
     }
     
-    public static boolean getRightIn(){
-        return right_flipped;
+    public static boolean isIn(){
+        return m_flipped;
     }
 
     public void initDefaultCommand() {

@@ -15,44 +15,21 @@
 
 package org.team2583.rcyclrsh.elevator;
 
-import io.github.robolib.command.Command;
+import io.github.robolib.command.SingleActionCommand;
 
 /**
  *
  * @author noriah <vix@noriah.dev>
  */
-public class CMDLeftHandFlipOut extends Command {
+public class CMDLeftHandFlipOut extends SingleActionCommand {
 
     public CMDLeftHandFlipOut() {
         super("CMDLeftArmFlipOut");
-        requires(Hands.getInstance());
+        requires(LeftTrolley.getInstance());
     }
 
     /** Called just before this Command runs the first time */
-    protected void initialize() {
-        Hands.flipLeftOut();
-    }
-
-    /** Called repeatedly when this Command is scheduled to run */
-    protected void execute() {
-    
-    }
-
-    /** Make this return true when this Command no longer needs to run execute() */
-    protected boolean isFinished() {
-        return true;
-    }
-
-    /** Called once after isFinished returns true */
-    protected void end() {
-    
-    }
-
-    /**
-     * Called when another command which requires one or more of the same
-     * subsystems is scheduled to run
-     */
-    protected void interrupted() {
-
+    protected void doAction() {
+        LeftTrolley.flipOut();
     }
 }

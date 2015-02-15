@@ -17,14 +17,14 @@ package org.team2583.rcyclrsh.drivetrain;
 
 import org.team2583.rcyclrsh.drivetrain.Drivetrain.DriveMode;
 
-import io.github.robolib.command.Command;
+import io.github.robolib.command.SingleActionCommand;
 
 
 /**
  *
  * @author noriah <vix@noriah.dev>
  */
-public class CMDChangeDrivemode extends Command {
+public class CMDChangeDrivemode extends SingleActionCommand {
     
     private final DriveMode m_mode;
     
@@ -34,13 +34,7 @@ public class CMDChangeDrivemode extends Command {
         m_mode = mode;
     }
 
-    protected void initialize(){
+    protected void doAction(){
         Drivetrain.setDriveMode(m_mode);
     }
-    
-    protected void execute(){}
-    protected boolean isFinished(){ return true; }
-    protected void end(){}
-    protected void interrupted(){}
-
 }

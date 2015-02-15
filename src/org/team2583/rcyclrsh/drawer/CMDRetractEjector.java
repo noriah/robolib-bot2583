@@ -15,24 +15,21 @@
 
 package org.team2583.rcyclrsh.drawer;
 
-import io.github.robolib.command.Command;
+import io.github.robolib.command.SingleActionCommand;
 
 
 /**
  *
  * @author noriah <vix@noriah.dev>
  */
-public class CMDRetractEjector extends Command {
+public class CMDRetractEjector extends SingleActionCommand {
     
     public CMDRetractEjector(){
         super("CMDRetractEjector");
         requires(Ejector.getInstance());
     }
 
-    protected void initialize(){ Ejector.retract(); }
-    protected void execute(){}
-    protected boolean isFinished(){ return true; }
-    protected void end(){}
-    protected void interrupted(){}
-
+    protected void doAction(){
+        Ejector.retract();
+    }
 }

@@ -13,7 +13,7 @@
  * included in all copies or substantial portions of the Software.
  */
 
-package org.team2583.rcyclrsh.elevator;
+package org.team2583.rcyclrsh.drawer;
 
 import io.github.robolib.command.SingleActionCommand;
 
@@ -21,14 +21,14 @@ import io.github.robolib.command.SingleActionCommand;
  *
  * @author noriah <vix@noriah.dev>
  */
-public class CMDRightHandFlipIn extends SingleActionCommand {
+public class CMDStopDrawer extends SingleActionCommand {
 
-    public CMDRightHandFlipIn() {
-        super("CMDRightHandFlipIn");
-        requires(RightTrolley.getInstance());
+    public CMDStopDrawer() {
+        super("CMDStopDrawer");
+        requires(Drawer.getInstance());
     }
 
     protected void doAction() {
-        RightTrolley.flipIn();
+        Drawer.stop();
     }
 }

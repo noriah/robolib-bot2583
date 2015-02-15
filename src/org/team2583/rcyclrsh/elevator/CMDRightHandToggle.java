@@ -21,14 +21,15 @@ import io.github.robolib.command.SingleActionCommand;
  *
  * @author noriah <vix@noriah.dev>
  */
-public class CMDRightHandFlipIn extends SingleActionCommand {
+public class CMDRightHandToggle extends SingleActionCommand {
 
-    public CMDRightHandFlipIn() {
-        super("CMDRightHandFlipIn");
+    public CMDRightHandToggle() {
+        super("CMDLeftHandToggle");
         requires(RightTrolley.getInstance());
     }
 
+    /** Called just before this Command runs the first time */
     protected void doAction() {
-        RightTrolley.flipIn();
+        RightTrolley.toggle();
     }
 }

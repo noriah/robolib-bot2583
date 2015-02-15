@@ -21,7 +21,7 @@ import org.team2583.rcyclrsh.drawer.Ejector;
 import org.team2583.rcyclrsh.drawer.Tailgate;
 import org.team2583.rcyclrsh.drivetrain.Drivetrain;
 import org.team2583.rcyclrsh.elevator.Elevator;
-import org.team2583.rcyclrsh.elevator.Hands;
+import org.team2583.rcyclrsh.elevator.LeftTrolley;
 
 import io.github.robolib.RoboLibBot;
 import io.github.robolib.util.mapper.RobotMap;
@@ -51,6 +51,6 @@ public class WestwoodBot extends RoboLibBot {
         Tailgate.initialize();
         Elevator.initialize();
         BoxLift.initialize();
-        Hands.initialize();
+        LeftTrolley.initialize();
     }
 }

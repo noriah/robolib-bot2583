@@ -15,24 +15,21 @@
 
 package org.team2583.rcyclrsh.drawer;
 
-import io.github.robolib.command.Command;
+import io.github.robolib.command.SingleActionCommand;
 
 
 /**
  *
  * @author noriah <vix@noriah.dev>
  */
-public class CMDRaiseTailgate extends Command {
+public class CMDRaiseTailgate extends SingleActionCommand {
     
     public CMDRaiseTailgate(){
         super("CMDRaiseTailgate");
         requires(Tailgate.getInstance());
     }
 
-    protected void initialize(){ Tailgate.raise(); }
-    protected void execute(){}
-    protected boolean isFinished(){ return true; }
-    protected void end(){}
-    protected void interrupted(){}
-
+    protected void doAction(){
+        Tailgate.raise();
+    }
 }
