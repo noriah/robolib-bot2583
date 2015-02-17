@@ -29,7 +29,7 @@ public class CMDLowerTailgate extends SingleActionCommand {
         requires(Tailgate.getInstance());
     }
 
-    protected void doAction(){
+    protected void execute(){
         Tailgate.lower();
     }
 

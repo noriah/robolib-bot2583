@@ -24,15 +24,20 @@ import org.team2583.rcyclrsh.elevator.Elevator;
 import org.team2583.rcyclrsh.elevator.LeftTrolley;
 
 import io.github.robolib.RoboLibBot;
+import io.github.robolib.module.sensor.mpu6050.MPU6050;
 import io.github.robolib.util.mapper.RobotMap;
 
 /**
  * 
  * @author noriah <vix@noriah.dev>
  */
-public class WestwoodBot extends RoboLibBot {
+public class WestwoodBot extends RoboLibBot{
 //    private LCDManager m_lcdManager;
+
     
+    
+    Thread reader;
+    MPU6050 mpu;
     public WestwoodBot(){
         super("Stacker", "1.0.0");
         RobotMap.setMapFile("/home/lvuser/rmap.json");
@@ -41,6 +46,8 @@ public class WestwoodBot extends RoboLibBot {
 //        m_lcdManager.startThread();
         
         new OI();
+        
+        
         
 
 //        TableSender.setEnabled(false);

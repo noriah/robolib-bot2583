@@ -34,7 +34,7 @@ public class CMDChangeDrivemode extends SingleActionCommand {
         m_mode = mode;
     }
 
-    protected void doAction(){
+    protected void execute(){
         Drivetrain.setDriveMode(m_mode);
     }
 }

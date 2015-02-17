@@ -29,7 +29,7 @@ public class CMDRightHandToggle extends SingleActionCommand {
     }
 
     /** Called just before this Command runs the first time */
-    protected void doAction() {
+    protected void execute() {
         RightTrolley.toggle();
     }
 }

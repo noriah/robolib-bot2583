@@ -46,6 +46,7 @@ public class MecanumMode extends Command {
     @Override
     protected void execute() {
         double scale = (OI.BTN_SPEED_SCALE.getState() ? 0.75 : 1.0);
+        double rotation;
         Drivetrain.mecanum(
                 OI.AXIS_DRIVER_LEFT_X.get() * scale,
                 OI.AXIS_DRIVER_LEFT_Y.get() * scale,

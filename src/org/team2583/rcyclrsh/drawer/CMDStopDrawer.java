@@ -28,7 +28,7 @@ public class CMDStopDrawer extends SingleActionCommand {
         requires(Drawer.getInstance());
     }
 
-    protected void doAction() {
+    protected void execute() {
         Drawer.stop();
     }
 }

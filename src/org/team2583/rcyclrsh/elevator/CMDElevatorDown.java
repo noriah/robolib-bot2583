@@ -21,16 +21,15 @@ import io.github.robolib.command.Command;
  *
  * @author noriah <vix@noriah.dev>
  */
-public class CMDArmsDownContinue extends Command {
+public class CMDElevatorDown extends Command {
 
-    public CMDArmsDownContinue() {
-        super("CMDArmsDownContinue");
+    public CMDElevatorDown() {
+        super("CMDElevatorDown");
         requires(Elevator.getInstance());
     }
 
     /** Called just before this Command runs the first time */
     protected void initialize() {
-    
     }
 
     /** Called repeatedly when this Command is scheduled to run */
@@ -40,7 +39,7 @@ public class CMDArmsDownContinue extends Command {
 
     /** Make this return true when this Command no longer needs to run execute() */
     protected boolean isFinished() {
-        return false;
+        return Elevator.isAtLimit();
     }
 
     /** Called once after isFinished returns true */
@@ -53,6 +52,6 @@ public class CMDArmsDownContinue extends Command {
      * subsystems is scheduled to run
      */
     protected void interrupted() {
-        end();
+
     }
 }

@@ -1,7 +1,8 @@
 {
 
-  "drawer_speed": 0.6,
-  "armlift_speed": 1.0,
+  "drawer_out_speed": 0.5,
+  "drawer_in_speed": 0.9,
+  "armlift_speed": 0.6,
   "boxlift_speed": 0.70,
   
   "motor_drive_front_left": {
@@ -38,21 +39,21 @@
     "device_channel": 4,
     "description": "Drawer Motor",          
     "power_channel": 4,
-    "inverted": false
+    "inverted": true
   },
   
   "motor_boxlift_left": {
     "type": "canjag", 
     "device_channel": 4,
     "description": "Left Box Lift",         
-    "power_channel": 8,
+    "power_channel": 9,
     "inverted": false
   },
   "motor_boxlift_right": {
     "type": "canjag", 
     "device_channel": 2,
     "description": "Right Box Lift",        
-    "power_channel": 11,
+    "power_channel": 10,
     "inverted": false
   },
   
@@ -60,14 +61,14 @@
     "type": "canjag", 
     "device_channel": 8,
     "description": "Left Elevator",         
-    "power_channel": 9,
+    "power_channel": 8,
     "inverted": false
   },
   "motor_elevator_right": {
     "type": "canjag", 
     "device_channel": 1,
     "description": "Right Elevator",        
-    "power_channel": 10,
+    "power_channel": 11,
     "inverted": false
   },
 

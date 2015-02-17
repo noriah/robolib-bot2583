@@ -27,9 +27,20 @@ public class CGEjectBoxes extends CommandGroup {
     
     public CGEjectBoxes(){
         super("CGEjectBoxes");
-        addSequential(new CMDExtendEjector());
-        addSequential(new WaitCommand(1.0));
-        addSequential(new CMDRetractEjector());
+        
+        //Lower the tailgate.
+//        addSequential(new CMDLowerTailgate());
+        //Spit out the drawer
+        addSequential(new CMDExtendDrawer());
+        //Wait 0.5 seconds for things to settle
+        addSequential(new WaitCommand(0.5));
+        addSequential(new CMDLowerTailgate());
+        addSequential(new CGRunEjector());
+//        addParallel(new CMDRetractDrawer());
+        addSequential(new WaitCommand(0.5));
+//        addSequential(new CMDRaiseTailgate());
+        addSequential(new CMDRetractDrawer());
+        addSequential(new CMDRaiseTailgate());
     }
 
 }

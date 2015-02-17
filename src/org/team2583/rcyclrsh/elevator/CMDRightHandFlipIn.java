@@ -28,7 +28,7 @@ public class CMDRightHandFlipIn extends SingleActionCommand {
         requires(RightTrolley.getInstance());
     }
 
-    protected void doAction() {
+    protected void execute() {
         RightTrolley.flipIn();
     }
 }

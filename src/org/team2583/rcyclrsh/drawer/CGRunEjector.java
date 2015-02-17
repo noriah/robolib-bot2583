@@ -13,23 +13,22 @@
  * included in all copies or substantial portions of the Software.
  */
 
-package org.team2583.rcyclrsh.elevator;
+package org.team2583.rcyclrsh.drawer;
 
-import io.github.robolib.command.SingleActionCommand;
+import io.github.robolib.command.CommandGroup;
+import io.github.robolib.command.WaitCommand;
 
 /**
  *
  * @author noriah <vix@noriah.dev>
  */
-public class CMDArmsStop extends SingleActionCommand {
-
-    public CMDArmsStop() {
-        super("CMDArmsStop");
-        requires(Elevator.getInstance());
-    }
-
-    /** Called just before this Command runs the first time */
-    protected void doAction() {
-        Elevator.stop();
+public class CGRunEjector extends CommandGroup {
+    
+    public CGRunEjector() {
+        super("CGRunEjector");
+        
+        addSequential(new CMDExtendEjector());
+        addSequential(new WaitCommand(1));
+        addSequential(new CMDRetractEjector());
     }
 }

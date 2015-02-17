@@ -27,13 +27,15 @@ public class Drawer extends Subsystem {
     
     private static LimitedController m_drawerMotor;
     
-    private static double m_drawerSpeed;
+    private static double m_drawerOutSpeed;
+    private static double m_drawerInSpeed;
     
     
     public static final void initialize(){
         m_drawerMotor = RobotMap.getModule("limited_controller_drawer");
         
-        m_drawerSpeed = RobotMap.getNumber("drawer_speed");
+        m_drawerOutSpeed = RobotMap.getNumber("drawer_out_speed");
+        m_drawerInSpeed = RobotMap.getNumber("drawer_in_speed");
     }
     
     private static final Drawer m_instance = new Drawer();
@@ -47,7 +49,7 @@ public class Drawer extends Subsystem {
     }
 
     protected static final void extend(){
-        m_drawerMotor.setSpeed(m_drawerSpeed);
+        m_drawerMotor.setSpeed(m_drawerOutSpeed);
     }
     
     protected static final void stop(){
@@ -55,10 +57,7 @@ public class Drawer extends Subsystem {
     }
     
     protected static final void retract(){
-        m_drawerMotor.setSpeed(-m_drawerSpeed);
-    }
-    
-    protected static final void toggle(){
+        m_drawerMotor.setSpeed(-m_drawerInSpeed);
     }
     
     protected static final boolean isExtended(){

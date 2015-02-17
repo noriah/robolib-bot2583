@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="Tipper">
+  <motor type="talon" pwm="pwm1" power="power0">Front Left Drive Motor</motor>
+  <motor type="talon" pwm="pwm2" power="power0">Front Left Drive Motor</motor>
+  <motor type="talon" pwm="pwm3" power="power0">Front Left Drive Motor</motor>
+  <motor type="talon" pwm="pwm0" power="power0">Front Left Drive Motor</motor>

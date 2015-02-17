@@ -29,7 +29,7 @@ public class CMDRetractEjector extends SingleActionCommand {
         requires(Ejector.getInstance());
     }
 
-    protected void doAction(){
+    protected void execute(){
         Ejector.retract();
     }
 }

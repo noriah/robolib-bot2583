@@ -81,13 +81,13 @@ public class LCDManager {
 //        VectorInt16 aa = new VectorInt16();
 //        VectorInt16 aaReal = new VectorInt16();
 //        VectorInt16 aaWorld = new VectorInt16();
-        double[] ypr = new double[3];
-        short[] ag;
+//        double[] ypr = new double[3];
+//        short[] ag;
         
-        byte[] fifoBuffer;
-        byte fifoCount;
-        byte mpuIntStatus;
-        byte packetSize = (byte) mpu.dmpGetFIFOPacketSize();
+//        byte[] fifoBuffer;
+//        byte fifoCount;
+//        byte mpuIntStatus;
+//        byte packetSize = (byte) mpu.dmpGetFIFOPacketSize();
         while(m_run){
             lcd0.home();
             lcd0.writeString(String.format("Batt %05.2fV", RoboRIO.getVoltage()));

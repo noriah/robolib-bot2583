@@ -17,6 +17,7 @@ package org.team2583.rcyclrsh.boxlift;
 
 import io.github.robolib.command.Subsystem;
 import io.github.robolib.module.controller.CANJaguar;
+import io.github.robolib.module.controller.CANJaguar.NeutralMode;
 import io.github.robolib.util.mapper.RobotMap;
 
 /**
@@ -34,6 +35,9 @@ public final class BoxLift extends Subsystem {
         
         m_motorLeft = RobotMap.getModule("motor_boxlift_left");
         m_motorRight = RobotMap.getModule("motor_boxlift_right");
+//        m_motorLeft.
+//        m_motorLeft.configNeutralMode(NeutralMode.Brake);
+//        m_motorRight.configNeutralMode(NeutralMode.Brake);
         
         lift_speed = RobotMap.getNumber("boxlift_speed");
         stop();
@@ -54,11 +58,11 @@ public final class BoxLift extends Subsystem {
         m_motorRight.setSpeed(value);
     }
     
-    protected static void lift(){
+    protected static void up(){
         setMotors(lift_speed);
     }
     
-    protected static void drop(){
+    protected static void down(){
         setMotors(-lift_speed);
     }
     
@@ -90,8 +94,7 @@ public final class BoxLift extends Subsystem {
         return isAtBottomLeftLimit() && isAtBottomRightLimit();
     }
     
-    public void initDefaultCommand()    {
-        //setDefaultCommand();
+    public void initDefaultCommand(){
     }
 }
 

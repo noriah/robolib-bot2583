@@ -29,6 +29,6 @@ public class CMDExtendEjector extends SingleActionCommand {
         requires(Ejector.getInstance());
     }
 
-    protected void doAction(){ Ejector.extend(); }
+    protected void execute(){ Ejector.extend(); }
 
 }

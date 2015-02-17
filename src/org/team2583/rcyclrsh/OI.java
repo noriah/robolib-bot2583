@@ -19,15 +19,17 @@ import org.team2583.rcyclrsh.boxlift.CMDTogglBoxeLift;
 import org.team2583.rcyclrsh.drawer.CGEjectBoxes;
 import org.team2583.rcyclrsh.drawer.CMDDrawerInContinue;
 import org.team2583.rcyclrsh.drawer.CMDDrawerOutContinue;
+import org.team2583.rcyclrsh.drawer.CMDExtendDrawer;
+import org.team2583.rcyclrsh.drawer.CMDRetractDrawer;
 import org.team2583.rcyclrsh.drawer.CMDToggleTailgate;
-import org.team2583.rcyclrsh.elevator.CMDArmsDownContinue;
-import org.team2583.rcyclrsh.elevator.CMDArmsUpContinue;
+import org.team2583.rcyclrsh.elevator.CMDElevatorDownContinue;
+import org.team2583.rcyclrsh.elevator.CMDElevatorUpContinue;
 import org.team2583.rcyclrsh.elevator.CMDLeftHandToggle;
 
-import io.github.robolib.control.HIDAxis;
-import io.github.robolib.control.HIDButton;
-import io.github.robolib.control.Joystick.JSID;
-import io.github.robolib.control.XBoxController;
+import io.github.robolib.module.hid.HIDAxis;
+import io.github.robolib.module.hid.HIDButton;
+import io.github.robolib.module.hid.Joystick.JSID;
+import io.github.robolib.module.hid.XBoxController;
 import io.github.robolib.module.sensor.LimitSwitch;
 import io.github.robolib.util.mapper.RobotMap;
 
@@ -40,14 +42,13 @@ public final class OI {
 
     public static final XBoxController JS_DRIVER;
     public static final XBoxController JS_ACTOR;
+    
     public static final HIDAxis AXIS_DRIVER_LEFT_X;
     public static final HIDAxis AXIS_DRIVER_LEFT_Y;
     public static final HIDAxis AXIS_DRIVER_RIGHT_X;
     public static final HIDAxis AXIS_DRIVER_RIGHT_Y;
+    
     public static final HIDButton BTN_SPEED_SCALE;
-//    public static final HIDButton BTN_DRIVEMODE_MECANUM;
-//    public static final HIDButton BTN_DRIVEMODE_ARCADE;
-//    public static final HIDButton BTN_DRIVEMODE_TANK;
     
     public static final HIDButton BTN_EJECT_BOXES;
     
@@ -56,9 +57,9 @@ public final class OI {
     
     public static final HIDButton BTN_BOXES_TOGGLE;
     
-    public static final HIDButton BTN_TOGGLE_GATE;
+    public static final HIDButton BTN_TAILGATE_TOGGLE;
     
-    public static final HIDButton BTN_ARM_TOGGLE;
+    public static final HIDButton BTN_LEFT_HAND_TOGGLE;
     
     public static final HIDButton BTN_ARM_UP;
     
@@ -74,7 +75,7 @@ public final class OI {
         AXIS_DRIVER_LEFT_Y = JS_DRIVER.getAxisLeftY();
         AXIS_DRIVER_RIGHT_X = JS_DRIVER.getAxisRightX();
         AXIS_DRIVER_RIGHT_Y = JS_DRIVER.getAxisRightY();
-        BTN_TOGGLE_GATE = JS_DRIVER.getButtonA();
+        BTN_TAILGATE_TOGGLE = JS_DRIVER.getButtonA();
         BTN_BOXES_TOGGLE = JS_DRIVER.getButtonB();
         BTN_EJECT_BOXES = JS_DRIVER.getButtonY();
         BTN_DRAWER_OUT = JS_DRIVER.getButtonSelect();
@@ -85,29 +86,25 @@ public final class OI {
         
         BTN_ARM_DOWN = JS_DRIVER.getButtonRightShoulder();
         
-        BTN_ARM_TOGGLE = JS_DRIVER.getButtonX();
+        BTN_LEFT_HAND_TOGGLE = JS_DRIVER.getButtonX();
         
         SWITCH_HAND_LEFT = RobotMap.getModule("limit_switch_hand_left");
-//        SWITCH_HAND_RIGHT = RobotMap.getModule("limit_switch_hand_right");
-
-//        BTN_DRIVEMODE_MECANUM.runWhenPressed(new CMDChangeDrivemode(DriveMode.MECANUM));
-//        BTN_DRIVEMODE_ARCADE.runWhenPressed(new CMDChangeDrivemode(DriveMode.ARCADE));
-//        BTN_DRIVEMODE_TANK.runWhenPressed(new CMDChangeDrivemode(DriveMode.TANK));
+       
         
         BTN_BOXES_TOGGLE.runWhenPressed(new CMDTogglBoxeLift());
         
-        BTN_TOGGLE_GATE.runWhenPressed(new CMDToggleTailgate());
+        BTN_TAILGATE_TOGGLE.runWhenPressed(new CMDToggleTailgate());
         
-        BTN_ARM_TOGGLE.runWhenPressed(new CMDLeftHandToggle());
+        BTN_LEFT_HAND_TOGGLE.runWhenPressed(new CMDLeftHandToggle());
         
         BTN_EJECT_BOXES.runWhenPressed(new CGEjectBoxes());
         
         BTN_DRAWER_OUT.runWhileHeld(new CMDDrawerOutContinue());
         BTN_DRAWER_IN.runWhileHeld(new CMDDrawerInContinue());
         
-        BTN_ARM_DOWN.runWhileHeld(new CMDArmsDownContinue());
+        BTN_ARM_DOWN.runWhileHeld(new CMDElevatorDownContinue());
         
-        BTN_ARM_UP.runWhileHeld(new CMDArmsUpContinue());
+        BTN_ARM_UP.runWhileHeld(new CMDElevatorUpContinue());
     }
     
     

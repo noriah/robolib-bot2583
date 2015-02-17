@@ -21,10 +21,10 @@ import io.github.robolib.command.Command;
  *
  * @author noriah <vix@noriah.dev>
  */
-public class CMDArmsUpContinue extends Command {
+public class CMDElevatorUp extends Command {
 
-    public CMDArmsUpContinue() {
-        super("CMDArmsUpContinue");
+    public CMDElevatorUp() {
+        super("CMDElevatorUp");
         requires(Elevator.getInstance());
     }
 
@@ -53,6 +53,6 @@ public class CMDArmsUpContinue extends Command {
      * subsystems is scheduled to run
      */
     protected void interrupted() {
-        end();
+
     }
 }

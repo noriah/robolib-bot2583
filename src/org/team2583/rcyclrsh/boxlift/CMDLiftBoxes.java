@@ -33,7 +33,7 @@ public class CMDLiftBoxes extends Command {
 
     /** Called repeatedly when this Command is scheduled to run */
     protected void execute() {
-        BoxLift.lift();
+        BoxLift.up();
     
     }
 

@@ -17,6 +17,7 @@ package org.team2583.rcyclrsh.elevator;
 
 import io.github.robolib.command.Subsystem;
 import io.github.robolib.module.controller.CANJaguar;
+import io.github.robolib.util.log.Logger;
 import io.github.robolib.util.mapper.RobotMap;
 
 /**
@@ -32,10 +33,14 @@ public class Elevator extends Subsystem {
     
     public static final void initialize(){
         m_motorLeft = RobotMap.getModule("motor_elevator_left");
-        m_motorRight = RobotMap.getModule("motor_elevator_right");
+//        m_motorRight = RobotMap.getModule("motor_elevator_right");
+        
+//        m_motorLeft.setPositionMode(CANJaguar.kQuadEncoder, 250, 0, 0, 0);
+//        m_motorLeft.enableControl(0.0);
+//        LiveWindow.addActuator("Elevator", "left", m_motorLeft);
         
         lift_speed = RobotMap.getNumber("armlift_speed");
-        stop();
+//        stop();
     }
 
     private static final Elevator m_instance = new Elevator();
@@ -66,11 +71,27 @@ public class Elevator extends Subsystem {
     
     private static void setMotors(double value){
         m_motorLeft.setSpeed(value);
+//        m_motorRight.setSpeed(value);
+    }
+    
+    public static void setVa(double value){
         m_motorRight.setSpeed(value);
+    }
+    
+    public static void update(){
+        Logger.get(Elevator.class).info(m_motorLeft.getPosition());
+    }
+    
+    protected static void speedMode(){
+        m_motorLeft.disableControl();
+        m_motorLeft.setPercentMode();
+    }
+    
+    protected static void posMode(){
     }
 
     public void initDefaultCommand() {
-        //setDefaultCommand();
+        
     }
 }
 
