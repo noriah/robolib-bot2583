@@ -13,22 +13,26 @@
  * included in all copies or substantial portions of the Software.
  */
 
-package org.team2583.rcyclrsh.drawer;
+package org.team2583.rcyclrsh;
 
 import io.github.robolib.command.CommandGroup;
-import io.github.robolib.command.WaitCommand;
 
 /**
+ * 
  *
  * @author noriah <vix@noriah.dev>
  */
-public class CGRunEjector extends CommandGroup {
+public class CGEjectBoxes extends CommandGroup {
     
-    public CGRunEjector() {
-        super("CGRunEjector");
-        
-        addSequential(new CMDExtendEjector());
-        addSequential(new WaitCommand(1));
-        addSequential(new CMDRetractEjector());
+    public CGEjectBoxes(){        
+        addSequential(Drawer.extend());
+        addSequential(Wait(0.5));
+        addSequential(Tailgate.lower());
+        addParallel(Ejector.extend());
+        addSequential(Wait(1));
+        addParallel(Ejector.retract());
+        addSequential(Drawer.retract());
+        addSequential(Tailgate.raise());
     }
+
 }

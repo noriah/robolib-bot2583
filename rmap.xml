@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <robot name="Tipper">
-  <motor type="talon" pwm="pwm1" power="power0">Front Left Drive Motor</motor>
-  <motor type="talon" pwm="pwm2" power="power0">Front Left Drive Motor</motor>
-  <motor type="talon" pwm="pwm3" power="power0">Front Left Drive Motor</motor>
-  <motor type="talon" pwm="pwm0" power="power0">Front Left Drive Motor</motor>
+  <motor id="motor_drive_front_left"
+    type="talon"
+    pwm="pwm1"
+    power="power0">
+    Front Left Drive Motor
+  </motor>
+  <module>
+    <id>motor_drive_front_right</id>
+    <type>talon</type>
+    <pwm>2</pwm>
+    <power>0</power>
+    <desc>Front Right Drive Motor</desc>
+  </motor>
+  <module>
+    <id>motor_drive_back_left</id>
+    type="talon"
+    pwm="pwm3"
+    power="power0">
+    Front Left Drive Motor
+  </motor>
+  <motor id="motor_drive_back_right"
+    type="talon"
+    pwm="pwm0"
+    power="power0">Front Left Drive Motor
+  </motor>
+  <motor id="motor_drawer"
+    type="victor"
+    pwm="pwm4"
+    power="power0">
+    Drawer Motor
+  </motor>
+  <motor id="motor_boxlift_left"
+    type="canjag"
+    can="4"
+    power="9">
+    Left
+  </motor>
+</robot>

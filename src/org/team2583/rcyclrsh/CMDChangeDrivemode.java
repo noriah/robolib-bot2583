@@ -13,26 +13,26 @@
  * included in all copies or substantial portions of the Software.
  */
 
-package org.team2583.rcyclrsh.drawer;
+package org.team2583.rcyclrsh;
 
-import io.github.robolib.command.Command;
+import org.team2583.rcyclrsh.Drivetrain.DriveMode;
+
+import io.github.robolib.command.SingleActionCommand;
 
 
 /**
  *
  * @author noriah <vix@noriah.dev>
  */
-public class CMDRetractDrawer extends Command {
+public class CMDChangeDrivemode extends SingleActionCommand {
     
-    public CMDRetractDrawer(){
-        super("CMDRetractDrawer");
-        requires(Drawer.getInstance());
+    private final DriveMode m_mode;
+    
+    public CMDChangeDrivemode(DriveMode mode){
+        super("C_ChangeDrivemode - " + mode);
+        requires(Drivetrain.getInstance());
+        m_mode = mode;
     }
 
-    protected void initialize(){}
-    protected void execute(){ Drawer.retract(); }
-    protected boolean isFinished(){ return Drawer.isRetracted(); }
-    protected void end(){ Drawer.stop(); }
-    protected void interrupted(){}
-
+    protected void execute(){Drivetrain.setDriveMode(m_mode);}
 }

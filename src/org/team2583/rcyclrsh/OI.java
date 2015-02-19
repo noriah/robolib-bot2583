@@ -15,13 +15,6 @@
 
 package org.team2583.rcyclrsh;
 
-import org.team2583.rcyclrsh.boxlift.CMDTogglBoxeLift;
-import org.team2583.rcyclrsh.drawer.CGEjectBoxes;
-import org.team2583.rcyclrsh.drawer.CMDDrawerInContinue;
-import org.team2583.rcyclrsh.drawer.CMDDrawerOutContinue;
-import org.team2583.rcyclrsh.drawer.CMDExtendDrawer;
-import org.team2583.rcyclrsh.drawer.CMDRetractDrawer;
-import org.team2583.rcyclrsh.drawer.CMDToggleTailgate;
 import org.team2583.rcyclrsh.elevator.CMDElevatorDownContinue;
 import org.team2583.rcyclrsh.elevator.CMDElevatorUpContinue;
 import org.team2583.rcyclrsh.elevator.CMDLeftHandToggle;
@@ -90,17 +83,16 @@ public final class OI {
         
         SWITCH_HAND_LEFT = RobotMap.getModule("limit_switch_hand_left");
        
+        BTN_BOXES_TOGGLE.runWhenPressed(BoxLift.toggle());
         
-        BTN_BOXES_TOGGLE.runWhenPressed(new CMDTogglBoxeLift());
-        
-        BTN_TAILGATE_TOGGLE.runWhenPressed(new CMDToggleTailgate());
+        BTN_TAILGATE_TOGGLE.runWhenPressed(Tailgate.toggle());
         
         BTN_LEFT_HAND_TOGGLE.runWhenPressed(new CMDLeftHandToggle());
         
         BTN_EJECT_BOXES.runWhenPressed(new CGEjectBoxes());
         
-        BTN_DRAWER_OUT.runWhileHeld(new CMDDrawerOutContinue());
-        BTN_DRAWER_IN.runWhileHeld(new CMDDrawerInContinue());
+        BTN_DRAWER_OUT.runWhileHeld(Drawer.extend());
+        BTN_DRAWER_IN.runWhileHeld(Drawer.retract());
         
         BTN_ARM_DOWN.runWhileHeld(new CMDElevatorDownContinue());
         

@@ -15,16 +15,10 @@
 
 package org.team2583.rcyclrsh;
 
-import org.team2583.rcyclrsh.boxlift.BoxLift;
-import org.team2583.rcyclrsh.drawer.Drawer;
-import org.team2583.rcyclrsh.drawer.Ejector;
-import org.team2583.rcyclrsh.drawer.Tailgate;
-import org.team2583.rcyclrsh.drivetrain.Drivetrain;
 import org.team2583.rcyclrsh.elevator.Elevator;
 import org.team2583.rcyclrsh.elevator.LeftTrolley;
 
 import io.github.robolib.RoboLibBot;
-import io.github.robolib.module.sensor.mpu6050.MPU6050;
 import io.github.robolib.util.mapper.RobotMap;
 
 /**
@@ -34,10 +28,6 @@ import io.github.robolib.util.mapper.RobotMap;
 public class WestwoodBot extends RoboLibBot{
 //    private LCDManager m_lcdManager;
 
-    
-    
-    Thread reader;
-    MPU6050 mpu;
     public WestwoodBot(){
         super("Stacker", "1.0.0");
         RobotMap.setMapFile("/home/lvuser/rmap.json");
