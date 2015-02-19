@@ -17,6 +17,12 @@ package org.team2583.rcyclrsh;
 
 import org.team2583.rcyclrsh.elevator.Elevator;
 import org.team2583.rcyclrsh.elevator.LeftTrolley;
+import org.team2583.rcyclrsh.elevator.RightTrolley;
+import org.team2583.rcyclrsh.systems.CrateJack;
+import org.team2583.rcyclrsh.systems.Drawer;
+import org.team2583.rcyclrsh.systems.Drivetrain;
+import org.team2583.rcyclrsh.systems.Ejector;
+import org.team2583.rcyclrsh.systems.Tailgate;
 
 import io.github.robolib.RoboLibBot;
 import io.github.robolib.util.mapper.RobotMap;
@@ -47,7 +53,8 @@ public class WestwoodBot extends RoboLibBot{
         Ejector.initialize();
         Tailgate.initialize();
         Elevator.initialize();
-        BoxLift.initialize();
+        CrateJack.initialize();
         LeftTrolley.initialize();
+        RightTrolley.initialize();
     }
 }

@@ -13,7 +13,9 @@
  * included in all copies or substantial portions of the Software.
  */
 
-package org.team2583.rcyclrsh;
+package org.team2583.rcyclrsh.systems;
+
+import org.team2583.rcyclrsh.OI;
 
 import io.github.robolib.command.Command;
 import io.github.robolib.command.ContinuousCommand;
@@ -57,7 +59,7 @@ public final class Drivetrain extends Subsystem{
     private static Talon m_motorRearLeft;
     private static Talon m_motorRearRight;
     
-    private static DriveBase m_driveBase;
+    static DriveBase m_driveBase;
     
     private static DriveMode m_driveMode;
     
@@ -67,8 +69,6 @@ public final class Drivetrain extends Subsystem{
     
     private static final Drivetrain m_instance = new Drivetrain();
     
-    private static boolean m_initialized = false;
-    
 //    private static Thread m_thread;
     
 
@@ -76,9 +76,6 @@ public final class Drivetrain extends Subsystem{
 //    private static double m_rotation;
     
     public static void initialize(){
-        if(m_initialized)
-            throw new IllegalStateException("Drivetrain already Initialized");
-        m_initialized = true;
         
         m_motorFrontLeft = RobotMap.getModule("motor_drive_front_left");
         m_motorFrontRight = RobotMap.getModule("motor_drive_front_right");

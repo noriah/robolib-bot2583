@@ -1,4 +1,4 @@
-package org.team2583.rcyclrsh.control;
+package org.team2583.rcyclrsh;
 
 import io.github.robolib.module.hid.Joystick;
 

@@ -13,8 +13,26 @@
  * included in all copies or substantial portions of the Software.
  */
 
+package org.team2583.rcyclrsh.systems;
+
+import io.github.robolib.command.CommandGroup;
+
 /**
  * 
+ *
  * @author noriah <vix@noriah.dev>
  */
-package org.team2583.rcyclrsh.control;
+public class CGEjectBoxes extends CommandGroup {
+    
+    public CGEjectBoxes(){        
+        addSequential(Drawer.extend());
+        addSequential(Wait(0.5));
+        addSequential(Tailgate.lower());
+        addParallel(Ejector.extend());
+        addSequential(Wait(1));
+        addParallel(Ejector.retract());
+        addSequential(Drawer.retract());
+        addSequential(Tailgate.raise());
+    }
+
+}

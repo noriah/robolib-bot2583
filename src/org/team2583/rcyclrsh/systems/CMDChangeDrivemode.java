@@ -13,9 +13,9 @@
  * included in all copies or substantial portions of the Software.
  */
 
-package org.team2583.rcyclrsh;
+package org.team2583.rcyclrsh.systems;
 
-import org.team2583.rcyclrsh.Drivetrain.DriveMode;
+import org.team2583.rcyclrsh.systems.Drivetrain.DriveMode;
 
 import io.github.robolib.command.SingleActionCommand;
 

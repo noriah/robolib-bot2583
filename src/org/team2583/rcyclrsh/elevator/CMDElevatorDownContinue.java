@@ -15,44 +15,15 @@
 
 package org.team2583.rcyclrsh.elevator;
 
-import io.github.robolib.command.Command;
+import io.github.robolib.command.ContinuousCommand;
 
 /**
  *
  * @author noriah <vix@noriah.dev>
  */
-public class CMDElevatorDownContinue extends Command {
-
-    public CMDElevatorDownContinue() {
-        super("CMDElevatorDownContinue");
-        requires(Elevator.getInstance());
-    }
-
-    /** Called just before this Command runs the first time */
-    protected void initialize() {
-    
-    }
-
-    /** Called repeatedly when this Command is scheduled to run */
-    protected void execute() {
-        Elevator.down();
-    }
-
-    /** Make this return true when this Command no longer needs to run execute() */
-    protected boolean isFinished() {
-        return false;
-    }
-
-    /** Called once after isFinished returns true */
-    protected void end() {
-        Elevator.stop();
-    }
-
-    /**
-     * Called when another command which requires one or more of the same
-     * subsystems is scheduled to run
-     */
-    protected void interrupted() {
-        end();
-    }
+public class CMDElevatorDownContinue extends ContinuousCommand {
+    public CMDElevatorDownContinue() {requires(Elevator.getInstance());}
+    protected void execute(){Elevator.down();}
+    protected void end(){Elevator.stop();}
+    protected void interrupted(){end();}
 }

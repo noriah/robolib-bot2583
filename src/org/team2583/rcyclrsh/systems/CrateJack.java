@@ -13,9 +13,10 @@
  * included in all copies or substantial portions of the Software.
  */
 
-package org.team2583.rcyclrsh;
+package org.team2583.rcyclrsh.systems;
 
 import io.github.robolib.command.Command;
+import io.github.robolib.command.CommandGroup;
 import io.github.robolib.command.SingleActionCommand;
 import io.github.robolib.command.Subsystem;
 import io.github.robolib.module.controller.CANJaguar;
@@ -25,7 +26,7 @@ import io.github.robolib.util.mapper.RobotMap;
  *
  * @author noriah <vix@noriah.dev>
  */
-public final class BoxLift extends Subsystem {
+public final class CrateJack extends Subsystem {
     
     private static CANJaguar m_motorLeft;
     private static CANJaguar m_motorRight;
@@ -43,13 +44,13 @@ public final class BoxLift extends Subsystem {
         setMotors(0);
     }
 
-    static final BoxLift m_instance = new BoxLift();
+    static final CrateJack m_instance = new CrateJack();
 
-    public static BoxLift getInstance(){
+    public static CrateJack getInstance(){
         return m_instance;
     }
 
-    private BoxLift(){
+    private CrateJack(){
         super("BoxLift");
     }
     
@@ -59,15 +60,19 @@ public final class BoxLift extends Subsystem {
     }
     
     public static Command up(){
-        return m_instance.new CMDLiftBoxes();
+        return m_instance.new CMDLiftCrates();
     }
     
     public static Command down(){
-        return m_instance.new CMDDropBoxes();
+        return m_instance.new CMDDropCrates();
     }
     
     public static Command toggle(){
-        return m_instance.new CMDToggleBoxLift();
+        return m_instance.new CMDToggleCrateJack();
+    }
+    
+    public static Command cycle(){
+        return m_instance.new CGCycleCrateJack();
     }
     
     public static Command stop(){
@@ -104,8 +109,8 @@ public final class BoxLift extends Subsystem {
      * 
      * @author noriah <vix@noriah.dev>
      */
-   private class CMDLiftBoxes extends Command {
-       public CMDLiftBoxes(){requires(m_instance);}
+   private class CMDLiftCrates extends Command {
+       public CMDLiftCrates(){requires(m_instance);}
        protected void initialize(){}
        protected void execute(){setMotors(lift_speed);}
        protected boolean isFinished(){return isAtTopLimit();}
@@ -116,8 +121,8 @@ public final class BoxLift extends Subsystem {
        protected void interrupted(){setMotors(0);}
    }
    
-   private class CMDDropBoxes extends Command {
-       public CMDDropBoxes(){requires(m_instance);}
+   private class CMDDropCrates extends Command {
+       public CMDDropCrates(){requires(m_instance);}
        protected void initialize(){}
        protected void execute(){setMotors(-lift_speed);}
        protected boolean isFinished(){return isAtBottomLimit();}
@@ -128,8 +133,8 @@ public final class BoxLift extends Subsystem {
        protected void interrupted(){setMotors(0);}
    }
    
-   private class CMDToggleBoxLift extends Command {
-       public CMDToggleBoxLift(){requires(m_instance);}
+   private class CMDToggleCrateJack extends Command {
+       public CMDToggleCrateJack(){requires(m_instance);}
        double dir;
        protected void initialize(){dir = m_atTop ? -lift_speed : lift_speed;}
        protected void execute(){setMotors(dir);}
@@ -139,6 +144,14 @@ public final class BoxLift extends Subsystem {
            m_atTop = dir > 0;
        }
        protected void interrupted(){setMotors(0);}
+   }
+   
+   private class CGCycleCrateJack extends CommandGroup {
+       public CGCycleCrateJack(){
+           addSequential(down());
+           addSequential(Wait(1));
+           addSequential(up());
+       }
    }
    
    private class CMDStopLift extends SingleActionCommand {

@@ -18,6 +18,10 @@ package org.team2583.rcyclrsh;
 import org.team2583.rcyclrsh.elevator.CMDElevatorDownContinue;
 import org.team2583.rcyclrsh.elevator.CMDElevatorUpContinue;
 import org.team2583.rcyclrsh.elevator.CMDLeftHandToggle;
+import org.team2583.rcyclrsh.systems.CrateJack;
+import org.team2583.rcyclrsh.systems.CGEjectBoxes;
+import org.team2583.rcyclrsh.systems.Drawer;
+import org.team2583.rcyclrsh.systems.Tailgate;
 
 import io.github.robolib.module.hid.HIDAxis;
 import io.github.robolib.module.hid.HIDButton;
@@ -83,7 +87,7 @@ public final class OI {
         
         SWITCH_HAND_LEFT = RobotMap.getModule("limit_switch_hand_left");
        
-        BTN_BOXES_TOGGLE.runWhenPressed(BoxLift.toggle());
+        BTN_BOXES_TOGGLE.runWhenPressed(CrateJack.toggle());
         
         BTN_TAILGATE_TOGGLE.runWhenPressed(Tailgate.toggle());
         

@@ -13,7 +13,7 @@
  * included in all copies or substantial portions of the Software.
  */
 
-package org.team2583.rcyclrsh;
+package org.team2583.rcyclrsh.systems;
 
 import io.github.robolib.command.Command;
 import io.github.robolib.command.SingleActionCommand;
