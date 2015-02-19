@@ -24,7 +24,7 @@ import io.github.robolib.command.CommandGroup;
  */
 public class CGEjectBoxes extends CommandGroup {
     
-    public CGEjectBoxes(){        
+    public CGEjectBoxes(){
         addSequential(Drawer.extend());
         addSequential(Wait(0.5));
         addSequential(Tailgate.lower());

@@ -19,6 +19,7 @@ import org.team2583.rcyclrsh.OI;
 
 import io.github.robolib.command.Command;
 import io.github.robolib.command.ContinuousCommand;
+import io.github.robolib.command.SingleActionCommand;
 import io.github.robolib.command.Subsystem;
 import io.github.robolib.module.DriveBase;
 import io.github.robolib.module.controller.Talon;
@@ -26,6 +27,7 @@ import io.github.robolib.util.mapper.RobotMap;
 
 /**
  *
+ * @author noriah <vix@noriah.dev>
  */
 public final class Drivetrain extends Subsystem{
     
@@ -33,25 +35,16 @@ public final class Drivetrain extends Subsystem{
      * DriveMode Class
      * Used to determine the type of driving we are doing
      */
-    public static class DriveMode{
-        private final Command m_command;
-        private final String m_name;
+    private final static class DriveMode {
+        public final Command m_command;
+        public final String m_name;
         
-        private DriveMode(Command command, String name){
+        public DriveMode(Command command, String name){
             m_command = command;
             m_name = name;
         }
         
-        public Command getCommand(){return m_command;}
         public String toString(){return m_name;}
-        
-        public boolean inMode(){
-            return m_driveMode == this;
-        }
-        
-        public static final DriveMode MECANUM = new DriveMode(m_instance.new MecanumMode(), "Mecanum Drive");
-        public static final DriveMode ARCADE = new DriveMode(m_instance.new ArcadeMode(), "Arcade Drive");
-        public static final DriveMode TANK = new DriveMode(m_instance.new TankMode(), "Tank Drive");
     }
     
     private static Talon m_motorFrontLeft;
@@ -59,22 +52,14 @@ public final class Drivetrain extends Subsystem{
     private static Talon m_motorRearLeft;
     private static Talon m_motorRearRight;
     
+    public static DriveMode MECANUM;
+    public static DriveMode ARCADE;
+    public static DriveMode TANK;
+    
     static DriveBase m_driveBase;
-    
-    private static DriveMode m_driveMode;
-    
-//    private static MPU6050 m_mpu;
 
-//    private static DigitalInput m_dig;
-    
     private static final Drivetrain m_instance = new Drivetrain();
-    
-//    private static Thread m_thread;
-    
 
-//    protected static Gyro gyro;
-//    private static double m_rotation;
-    
     public static void initialize(){
         
         m_motorFrontLeft = RobotMap.getModule("motor_drive_front_left");
@@ -88,41 +73,9 @@ public final class Drivetrain extends Subsystem{
         
         m_driveBase.setSafetyEnabled(false);
         
-//        q = new Quaternion();
-//        aa = new VectorInt16();
-//        aaReal = new VectorInt16();
-//        aaWorld = new VectorInt16();
-//        gravity = new VectorDouble();
-//        m_mpu = new MPU6050(Port.ONBOARD);
-        
-//        m_dig = new DigitalInput(DigitalChannel.DIO4);
-//        m_mpu.initialize();
-        
-//        devStatus = m_mpu.dmpInitialize();
-//        m_mpu.setXGyroOffset(220);
-//        m_mpu.setYGyroOffset(76);
-//        m_mpu.setZGyroOffset(-85);
-//        m_mpu.setZAccelOffset(1788);
-        
-//        if(devStatus == 0){
-//            m_mpu.setDMPEnabled(true);
-            
-//            m_dig.requestInterrupt((int a, Object b) -> m_instance.dmpDataReady());
-//            m_dig.setUpSourceEdge(true, false);
-//            m_dig.enableInterrupts();
-            
-//            mpuIntStatus = m_mpu.getIntStatus();
-            
-//            packetSize = m_mpu.dmpGetFIFOPacketSize();
-//        }
-        
-//        gyro = new Gyro(AnalogChannel.AIO0);
-//        gyro.setSensitivity(0.0072);
-        
-//        m_thread = new Thread(m_instance);
-//        m_thread.setPriority(2);
-//        m_thread.start();
-        
+        MECANUM = new DriveMode(m_instance.new MecanumMode(), "Mecanum Drive");
+        ARCADE = new DriveMode(m_instance.new ArcadeMode(), "Arcade Drive");
+        TANK = new DriveMode(m_instance.new TankMode(), "Tank Drive");
     }
     
     public static Drivetrain getInstance(){
@@ -132,81 +85,29 @@ public final class Drivetrain extends Subsystem{
     private Drivetrain(){
         super("Drive Base Subsystem");
     }
-    
-//    private void dmpDataReady(){
-//        mpuInterrupt = true;
-//    }
-    
-    public static void setDriveMode(DriveMode mode){
-        m_driveMode = mode;
-        m_instance.setDefaultCommand(m_driveMode.m_command);
-    }
-    
-//    private static byte mpuIntStatus;
-//    private static byte devStatus;
-//    private static short packetSize;
-//    private static short fifoCount;
-//    private static byte[] fifoBuffer = new byte[64];
-//    private static boolean mpuInterrupt = false;
-//    private static Quaternion q;
-//    private static VectorInt16 aa;
-//    private static VectorInt16 aaReal;
-//    private static VectorInt16 aaWorld;
-//    private static VectorDouble gravity;
-//    private static double[] euler = new double[3];
-//    private static double[] ypr = new double[3];
-    
-//    public void run(){
-//        while(true){
 
-//            Logger.get(this).info(String.format("%6.2f   %6.2f",gyro.getAngle(), gyro.getRate()));
-//            while(!mpuInterrupt && fifoCount < packetSize){
-//                
-//            }
-//            
-//            mpuInterrupt = false;
-//            
-//            mpuIntStatus = m_mpu.getIntStatus();
-//            
-//            fifoCount = m_mpu.getFIFOCount();
-//            
-//            if(((mpuIntStatus & 0x10) != 0)|| fifoCount == 1024){
-//                m_mpu.resetFIFO();
-//                Logger.get(this).warn("FIFO overflow!");
-//                
-//            }else if((mpuIntStatus & 0x02) != 0){
-//                while(fifoCount < packetSize) fifoCount = m_mpu.getFIFOCount();
-//                
-//                m_mpu.getFIFOBytes(fifoBuffer, packetSize);
-//                
-//                fifoCount -= packetSize;
-//                
-//                m_mpu.dmpGetQuaternion(q, fifoBuffer);
-//                m_mpu.dmpGetAccel(aa, fifoBuffer);
-//                m_mpu.dmpGetGravity(gravity, q);
-//                m_mpu.dmpGetLinearAccel(aaReal, aa, gravity);
-//                m_mpu.dmpGetYawPitchRoll(ypr, q, gravity);
-//                ypr = m_mpu.getRotation();
-//                RoboRIO.getFPGATimestamp();
-////                Logger.get(this).info(String.format("%.2f %.2f %.2f", ypr[0], ypr[1], ypr[2]));
-////                Logger.get(this).info(String.format("ypr %.2f %.2f %.2f", ypr[0] * MathUtils.M_180_OVER_PI, ypr[1] * MathUtils.M_180_OVER_PI, ypr[2] * MathUtils.M_180_OVER_PI));
-////                Logger.get(this).info(String.format("realAccel %.2f %.2f %.2f", aaReal.x / 1024.0, aaReal.y / 1024.0, aaReal.z / 1024.0));
-//            }
-//        }
-//    }
-    
+    public static Command setDriveMode(final DriveMode mode){
+        return m_instance.new CMDChangeDrivemode(mode);
+    }
+
     public void initDefaultCommand() {
-        setDefaultCommand(DriveMode.MECANUM.getCommand());
+        setDefaultCommand(MECANUM.m_command);
     }
     
-    private class ArcadeMode extends ContinuousCommand {
-        
+    private final class CMDChangeDrivemode extends SingleActionCommand {
+        private final DriveMode m_mode;
+        public CMDChangeDrivemode(final DriveMode mode){
+            super("C_ChangeDrivemode - " + mode);
+            requires(m_instance);
+            m_mode = mode;
+        }
+        protected void execute(){
+            m_instance.setDefaultCommand(m_mode.m_command);
+        }
+    }
+    
+    private final class ArcadeMode extends ContinuousCommand {
         public ArcadeMode(){requires(m_instance);}
-        
-        /**
-         * {@inheritDoc}
-         */
-        @Override
         protected void execute() {
             double scale = (OI.BTN_SPEED_SCALE.getState() ? 0.75 : 1.0);
             m_driveBase.arcade(
@@ -215,16 +116,10 @@ public final class Drivetrain extends Subsystem{
         }
     }
 
-    private class MecanumMode extends ContinuousCommand {
-        
+    private final class MecanumMode extends ContinuousCommand {
         private double slow = 1;
         private boolean pressed = false;
-        
         public MecanumMode(){requires(m_instance);}
-        /**
-         * {@inheritDoc}
-         */
-        @Override
         protected void execute() {
             if(OI.BTN_SPEED_SCALE.getState()){
                 if(!pressed){
@@ -237,7 +132,6 @@ public final class Drivetrain extends Subsystem{
             }else{
                 pressed = false;
             }
-//            double rotation;
             m_driveBase.mecanum(
                     OI.AXIS_DRIVER_LEFT_X.get() * slow,
                     OI.AXIS_DRIVER_LEFT_Y.get() * slow,
@@ -246,14 +140,8 @@ public final class Drivetrain extends Subsystem{
 
     }
     
-    private class TankMode extends ContinuousCommand {
-        
+    private final class TankMode extends ContinuousCommand {
         public TankMode(){requires(m_instance);}
-        
-        /**
-         * {@inheritDoc}
-         */
-        @Override
         protected void execute() {
             double scale = (OI.BTN_SPEED_SCALE.getState() ? 0.75 : 1.0);
             m_driveBase.tank(

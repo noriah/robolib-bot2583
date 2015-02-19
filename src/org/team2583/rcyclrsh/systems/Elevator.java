@@ -13,9 +13,10 @@
  * included in all copies or substantial portions of the Software.
  */
 
-package org.team2583.rcyclrsh.elevator;
+package org.team2583.rcyclrsh.systems;
 
 import io.github.robolib.command.Command;
+import io.github.robolib.command.ContinuousCommand;
 import io.github.robolib.command.SingleActionCommand;
 import io.github.robolib.command.Subsystem;
 import io.github.robolib.module.controller.CANJaguar;
@@ -58,6 +59,14 @@ public final class Elevator extends Subsystem {
         return m_instance.new CMDElevatorDown();
     }
     
+    public static Command upContinue(){
+        return m_instance.new CMDElevatorUpContinue();
+    }
+    
+    public static Command downContinue(){
+        return m_instance.new CMDElevatorDownContinue();
+    }
+    
     public static Command stop(){
         return m_instance.new CMDElevatorStop();
     }
@@ -95,10 +104,23 @@ public final class Elevator extends Subsystem {
         protected void interrupted(){setMotors(0);}
     }
 
+    private final class CMDElevatorUpContinue extends ContinuousCommand {
+        public CMDElevatorUpContinue(){requires(m_instance);}
+        protected void execute(){setMotors(-lift_speed);}
+        protected void end(){setMotors(0);}
+        protected void interrupted(){setMotors(0);}
+    }
+    
+    private final class CMDElevatorDownContinue extends ContinuousCommand {
+        public CMDElevatorDownContinue(){requires(m_instance);}
+        protected void execute(){setMotors(-lift_speed);}
+        protected void end(){setMotors(0);}
+        protected void interrupted(){setMotors(0);}
+    }
+
     private final class CMDElevatorStop extends SingleActionCommand {
         public CMDElevatorStop(){requires(m_instance);}
         protected void execute(){setMotors(0);}
     }
-
 }
 
