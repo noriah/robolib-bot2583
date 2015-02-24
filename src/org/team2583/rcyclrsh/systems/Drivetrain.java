@@ -22,7 +22,7 @@ import io.github.robolib.command.ContinuousCommand;
 import io.github.robolib.command.SingleActionCommand;
 import io.github.robolib.command.Subsystem;
 import io.github.robolib.module.DriveBase;
-import io.github.robolib.module.controller.Talon;
+import io.github.robolib.module.actuator.Talon;
 import io.github.robolib.util.mapper.RobotMap;
 
 /**

@@ -19,7 +19,7 @@ import io.github.robolib.command.Command;
 import io.github.robolib.command.ContinuousCommand;
 import io.github.robolib.command.SingleActionCommand;
 import io.github.robolib.command.Subsystem;
-import io.github.robolib.module.controller.CANJaguar;
+import io.github.robolib.module.actuator.CANJaguar;
 import io.github.robolib.util.mapper.RobotMap;
 
 /**

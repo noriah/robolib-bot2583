@@ -15,16 +15,15 @@
 
 package org.team2583.rcyclrsh;
 
-import org.team2583.rcyclrsh.systems.CrateJack;
 import org.team2583.rcyclrsh.systems.Drawer;
 import org.team2583.rcyclrsh.systems.Drivetrain;
 import org.team2583.rcyclrsh.systems.Ejector;
-import org.team2583.rcyclrsh.systems.Elevator;
 import org.team2583.rcyclrsh.systems.LeftTrolley;
 import org.team2583.rcyclrsh.systems.RightTrolley;
 import org.team2583.rcyclrsh.systems.Tailgate;
 
 import io.github.robolib.RoboLibBot;
+import io.github.robolib.util.TableSender;
 import io.github.robolib.util.mapper.RobotMap;
 
 /**
@@ -41,20 +40,20 @@ public class WestwoodBot extends RoboLibBot{
 //        m_lcdManager = new LCDManager();
 //        m_lcdManager.startThread();
         
-        new OI();
-        
         
         
 
-//        TableSender.setEnabled(false);
+        TableSender.setEnabled(false);
         
         Drivetrain.initialize();
         Drawer.initialize();
         Ejector.initialize();
         Tailgate.initialize();
-        Elevator.initialize();
-        CrateJack.initialize();
+//        Elevator.initialize();
+//        CrateJack.initialize();
         LeftTrolley.initialize();
         RightTrolley.initialize();
+        
+        new OI();
     }
 }

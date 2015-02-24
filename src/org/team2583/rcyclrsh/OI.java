@@ -15,18 +15,20 @@
 
 package org.team2583.rcyclrsh;
 
-import org.team2583.rcyclrsh.systems.CGEjectBoxes;
-import org.team2583.rcyclrsh.systems.CrateJack;
+import java.nio.IntBuffer;
+
 import org.team2583.rcyclrsh.systems.Drawer;
-import org.team2583.rcyclrsh.systems.Elevator;
 import org.team2583.rcyclrsh.systems.LeftTrolley;
 import org.team2583.rcyclrsh.systems.Tailgate;
 
+import io.github.robolib.command.SingleActionCommand;
+import io.github.robolib.jni.HALUtil;
 import io.github.robolib.module.hid.HIDAxis;
 import io.github.robolib.module.hid.HIDButton;
 import io.github.robolib.module.hid.Joystick.JSID;
 import io.github.robolib.module.hid.XBoxController;
 import io.github.robolib.module.sensor.LimitSwitch;
+import io.github.robolib.util.Utility;
 import io.github.robolib.util.mapper.RobotMap;
 
 /**
@@ -78,19 +80,32 @@ public final class OI {
         
         SWITCH_HAND_LEFT = RobotMap.getModule("limit_switch_hand_left");
        
-        BTN_BOXES_TOGGLE.runWhenPressed(CrateJack.toggle());
+        //BTN_BOXES_TOGGLE.runWhenPressed(CrateJack.toggle());
         
         BTN_TAILGATE_TOGGLE.runWhenPressed(Tailgate.toggle());
         
         BTN_LEFT_HAND_TOGGLE.runWhenPressed(LeftTrolley.toggle());
         
-        BTN_EJECT_BOXES.runWhenPressed(new CGEjectBoxes());
+        //BTN_EJECT_BOXES.runWhenPressed(new CGEjectBoxes());
 
         BTN_DRAWER_IN.runWhileHeld(Drawer.retract());
         BTN_DRAWER_OUT.runWhileHeld(Drawer.extend());
+        
+        BTN_EJECT_BOXES.runWhenPressed(new SingleActionCommand("adk") {
+            
+            @Override
+            protected void execute() {
+                IntBuffer s = Utility.allocateInt();
+                HALUtil.setRadioLED((char) 0x02, s);
+                HALUtil.setModeLED((char) 0x02, s);
+                HALUtil.setRSLLED(false, s);
+                HALUtil.checkStatus(s);
+                
+            }
+        });
 
-        BTN_ARM_UP.runWhileHeld(Elevator.upContinue());
-        BTN_ARM_DOWN.runWhileHeld(Elevator.downContinue());
+        //BTN_ARM_UP.runWhileHeld(Elevator.upContinue());
+        //BTN_ARM_DOWN.runWhileHeld(Elevator.downContinue());
         
     }
     
