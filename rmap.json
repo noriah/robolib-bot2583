@@ -10,7 +10,7 @@
     "device_channel": 1,
     "description": "Front Left Drive Motor",
     "power_channel": 2,
-    "inverted": false
+    "inverted": true
   },
   "motor_drive_front_right": {
     "type": "talon",  
@@ -24,7 +24,7 @@
     "device_channel": 0,
     "description": "Rear Left Drive Motor", 
     "power_channel": 3,
-    "inverted": false
+    "inverted": true
   },
   "motor_drive_back_right": {
     "type": "talon",  

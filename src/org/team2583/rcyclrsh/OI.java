@@ -28,7 +28,7 @@ import io.github.robolib.module.hid.HIDButton;
 import io.github.robolib.module.hid.Joystick.JSID;
 import io.github.robolib.module.hid.XBoxController;
 import io.github.robolib.module.sensor.LimitSwitch;
-import io.github.robolib.util.Utility;
+import io.github.robolib.util.Common;
 import io.github.robolib.util.mapper.RobotMap;
 
 /**
@@ -95,7 +95,7 @@ public final class OI {
             
             @Override
             protected void execute() {
-                IntBuffer s = Utility.allocateInt();
+                IntBuffer s = Common.allocateInt();
                 HALUtil.setRadioLED((char) 0x02, s);
                 HALUtil.setModeLED((char) 0x02, s);
                 HALUtil.setRSLLED(false, s);
