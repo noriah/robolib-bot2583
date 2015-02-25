@@ -22,7 +22,7 @@ import org.team2583.rcyclrsh.systems.LeftTrolley;
 import org.team2583.rcyclrsh.systems.RightTrolley;
 import org.team2583.rcyclrsh.systems.Tailgate;
 
-import io.github.robolib.RoboLibBot;
+import io.github.robolib.RoboLib;
 import io.github.robolib.util.TableSender;
 import io.github.robolib.util.mapper.RobotMap;
 
@@ -30,7 +30,7 @@ import io.github.robolib.util.mapper.RobotMap;
  * 
  * @author noriah <vix@noriah.dev>
  */
-public class WestwoodBot extends RoboLibBot{
+public class WestwoodBot extends RoboLib{
 //    private LCDManager m_lcdManager;
 
     public WestwoodBot(){

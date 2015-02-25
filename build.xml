@@ -85,7 +85,7 @@
 
     <jar destfile="${dist.jar}" update="false">
       <manifest>
-        <attribute name="Main-Class" value="io.github.robolib.RoboLibBot"/>
+        <attribute name="Main-Class" value="io.github.robolib.RoboLib"/>
         <attribute name="Robot-Class" value="${robot.class}"/>
         <attribute name="Class-Path" value="."/>
       </manifest>
@@ -110,11 +110,6 @@
   	      todir="${username}@${target}:${deploy.dir}"
   	      password="${password}"
   	      trust="true" />
-
-    <scp file="${wpilib.ant.dir}/robotCommand"
-      todir="${username}@${target}:${command.dir}"
-      password="${password}"
-      trust="true"/>
 
     <echo>[Project-deploy] Starting program.</echo>
     <sshexec host="${target}"
