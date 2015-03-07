@@ -91,18 +91,18 @@ public final class OI {
         BTN_DRAWER_IN.runWhileHeld(Drawer.retract());
         BTN_DRAWER_OUT.runWhileHeld(Drawer.extend());
         
-        BTN_EJECT_BOXES.runWhenPressed(new SingleActionCommand("adk") {
-            
-            @Override
-            protected void execute() {
-                IntBuffer s = Common.allocateInt();
-                HALUtil.setRadioLED((char) 0x02, s);
-                HALUtil.setModeLED((char) 0x02, s);
-                HALUtil.setRSLLED(false, s);
-                HALUtil.checkStatus(s);
-                
-            }
-        });
+//        BTN_EJECT_BOXES.runWhenPressed(new SingleActionCommand("adk") {
+//            
+//            @Override
+//            protected void execute() {
+//                IntBuffer s = Common.allocateInt();
+//                HALUtil.setRadioLED((char) 0x02, s);
+//                HALUtil.setModeLED((char) 0x02, s);
+//                HALUtil.setRSLLED(false, s);
+//                HALUtil.checkStatus(s);
+//                
+//            }
+//        });
 
         //BTN_ARM_UP.runWhileHeld(Elevator.upContinue());
         //BTN_ARM_DOWN.runWhileHeld(Elevator.downContinue());
