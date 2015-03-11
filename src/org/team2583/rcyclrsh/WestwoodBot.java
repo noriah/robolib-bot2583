@@ -15,14 +15,20 @@
 
 package org.team2583.rcyclrsh;
 
+import org.team2583.rcyclrsh.auton.AdvancedAuton;
+import org.team2583.rcyclrsh.auton.BasicAuton;
+import org.team2583.rcyclrsh.systems.CrateJack;
 import org.team2583.rcyclrsh.systems.Drawer;
 import org.team2583.rcyclrsh.systems.Drivetrain;
 import org.team2583.rcyclrsh.systems.Ejector;
+import org.team2583.rcyclrsh.systems.LeftElevator;
 import org.team2583.rcyclrsh.systems.LeftTrolley;
+import org.team2583.rcyclrsh.systems.RightElevator;
 import org.team2583.rcyclrsh.systems.RightTrolley;
 import org.team2583.rcyclrsh.systems.Tailgate;
 
 import io.github.robolib.RoboLib;
+import io.github.robolib.robot.AutonCommandMode;
 import io.github.robolib.util.TableSender;
 import io.github.robolib.util.mapper.RobotMap;
 
@@ -34,7 +40,7 @@ public class WestwoodBot extends RoboLib{
 //    private LCDManager m_lcdManager;
 
     public WestwoodBot(){
-        super("Stacker", "1.0.0");
+        super("Tetris", "1.0.0");
         RobotMap.setMapFile("/home/lvuser/rmap.json");
         enableDebug(true);
 //        m_lcdManager = new LCDManager();
@@ -49,11 +55,18 @@ public class WestwoodBot extends RoboLib{
         Drawer.initialize();
         Ejector.initialize();
         Tailgate.initialize();
-//        Elevator.initialize();
-//        CrateJack.initialize();
+        LeftElevator.initialize();
+        RightElevator.initialize();
+        CrateJack.initialize();
         LeftTrolley.initialize();
         RightTrolley.initialize();
         
         new OI();
+    }
+    
+    public void robotInit(){
+        new AutonCommandMode(new BasicAuton(), "Strat 1", true);
+        
+        new AutonCommandMode(new AdvancedAuton(), "Strat 2");
     }
 }

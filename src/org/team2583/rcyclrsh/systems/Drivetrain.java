@@ -94,6 +94,25 @@ public final class Drivetrain extends Subsystem{
         setDefaultCommand(MECANUM.m_command);
     }
     
+    public static Command mecanumDrive(final double x, final double y, final double rot){
+        return m_instance.new CMDMecanumDrive(x, y, rot);
+    }
+    
+    private final class CMDMecanumDrive extends Command {
+        final double xMove, yMove, rotMove; 
+        public CMDMecanumDrive(double x, double y, double rot){
+            requires(m_instance);
+            xMove = x;
+            yMove = y;
+            rotMove = rot;
+        }
+        protected void initialize(){}
+        protected void execute(){m_driveBase.mecanum(xMove, yMove, rotMove);}
+        protected boolean isFinished(){return false;}
+        protected void end(){m_driveBase.stopMotor();}
+        protected void interrupted(){m_driveBase.stopMotor();}
+    }
+    
     private final class CMDChangeDrivemode extends SingleActionCommand {
         private final DriveMode m_mode;
         public CMDChangeDrivemode(final DriveMode mode){

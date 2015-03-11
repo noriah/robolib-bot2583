@@ -4,6 +4,23 @@
   "drawer_in_speed": 0.9,
   "armlift_speed": 0.6,
   "boxlift_speed": 0.70,
+  "arcade_toggle_left_arm": 0, 
+  "arcade_toggle_right_arm": 1,
+  "arcade_toggle_drawer_gate": 2, 
+  "arcade_toggle_railroad": 3,
+  "arcade_arms_up": 4,
+  "arcade_arms_down": 5,
+  "arcade_jack_up": 6,
+  "arcade_jack_down": 7,
+  "arcade_drawer_in": 8,
+  "arcade_drawer_out": 9,
+  "arcade_eject_sequence": 10,
+  "arcade_cancel_sequence": 11,
+
+  "auton_basic_lift_time": 2000,
+  "auton_basic_drive_forward_speed": 0.2,
+  "auton_basic_drive_forward_time": 3000,
+
   
   "motor_drive_front_left": {
     "type": "talon",
