@@ -17,6 +17,7 @@ package org.team2583.rcyclrsh.systems;
 
 import io.github.robolib.command.Command;
 import io.github.robolib.command.CommandGroup;
+import io.github.robolib.command.ContinuousCommand;
 import io.github.robolib.command.SingleActionCommand;
 import io.github.robolib.command.Subsystem;
 import io.github.robolib.module.actuator.CANJaguar;
@@ -65,6 +66,14 @@ public final class CrateJack extends Subsystem {
     
     public static Command down(){
         return m_instance.new CMDDropCrates();
+    }
+
+    public static Command upContinue(){
+        return m_instance.new CMDLiftCratesContinue();
+    }
+    
+    public static Command downContinue(){
+        return m_instance.new CMDDropCratesContinue();
     }
     
     public static Command toggle(){
@@ -130,6 +139,20 @@ public final class CrateJack extends Subsystem {
            setMotors(0);
            m_atTop = false;
        }
+       protected void interrupted(){setMotors(0);}
+   }
+   
+   private final class CMDLiftCratesContinue extends ContinuousCommand {
+       public CMDLiftCratesContinue(){requires(m_instance);}
+       protected void execute(){setMotors(-lift_speed);}
+       protected void end(){setMotors(0);}
+       protected void interrupted(){setMotors(0);}
+   }
+   
+   private final class CMDDropCratesContinue extends ContinuousCommand {
+       public CMDDropCratesContinue(){requires(m_instance);}
+       protected void execute(){setMotors(-lift_speed);}
+       protected void end(){setMotors(0);}
        protected void interrupted(){setMotors(0);}
    }
    

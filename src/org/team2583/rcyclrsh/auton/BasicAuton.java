@@ -15,9 +15,8 @@
 
 package org.team2583.rcyclrsh.auton;
 
-import org.team2583.rcyclrsh.systems.CMDBothArmsDown;
-import org.team2583.rcyclrsh.systems.CMDBothArmsUp;
 import org.team2583.rcyclrsh.systems.Drivetrain;
+import org.team2583.rcyclrsh.systems.LeftElevator;
 
 import io.github.robolib.command.CommandGroup;
 import io.github.robolib.command.PrintCommand;
@@ -30,12 +29,17 @@ import io.github.robolib.util.mapper.RobotMap;
 public class BasicAuton extends CommandGroup {
     
     public BasicAuton() {
-        addSequential(new CMDBothArmsUp(), RobotMap.getNumber("auton_basic_lift_time"));
+        addSequential(LeftElevator.upContinue(), RobotMap.getNumber("auton_basic_lift_time"));
         addSequential(Drivetrain.mecanumDrive(
-                0,
-                RobotMap.getNumber("auton_basic_drive_forward_speed"),
+                RobotMap.getNumber("auton_basic_drive_forward_speed_left"),
+                RobotMap.getNumber("auton_basic_drive_forward_speed_right"),
                 0), RobotMap.getNumber("auton_basic_drive_forward_time"));
-        addSequential(new CMDBothArmsDown());
+//        addSequential(Drivetrain.stopDrive());
+        addSequential(LeftElevator.downContinue(), RobotMap.getNumber("auton_basic_drop_time"));
+        addSequential(Drivetrain.mecanumDrive(
+                RobotMap.getNumber("auton_basic_drive_reverse_speed_left"),
+                RobotMap.getNumber("auton_basic_drive_reverse_speed_right"),
+                0), RobotMap.getNumber("auton_basic_drive_reverse_time"));
         addSequential(new PrintCommand("Basic Autonomous Complete"));
     }
 }

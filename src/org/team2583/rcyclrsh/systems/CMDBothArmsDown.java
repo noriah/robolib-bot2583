@@ -15,25 +15,21 @@
 
 package org.team2583.rcyclrsh.systems;
 
-import io.github.robolib.command.Command;
+import io.github.robolib.command.ContinuousCommand;
 
 /**
 *
 * @author noriah <vix@noriah.dev>
 */
-public class CMDBothArmsDown extends Command {
+public class CMDBothArmsDown extends ContinuousCommand {
 
     public CMDBothArmsDown(){
         requires(LeftElevator.getInstance());
         requires(RightElevator.getInstance());
     }
-    protected void initialize(){}
     protected void execute(){
         LeftElevator.setMotor(-LeftElevator.lift_speed);
         RightElevator.setMotor(-RightElevator.lift_speed);
-    }
-    protected boolean isFinished(){
-        return LeftElevator.isAtBottomLimit() && RightElevator.isAtBottomLimit();
     }
     protected void end(){
         LeftElevator.setMotor(0);

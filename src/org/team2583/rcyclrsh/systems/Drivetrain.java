@@ -91,14 +91,14 @@ public final class Drivetrain extends Subsystem{
     }
 
     public void initDefaultCommand() {
-        setDefaultCommand(MECANUM.m_command);
+//        setDefaultCommand(MECANUM.m_command);
     }
     
     public static Command mecanumDrive(final double x, final double y, final double rot){
         return m_instance.new CMDMecanumDrive(x, y, rot);
     }
     
-    private final class CMDMecanumDrive extends Command {
+    private final class CMDMecanumDrive extends ContinuousCommand {
         final double xMove, yMove, rotMove; 
         public CMDMecanumDrive(double x, double y, double rot){
             requires(m_instance);
@@ -106,9 +106,9 @@ public final class Drivetrain extends Subsystem{
             yMove = y;
             rotMove = rot;
         }
-        protected void initialize(){}
+//        protected void initialize(){}
         protected void execute(){m_driveBase.mecanum(xMove, yMove, rotMove);}
-        protected boolean isFinished(){return false;}
+//        protected boolean isFinished(){return false;}
         protected void end(){m_driveBase.stopMotor();}
         protected void interrupted(){m_driveBase.stopMotor();}
     }
@@ -121,7 +121,11 @@ public final class Drivetrain extends Subsystem{
             m_mode = mode;
         }
         protected void execute(){
-            m_instance.setDefaultCommand(m_mode.m_command);
+            if(m_mode == null){
+                m_instance.setDefaultCommand(null);
+            }else{
+                m_instance.setDefaultCommand(m_mode.m_command);
+            }
         }
     }
     
@@ -138,7 +142,9 @@ public final class Drivetrain extends Subsystem{
     private final class MecanumMode extends ContinuousCommand {
         private double slow = 1;
         private boolean pressed = false;
-        public MecanumMode(){requires(m_instance);}
+        public MecanumMode(){
+            setInterruptible(true);
+            requires(m_instance);}
         protected void execute() {
             if(OI.BTN_SPEED_SCALE.getState()){
                 if(!pressed){

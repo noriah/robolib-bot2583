@@ -15,7 +15,6 @@
 
 package org.team2583.rcyclrsh;
 
-import org.team2583.rcyclrsh.auton.AdvancedAuton;
 import org.team2583.rcyclrsh.auton.BasicAuton;
 import org.team2583.rcyclrsh.systems.CrateJack;
 import org.team2583.rcyclrsh.systems.Drawer;
@@ -28,15 +27,16 @@ import org.team2583.rcyclrsh.systems.RightTrolley;
 import org.team2583.rcyclrsh.systems.Tailgate;
 
 import io.github.robolib.RoboLib;
-import io.github.robolib.robot.AutonCommandMode;
-import io.github.robolib.util.TableSender;
+import io.github.robolib.command.Command;
+import io.github.robolib.modes.AutonCommandMode;
+import io.github.robolib.modes.TeleopMode;
 import io.github.robolib.util.mapper.RobotMap;
 
 /**
  * 
  * @author noriah <vix@noriah.dev>
  */
-public class WestwoodBot extends RoboLib{
+public class WestwoodBot extends RoboLib {
 //    private LCDManager m_lcdManager;
 
     public WestwoodBot(){
@@ -49,7 +49,7 @@ public class WestwoodBot extends RoboLib{
         
         
 
-        TableSender.setEnabled(false);
+//        TableSender.setEnabled(false);
         
         Drivetrain.initialize();
         Drawer.initialize();
@@ -65,8 +65,21 @@ public class WestwoodBot extends RoboLib{
     }
     
     public void robotInit(){
+        new TeleopMode("Teleop", true){
+            final Command m_teleopDrive = Drivetrain.setDriveMode(Drivetrain.MECANUM);
+            final Command m_teleopClear = Drivetrain.setDriveMode(null);
+            
+            protected void init(){
+                m_teleopDrive.start();
+            }
+            
+            protected void end(){
+                m_teleopClear.start();
+            }
+        };
+        
         new AutonCommandMode(new BasicAuton(), "Strat 1", true);
         
-        new AutonCommandMode(new AdvancedAuton(), "Strat 2");
+//        new AutonCommandMode(new AdvancedAuton(), "Strat 2");
     }
 }

@@ -16,6 +16,7 @@
 package org.team2583.rcyclrsh.systems;
 
 import io.github.robolib.command.Command;
+import io.github.robolib.command.ContinuousCommand;
 //import io.github.robolib.command.ContinuousCommand;
 import io.github.robolib.command.SingleActionCommand;
 import io.github.robolib.command.Subsystem;
@@ -57,13 +58,13 @@ public final class LeftElevator extends Subsystem {
         return m_instance.new CMDLeftElevatorDown();
     }
     
-//    public static Command upContinue(){
-//        return m_instance.new CMDLeftElevatorUpContinue();
-//    }
-//    
-//    public static Command downContinue(){
-//        return m_instance.new CMDLeftElevatorDownContinue();
-//    }
+    public static Command upContinue(){
+        return m_instance.new CMDLeftElevatorUpContinue();
+    }
+    
+    public static Command downContinue(){
+        return m_instance.new CMDLeftElevatorDownContinue();
+    }
     
     public static Command stop(){
         return m_instance.new CMDLeftElevatorStop();
@@ -101,19 +102,19 @@ public final class LeftElevator extends Subsystem {
         protected void interrupted(){m_motor.setSpeed(0);}
     }
 
-//    private final class CMDLeftElevatorUpContinue extends ContinuousCommand {
-//        public CMDLeftElevatorUpContinue(){requires(m_instance);}
-//        protected void execute(){m_motor.setSpeed(-lift_speed);}
-//        protected void end(){m_motor.setSpeed(0);}
-//        protected void interrupted(){m_motor.setSpeed(0);}
-//    }
-//    
-//    private final class CMDLeftElevatorDownContinue extends ContinuousCommand {
-//        public CMDLeftElevatorDownContinue(){requires(m_instance);}
-//        protected void execute(){m_motor.setSpeed(-lift_speed);}
-//        protected void end(){m_motor.setSpeed(0);}
-//        protected void interrupted(){m_motor.setSpeed(0);}
-//    }
+    private final class CMDLeftElevatorUpContinue extends ContinuousCommand {
+        public CMDLeftElevatorUpContinue(){requires(m_instance);}
+        protected void execute(){m_motor.setSpeed(lift_speed);}
+        protected void end(){m_motor.setSpeed(0);}
+        protected void interrupted(){m_motor.setSpeed(0);}
+    }
+    
+    private final class CMDLeftElevatorDownContinue extends ContinuousCommand {
+        public CMDLeftElevatorDownContinue(){requires(m_instance);}
+        protected void execute(){m_motor.setSpeed(-lift_speed);}
+        protected void end(){m_motor.setSpeed(0);}
+        protected void interrupted(){m_motor.setSpeed(0);}
+    }
 
     private final class CMDLeftElevatorStop extends SingleActionCommand {
         public CMDLeftElevatorStop(){requires(m_instance);}

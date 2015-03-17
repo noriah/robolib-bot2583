@@ -16,9 +16,11 @@
 package org.team2583.rcyclrsh.systems;
 
 import io.github.robolib.command.Command;
+import io.github.robolib.command.ContinuousCommand;
 import io.github.robolib.command.SingleActionCommand;
 import io.github.robolib.command.Subsystem;
 import io.github.robolib.module.controller.LimitedController;
+import io.github.robolib.util.log.Logger;
 import io.github.robolib.util.mapper.RobotMap;
 
 /**
@@ -58,6 +60,14 @@ public final class Drawer extends Subsystem {
         return m_instance.new CMDRetractDrawer();
     }
     
+    public static Command extendContinue(){
+        return m_instance.new CMDExtendDrawerContinue();
+    }
+    
+    public static Command retractContinue(){
+        return m_instance.new CMDRetractDrawerContinue();
+    }
+    
     public static Command toggle(){
         return m_instance.new CMDToggleDrawer();
     }
@@ -79,7 +89,8 @@ public final class Drawer extends Subsystem {
     private class CMDExtendDrawer extends Command {
         public CMDExtendDrawer(){requires(m_instance);}
         protected void initialize(){}
-        protected void execute(){m_drawerMotor.setSpeed(m_drawerOutSpeed);}
+        protected void execute(){m_drawerMotor.setSpeed(m_drawerOutSpeed);
+        Logger.get(this).info(m_drawerMotor.atFrontLimit());}
         protected boolean isFinished(){return m_drawerMotor.atFrontLimit();}
         protected void end(){
             m_drawerMotor.setSpeed(0);
@@ -97,6 +108,20 @@ public final class Drawer extends Subsystem {
             m_drawerMotor.setSpeed(0);
             m_drawerExtended = false;
         }
+        protected void interrupted(){m_drawerMotor.setSpeed(0);}
+    }
+    
+    private final class CMDExtendDrawerContinue extends ContinuousCommand {
+        public CMDExtendDrawerContinue(){requires(m_instance);}
+        protected void execute(){m_drawerMotor.setSpeed(m_drawerOutSpeed);}
+        protected void end(){m_drawerMotor.setSpeed(0);}
+        protected void interrupted(){m_drawerMotor.setSpeed(0);}
+    }
+    
+    private final class CMDRetractDrawerContinue extends ContinuousCommand {
+        public CMDRetractDrawerContinue(){requires(m_instance);}
+        protected void execute(){m_drawerMotor.setSpeed(m_drawerInSpeed);}
+        protected void end(){m_drawerMotor.setSpeed(0);}
         protected void interrupted(){m_drawerMotor.setSpeed(0);}
     }
     

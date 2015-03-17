@@ -16,11 +16,11 @@
 package org.team2583.rcyclrsh;
 
 import org.team2583.rcyclrsh.systems.CGEjectBoxes;
-import org.team2583.rcyclrsh.systems.CMDBothArmsDown;
-import org.team2583.rcyclrsh.systems.CMDBothArmsUp;
 import org.team2583.rcyclrsh.systems.CrateJack;
 import org.team2583.rcyclrsh.systems.Drawer;
+import org.team2583.rcyclrsh.systems.LeftElevator;
 import org.team2583.rcyclrsh.systems.LeftTrolley;
+import org.team2583.rcyclrsh.systems.RightElevator;
 import org.team2583.rcyclrsh.systems.RightTrolley;
 import org.team2583.rcyclrsh.systems.Tailgate;
 
@@ -100,17 +100,21 @@ public final class OI {
         
         BTN_EJECT_SEQUENCE.runWhenPressed(CMD_EJECT_BOXES);
         BTN_CANCEL_SEQUENCE.cancelWhenPressed(CMD_EJECT_BOXES);
-        BTN_DRAWER_IN.runWhileHeld(Drawer.retract());
-        BTN_DRAWER_IN.runWhenDoublePressed(Drawer.retract(), 50);
-        BTN_DRAWER_OUT.runWhileHeld(Drawer.retract());
-        BTN_DRAWER_OUT.runWhenDoublePressed(Drawer.extend(), 50);
+        BTN_DRAWER_IN.runWhileHeld(Drawer.retractContinue());
+        BTN_DRAWER_IN.runWhenDoublePressed(Drawer.retract(), 100);
+        BTN_DRAWER_OUT.runWhileHeld(Drawer.extendContinue());
+        BTN_DRAWER_OUT.runWhenDoublePressed(Drawer.extend(), 100);
         BTN_DRAWER_GATE_TOGGLE.runWhenPressed(Tailgate.toggle());
         BTN_JACK_UP.runWhenPressed(CrateJack.up());
         BTN_JACK_DOWN.runWhenPressed(CrateJack.down());
         BTN_LEFT_ARM_TOGGLE.runWhenPressed(LeftTrolley.toggle());
         BTN_RIGHT_ARM_TOGGLE.runWhenPressed(RightTrolley.toggle());
-        BTN_ARMS_UP.runWhileHeld(new CMDBothArmsUp());
-        BTN_ARMS_DOWN.runWhileHeld(new CMDBothArmsDown());
+//        BTN_ARMS_UP.runWhileHeld(new CMDBothArmsUp());
+//        BTN_ARMS_DOWN.runWhileHeld(new CMDBothArmsDown());
+        BTN_ARMS_UP.runWhileHeld(LeftElevator.upContinue());
+//        BTN_ARMS_UP.runWhileHeld(RightElevator.upContinue());
+        BTN_ARMS_DOWN.runWhileHeld(LeftElevator.downContinue());
+//        BTN_ARMS_DOWN.runWhileHeld(RightElevator.downContinue());
         // BTN_RAILROAD_TOGGLE.runWhenPressed(Railroad.toggle());
     }    
 }
