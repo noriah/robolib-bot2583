@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2015 Westwood Robotics <code.westwoodrobotics@gmail.com>.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -8,7 +8,7 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
  */
@@ -23,14 +23,14 @@ import io.github.robolib.util.mapper.RobotMap;
 
 /**
  *
- * @author Austin Reuland <amreuland@gmail.com>
+ * @author noriah reuland <code@noriah.dev>
  */
 public final class LeftTrolley extends Subsystem {
-    
+
     static Solenoid m_solenoid;
-    
+
     static boolean m_flipped;
-    
+
     public static void initialize(){
         m_solenoid = RobotMap.getModule("solenoid_left_hand");
     }
@@ -44,25 +44,25 @@ public final class LeftTrolley extends Subsystem {
     private LeftTrolley(){
         super("LeftTrolley");
     }
-    
+
     public static Command flipIn(){
         return m_instance.new CMDLeftHandFlipIn();
     }
-    
+
     public static Command flipOut(){
         return m_instance.new CMDLeftHandFlipOut();
     }
-    
+
     public static Command toggle(){
         return m_instance.new CMDLeftHandToggle();
     }
-    
+
     public static boolean isIn(){
         return m_flipped;
     }
 
     public void initDefaultCommand() {}
-    
+
     private final class CMDLeftHandFlipOut extends SingleActionCommand {
         public CMDLeftHandFlipOut(){requires(m_instance);}
         protected void execute(){
@@ -70,7 +70,7 @@ public final class LeftTrolley extends Subsystem {
             m_flipped = false;
         }
     }
-    
+
     private final class CMDLeftHandFlipIn extends SingleActionCommand {
         public CMDLeftHandFlipIn(){requires(m_instance);}
         protected void execute(){
@@ -78,7 +78,7 @@ public final class LeftTrolley extends Subsystem {
             m_flipped = true;
         }
     }
-    
+
     private final class CMDLeftHandToggle extends SingleActionCommand {
         public CMDLeftHandToggle(){requires(m_instance);}
         protected void execute(){

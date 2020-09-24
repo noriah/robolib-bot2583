@@ -1,7 +1,10 @@
+### Its a switcheroo
+I mean.. I have all the source code...
+
 # robot-recyclerush
-Robot Code for the 2015 Recycle Rush competition.
+Robot Code for FRC team 2583's robot from 2015
 
 ## RoboLibJ
-RoboLibJ is a robotics library developed by our team for everyone to use.
+RoboLibJ is a robotics library 
 
 See it here: https://github.com/robolib/robolibj

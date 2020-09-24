@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2015 Westwood Robotics <code.westwoodrobotics@gmail.com>.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -8,7 +8,7 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
  */
@@ -23,16 +23,16 @@ import io.github.robolib.util.mapper.RobotMap;
 
 /**
  *
- * @author Austin Reuland <amreuland@gmail.com>
+ * @author noriah reuland <code@noriah.dev>
  */
 public final class Ejector extends Subsystem {
 
     static Solenoid m_boxEjector;
-    
+
     static boolean m_extended;
-    
+
     public static void initialize(){
-        m_boxEjector = RobotMap.getModule("solenoid_boxEjector"); 
+        m_boxEjector = RobotMap.getModule("solenoid_boxEjector");
     }
 
     static final Ejector m_instance = new Ejector();
@@ -44,19 +44,19 @@ public final class Ejector extends Subsystem {
     private Ejector(){
         super("Ejector Subsystem");
     }
-    
+
     public static Command extend(){
         return m_instance.new CMDExtendEjector();
     }
-    
+
     public static Command retract(){
         return m_instance.new CMDRetractEjector();
     }
-    
+
     public static Command toggle(){
         return m_instance.new CMDToggleEjector();
     }
-    
+
     public static boolean isExtended(){
         return m_extended;
     }

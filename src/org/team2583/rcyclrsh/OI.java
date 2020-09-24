@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2015 Westwood Robotics <code.westwoodrobotics@gmail.com>.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -8,7 +8,7 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
  */
@@ -35,21 +35,21 @@ import io.github.robolib.util.mapper.RobotMap;
 /**
  * The Operator Interface Class. Controls Things that interface with the operator.
  *
- * @author Austin Reuland <amreuland@gmail.com>
+ * @author noriah reuland <code@noriah.dev>
  */
 public final class OI {
 
     public static final XBoxController JS_DRIVER;
     public static final ArcadeController JS_ACTOR;
-    
+
     public static final HIDAxis AXIS_DRIVER_LEFT_X;
     public static final HIDAxis AXIS_DRIVER_LEFT_Y;
     public static final HIDAxis AXIS_DRIVER_RIGHT_X;
     public static final HIDAxis AXIS_DRIVER_RIGHT_Y;
-    
+
     //Driver Buttons
     public static final HIDButton BTN_SPEED_SCALE;
-    
+
     //Actor Buttons
     public static final HIDButton BTN_EJECT_SEQUENCE;
     public static final HIDButton BTN_CANCEL_SEQUENCE;
@@ -63,23 +63,23 @@ public final class OI {
     public static final HIDButton BTN_RIGHT_ARM_TOGGLE;
     public static final HIDButton BTN_ARMS_UP;
     public static final HIDButton BTN_ARMS_DOWN;
-    
+
     private static final Command CMD_EJECT_BOXES;
-    
+
     public static final LimitSwitch SWITCH_HAND_LEFT;
     public static final LimitSwitch SWITCH_HAND_RIGHT;
-    
+
     static{
         JS_DRIVER = new XBoxController(JSID.JS0);
         JS_ACTOR = new ArcadeController(JSID.JS1);
-        
+
         AXIS_DRIVER_LEFT_X = JS_DRIVER.getAxisLeftX();
         AXIS_DRIVER_LEFT_Y = JS_DRIVER.getAxisLeftY();
         AXIS_DRIVER_RIGHT_X = JS_DRIVER.getAxisRightX();
         AXIS_DRIVER_RIGHT_Y = JS_DRIVER.getAxisRightY();
 
         BTN_SPEED_SCALE = JS_DRIVER.getButtonLeftShoulder();
-        
+
         BTN_EJECT_SEQUENCE = JS_ACTOR.getButtonEjectSequence();
         BTN_CANCEL_SEQUENCE = JS_ACTOR.getButtonCancelSequence();
         BTN_DRAWER_IN = JS_ACTOR.getButtonDrawerIn();
@@ -92,12 +92,12 @@ public final class OI {
         BTN_ARMS_UP = JS_ACTOR.getButtonArmsUp();
         BTN_ARMS_DOWN = JS_ACTOR.getButtonArmsDown();
         BTN_RAILROAD_TOGGLE = JS_ACTOR.getButtonRailroadToggle();
-        
+
         CMD_EJECT_BOXES = new CGEjectBoxes();
-        
+
         SWITCH_HAND_LEFT = RobotMap.getModule("limit_switch_hand_left");
         SWITCH_HAND_RIGHT = RobotMap.getModule("limit_switch_hand_right");
-        
+
         BTN_EJECT_SEQUENCE.runWhenPressed(CMD_EJECT_BOXES);
         BTN_CANCEL_SEQUENCE.cancelWhenPressed(CMD_EJECT_BOXES);
         BTN_DRAWER_IN.runWhileHeld(Drawer.retractContinue());
@@ -116,5 +116,5 @@ public final class OI {
         BTN_ARMS_DOWN.runWhileHeld(LeftElevator.downContinue());
 //        BTN_ARMS_DOWN.runWhileHeld(RightElevator.downContinue());
         // BTN_RAILROAD_TOGGLE.runWhenPressed(Railroad.toggle());
-    }    
+    }
 }

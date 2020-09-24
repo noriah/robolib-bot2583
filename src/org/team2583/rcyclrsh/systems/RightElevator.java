@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2015 Westwood Robotics <code.westwoodrobotics@gmail.com>.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -8,7 +8,7 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
  */
@@ -25,14 +25,14 @@ import io.github.robolib.util.mapper.RobotMap;
 
 /**
  *
- * @author Austin Reuland <amreuland@gmail.com>
+ * @author noriah reuland <code@noriah.dev>
  */
 public final class RightElevator extends Subsystem {
-    
+
     private static CANJaguar m_motor;
-    
+
     static double lift_speed;
-    
+
     public static void initialize(){
         m_motor = RobotMap.getModule("motor_elevator_right");
 
@@ -49,41 +49,41 @@ public final class RightElevator extends Subsystem {
     private RightElevator(){
         super("Elevator");
     }
-    
+
     public static Command up(){
         return m_instance.new CMDRightElevatorUp();
     }
-    
+
     public static Command down(){
         return m_instance.new CMDRightElevatorDown();
     }
-    
+
     public static Command upContinue(){
         return m_instance.new CMDRightElevatorUpContinue();
     }
-    
+
     public static Command downContinue(){
         return m_instance.new CMDRightElevatorDownContinue();
     }
-    
+
     public static Command stop(){
         return m_instance.new CMDRightElevatorStop();
     }
-    
+
     public static boolean isAtTopLimit(){
         return !m_motor.getForwardLimitOK();
     }
-    
+
     public static boolean isAtBottomLimit(){
         return !m_motor.getReverseLimitOK();
     }
-    
+
     static void setMotor(double value){
         m_motor.setSpeed(0);
     }
-    
+
     public void initDefaultCommand(){}
-    
+
     private final class CMDRightElevatorUp extends Command {
         public CMDRightElevatorUp(){requires(m_instance);}
         protected void initialize(){}
@@ -92,7 +92,7 @@ public final class RightElevator extends Subsystem {
         protected void end(){m_motor.setSpeed(0);}
         protected void interrupted(){m_motor.setSpeed(0);}
     }
-    
+
     private final class CMDRightElevatorDown extends Command {
         public CMDRightElevatorDown(){requires(m_instance);}
         protected void initialize(){}
@@ -108,7 +108,7 @@ public final class RightElevator extends Subsystem {
         protected void end(){m_motor.setSpeed(0);}
         protected void interrupted(){m_motor.setSpeed(0);}
     }
-    
+
     private final class CMDRightElevatorDownContinue extends ContinuousCommand {
         public CMDRightElevatorDownContinue(){requires(m_instance);}
         protected void execute(){m_motor.setSpeed(-lift_speed);}

@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2015 Westwood Robotics <code.westwoodrobotics@gmail.com>.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -8,7 +8,7 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
  */
@@ -23,12 +23,12 @@ import io.github.robolib.module.sensor.mpu6050.MPU6050;
 import io.github.robolib.util.Timer;
 
 /**
- * 
  *
- * @author Austin Reuland <amreuland@gmail.com>
+ *
+ * @author noriah reuland <code@noriah.dev>
  */
 public class LCDManager {
-    
+
     private LCD2004 lcd0;
 //    private Object m_sem;
     private static volatile boolean m_run = true;
@@ -36,41 +36,41 @@ public class LCDManager {
     private HMC5883L mag;
     private MPU6050 mpu;
 //    private ArdEx ad0;
-    
+
     public LCDManager(){
 //        m_sem = new Object();
         m_thread = new Thread(() -> run(), "LCD Manager");
         m_thread.setPriority(((Thread.NORM_PRIORITY + Thread.MAX_PRIORITY) / 2) - 5);
     }
-    
+
     protected void startThread(){
         if(!m_thread.isAlive())
             m_thread.start();
     }
-    
+
     public static void die(){
         m_run = false;
     }
-    
+
     private void run(){
         mpu = new MPU6050(Port.ONBOARD);
-        
+
 //        mpu.dmpInitialize();
 //        mpu.setXGyroOffset((short) 220);
 //        mpu.setYGyroOffset((short) 76);
 //        mpu.setZGyroOffset((short) -85);
 //        mpu.setZAccelOffset((short) 1788);
-        
+
 //        mpu.setDMPEnabled(true);
-        
+
         mpu.setI2CMasterModeEnabled(false);
         mpu.setI2CBypassEnabled(true);
-        
-        
+
+
         mag = new HMC5883L(Port.ONBOARD);
 //        ad0 = new ArdEx(Port.MXP, (byte)0x05);
         lcd0 = new LCD2004(Port.MXP);
-        
+
         lcd0.clear();
         lcd0.noBlink();
         lcd0.noCursor();
@@ -83,7 +83,7 @@ public class LCDManager {
 //        VectorInt16 aaWorld = new VectorInt16();
 //        double[] ypr = new double[3];
 //        short[] ag;
-        
+
 //        byte[] fifoBuffer;
 //        byte fifoCount;
 //        byte mpuIntStatus;
@@ -126,7 +126,7 @@ public class LCDManager {
 //            lcd0.setCursor(3, 0);
 //            lcd0.writeString("  DS: " + (DriverStation.isDSAttached() ? "Connected" : "Nope     "));
         }
-        
+
     }
 
 }
