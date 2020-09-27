@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Westwood Robotics <code.westwoodrobotics@gmail.com>.
+ * Copyright (c) 2015-2020 noriah reuland <code@noriah.dev>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -23,23 +23,21 @@ import io.github.robolib.command.PrintCommand;
 import io.github.robolib.util.mapper.RobotMap;
 
 /**
-*
-* @author noriah reuland <code@noriah.dev>
-*/
+ *
+ * @author noriah reuland <code@noriah.dev>
+ */
 public class BasicAuton extends CommandGroup {
 
-    public BasicAuton() {
-        addSequential(LeftElevator.upContinue(), RobotMap.getNumber("auton_basic_lift_time"));
-        addSequential(Drivetrain.mecanumDrive(
-                RobotMap.getNumber("auton_basic_drive_forward_speed_left"),
-                RobotMap.getNumber("auton_basic_drive_forward_speed_right"),
-                0), RobotMap.getNumber("auton_basic_drive_forward_time"));
-//        addSequential(Drivetrain.stopDrive());
-        addSequential(LeftElevator.downContinue(), RobotMap.getNumber("auton_basic_drop_time"));
-        addSequential(Drivetrain.mecanumDrive(
-                RobotMap.getNumber("auton_basic_drive_reverse_speed_left"),
-                RobotMap.getNumber("auton_basic_drive_reverse_speed_right"),
-                0), RobotMap.getNumber("auton_basic_drive_reverse_time"));
-        addSequential(new PrintCommand("Basic Autonomous Complete"));
-    }
+        public BasicAuton() {
+                addSequential(LeftElevator.upContinue(), RobotMap.getNumber("auton_basic_lift_time"));
+                addSequential(Drivetrain.mecanumDrive(RobotMap.getNumber("auton_basic_drive_forward_speed_left"),
+                                RobotMap.getNumber("auton_basic_drive_forward_speed_right"), 0),
+                                RobotMap.getNumber("auton_basic_drive_forward_time"));
+                // addSequential(Drivetrain.stopDrive());
+                addSequential(LeftElevator.downContinue(), RobotMap.getNumber("auton_basic_drop_time"));
+                addSequential(Drivetrain.mecanumDrive(RobotMap.getNumber("auton_basic_drive_reverse_speed_left"),
+                                RobotMap.getNumber("auton_basic_drive_reverse_speed_right"), 0),
+                                RobotMap.getNumber("auton_basic_drive_reverse_time"));
+                addSequential(new PrintCommand("Basic Autonomous Complete"));
+        }
 }

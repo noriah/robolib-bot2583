@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Westwood Robotics <code.westwoodrobotics@gmail.com>.
+ * Copyright (c) 2015-2020 noriah reuland <code@noriah.dev>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -31,65 +31,74 @@ public final class LeftTrolley extends Subsystem {
 
     static boolean m_flipped;
 
-    public static void initialize(){
+    public static void initialize() {
         m_solenoid = RobotMap.getModule("solenoid_left_hand");
     }
 
     private static final LeftTrolley m_instance = new LeftTrolley();
 
-    public static LeftTrolley getInstance(){
+    public static LeftTrolley getInstance() {
         return m_instance;
     }
 
-    private LeftTrolley(){
+    private LeftTrolley() {
         super("LeftTrolley");
     }
 
-    public static Command flipIn(){
+    public static Command flipIn() {
         return m_instance.new CMDLeftHandFlipIn();
     }
 
-    public static Command flipOut(){
+    public static Command flipOut() {
         return m_instance.new CMDLeftHandFlipOut();
     }
 
-    public static Command toggle(){
+    public static Command toggle() {
         return m_instance.new CMDLeftHandToggle();
     }
 
-    public static boolean isIn(){
+    public static boolean isIn() {
         return m_flipped;
     }
 
-    public void initDefaultCommand() {}
+    public void initDefaultCommand() {
+    }
 
     private final class CMDLeftHandFlipOut extends SingleActionCommand {
-        public CMDLeftHandFlipOut(){requires(m_instance);}
-        protected void execute(){
+        public CMDLeftHandFlipOut() {
+            requires(m_instance);
+        }
+
+        protected void execute() {
             m_solenoid.set(Solenoid.Value.OFF);
             m_flipped = false;
         }
     }
 
     private final class CMDLeftHandFlipIn extends SingleActionCommand {
-        public CMDLeftHandFlipIn(){requires(m_instance);}
-        protected void execute(){
+        public CMDLeftHandFlipIn() {
+            requires(m_instance);
+        }
+
+        protected void execute() {
             m_solenoid.set(Solenoid.Value.ON);
             m_flipped = true;
         }
     }
 
     private final class CMDLeftHandToggle extends SingleActionCommand {
-        public CMDLeftHandToggle(){requires(m_instance);}
-        protected void execute(){
-            if(m_flipped){
+        public CMDLeftHandToggle() {
+            requires(m_instance);
+        }
+
+        protected void execute() {
+            if (m_flipped) {
                 m_solenoid.set(Solenoid.Value.OFF);
                 m_flipped = false;
-            }else{
+            } else {
                 m_solenoid.set(Solenoid.Value.ON);
                 m_flipped = true;
             }
         }
     }
 }
-

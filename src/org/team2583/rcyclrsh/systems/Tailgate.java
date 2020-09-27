@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Westwood Robotics <code.westwoodrobotics@gmail.com>.
+ * Copyright (c) 2015-2020 noriah reuland <code@noriah.dev>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -31,69 +31,78 @@ public final class Tailgate extends Subsystem {
 
     static boolean m_tailgateDown;
 
-    public static void initialize(){
+    public static void initialize() {
         m_tailGate = RobotMap.getModule("solenoid_tailgate");
     }
 
     static final Tailgate m_instance = new Tailgate();
 
-    public static Tailgate getInstance(){
+    public static Tailgate getInstance() {
         return m_instance;
     }
 
-    private Tailgate(){
+    private Tailgate() {
         super("Tailgate Subsystem");
     }
 
-    public static Command raise(){
+    public static Command raise() {
         return m_instance.new CMDRaiseTailgate();
     }
 
-    public static Command lower(){
+    public static Command lower() {
         return m_instance.new CMDLowerTailgate();
     }
 
-    public static Command toggle(){
+    public static Command toggle() {
         return m_instance.new CMDToggleTailgate();
     }
 
-    public static boolean isLowered(){
+    public static boolean isLowered() {
         return m_tailgateDown;
     }
 
-    public void initDefaultCommand() {}
+    public void initDefaultCommand() {
+    }
 
     /**
      *
      * @author noriah reuland <code@noriah.dev>
      */
     private final class CMDLowerTailgate extends SingleActionCommand {
-        public CMDLowerTailgate(){requires(m_instance);}
-        protected void execute(){
+        public CMDLowerTailgate() {
+            requires(m_instance);
+        }
+
+        protected void execute() {
             m_tailGate.set(Solenoid.Value.ON);
             m_tailgateDown = true;
         }
     }
 
     private final class CMDRaiseTailgate extends SingleActionCommand {
-        public CMDRaiseTailgate(){requires(m_instance);}
-        protected void execute(){
+        public CMDRaiseTailgate() {
+            requires(m_instance);
+        }
+
+        protected void execute() {
             m_tailGate.set(Solenoid.Value.OFF);
             m_tailgateDown = false;
         }
     }
 
     private final class CMDToggleTailgate extends SingleActionCommand {
-        public CMDToggleTailgate(){requires(m_instance);}
-        protected void execute(){
-            if(m_tailgateDown){
+        public CMDToggleTailgate() {
+            requires(m_instance);
+        }
+
+        protected void execute() {
+            if (m_tailgateDown) {
                 m_tailGate.set(Solenoid.Value.OFF);
                 m_tailgateDown = false;
-            }else{
+            } else {
                 m_tailGate.set(Solenoid.Value.ON);
                 m_tailgateDown = true;
             }
         }
     }
 }
-

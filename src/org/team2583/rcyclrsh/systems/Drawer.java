@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Westwood Robotics <code.westwoodrobotics@gmail.com>.
+ * Copyright (c) 2015-2020 noriah reuland <code@noriah.dev>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -35,7 +35,7 @@ public final class Drawer extends Subsystem {
     static double m_drawerInSpeed;
     static boolean m_drawerExtended;
 
-    public static void initialize(){
+    public static void initialize() {
         m_drawerMotor = RobotMap.getModule("limited_controller_drawer");
 
         m_drawerOutSpeed = RobotMap.getNumber("drawer_out_speed");
@@ -44,107 +44,174 @@ public final class Drawer extends Subsystem {
 
     static final Drawer m_instance = new Drawer();
 
-    public static Drawer getInstance(){
+    public static Drawer getInstance() {
         return m_instance;
     }
 
-    private Drawer(){
+    private Drawer() {
         super("Drawer Subsystem");
     }
 
-    public static Command extend(){
+    public static Command extend() {
         return m_instance.new CMDExtendDrawer();
     }
 
-    public static Command retract(){
+    public static Command retract() {
         return m_instance.new CMDRetractDrawer();
     }
 
-    public static Command extendContinue(){
+    public static Command extendContinue() {
         return m_instance.new CMDExtendDrawerContinue();
     }
 
-    public static Command retractContinue(){
+    public static Command retractContinue() {
         return m_instance.new CMDRetractDrawerContinue();
     }
 
-    public static Command toggle(){
+    public static Command toggle() {
         return m_instance.new CMDToggleDrawer();
     }
 
-    public static Command stop(){
+    public static Command stop() {
         return m_instance.new CMDStopDrawer();
     }
 
-    protected static boolean isExtended(){
+    protected static boolean isExtended() {
         return m_drawerMotor.atFrontLimit();
     }
 
-    protected static boolean isRetracted(){
+    protected static boolean isRetracted() {
         return m_drawerMotor.atBackLimit();
     }
 
-    public void initDefaultCommand(){}
+    public void initDefaultCommand() {
+    }
 
     private class CMDExtendDrawer extends Command {
-        public CMDExtendDrawer(){requires(m_instance);}
-        protected void initialize(){}
-        protected void execute(){m_drawerMotor.setSpeed(m_drawerOutSpeed);
-        Logger.get(this).info(m_drawerMotor.atFrontLimit());}
-        protected boolean isFinished(){return m_drawerMotor.atFrontLimit();}
-        protected void end(){
+        public CMDExtendDrawer() {
+            requires(m_instance);
+        }
+
+        protected void initialize() {
+        }
+
+        protected void execute() {
+            m_drawerMotor.setSpeed(m_drawerOutSpeed);
+            Logger.get(this).info(m_drawerMotor.atFrontLimit());
+        }
+
+        protected boolean isFinished() {
+            return m_drawerMotor.atFrontLimit();
+        }
+
+        protected void end() {
             m_drawerMotor.setSpeed(0);
             m_drawerExtended = true;
         }
-        protected void interrupted(){m_drawerMotor.setSpeed(0);}
+
+        protected void interrupted() {
+            m_drawerMotor.setSpeed(0);
+        }
     }
 
     private class CMDRetractDrawer extends Command {
-        public CMDRetractDrawer(){requires(m_instance);}
-        protected void initialize(){}
-        protected void execute(){m_drawerMotor.setSpeed(m_drawerInSpeed);}
-        protected boolean isFinished(){return m_drawerMotor.atBackLimit();}
-        protected void end(){
+        public CMDRetractDrawer() {
+            requires(m_instance);
+        }
+
+        protected void initialize() {
+        }
+
+        protected void execute() {
+            m_drawerMotor.setSpeed(m_drawerInSpeed);
+        }
+
+        protected boolean isFinished() {
+            return m_drawerMotor.atBackLimit();
+        }
+
+        protected void end() {
             m_drawerMotor.setSpeed(0);
             m_drawerExtended = false;
         }
-        protected void interrupted(){m_drawerMotor.setSpeed(0);}
+
+        protected void interrupted() {
+            m_drawerMotor.setSpeed(0);
+        }
     }
 
     private final class CMDExtendDrawerContinue extends ContinuousCommand {
-        public CMDExtendDrawerContinue(){requires(m_instance);}
-        protected void execute(){m_drawerMotor.setSpeed(m_drawerOutSpeed);}
-        protected void end(){m_drawerMotor.setSpeed(0);}
-        protected void interrupted(){m_drawerMotor.setSpeed(0);}
+        public CMDExtendDrawerContinue() {
+            requires(m_instance);
+        }
+
+        protected void execute() {
+            m_drawerMotor.setSpeed(m_drawerOutSpeed);
+        }
+
+        protected void end() {
+            m_drawerMotor.setSpeed(0);
+        }
+
+        protected void interrupted() {
+            m_drawerMotor.setSpeed(0);
+        }
     }
 
     private final class CMDRetractDrawerContinue extends ContinuousCommand {
-        public CMDRetractDrawerContinue(){requires(m_instance);}
-        protected void execute(){m_drawerMotor.setSpeed(m_drawerInSpeed);}
-        protected void end(){m_drawerMotor.setSpeed(0);}
-        protected void interrupted(){m_drawerMotor.setSpeed(0);}
+        public CMDRetractDrawerContinue() {
+            requires(m_instance);
+        }
+
+        protected void execute() {
+            m_drawerMotor.setSpeed(m_drawerInSpeed);
+        }
+
+        protected void end() {
+            m_drawerMotor.setSpeed(0);
+        }
+
+        protected void interrupted() {
+            m_drawerMotor.setSpeed(0);
+        }
     }
 
     private class CMDToggleDrawer extends Command {
-        public CMDToggleDrawer(){requires(m_instance);}
+        public CMDToggleDrawer() {
+            requires(m_instance);
+        }
+
         double dir;
-        protected void initialize(){
+
+        protected void initialize() {
             dir = m_drawerExtended ? m_drawerInSpeed : m_drawerOutSpeed;
         }
-        protected void execute(){m_drawerMotor.setSpeed(dir);}
-        protected boolean isFinished(){
+
+        protected void execute() {
+            m_drawerMotor.setSpeed(dir);
+        }
+
+        protected boolean isFinished() {
             return dir > 0 ? m_drawerMotor.atFrontLimit() : m_drawerMotor.atBackLimit();
         }
-        protected void end(){
+
+        protected void end() {
             m_drawerMotor.setSpeed(0);
             m_drawerExtended = dir > 0;
         }
-        protected void interrupted(){m_drawerMotor.setSpeed(0);}
+
+        protected void interrupted() {
+            m_drawerMotor.setSpeed(0);
+        }
     }
 
     private class CMDStopDrawer extends SingleActionCommand {
-        public CMDStopDrawer(){requires(m_instance);}
-        protected void execute(){m_drawerMotor.setSpeed(0);}
+        public CMDStopDrawer() {
+            requires(m_instance);
+        }
+
+        protected void execute() {
+            m_drawerMotor.setSpeed(0);
+        }
     }
 }
-

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Westwood Robotics <code.westwoodrobotics@gmail.com>.
+ * Copyright (c) 2015-2020 noriah reuland <code@noriah.dev>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -29,22 +29,23 @@ import io.github.robolib.util.mapper.RobotMap;
  *
  * @author noriah reuland <code@noriah.dev>
  */
-public final class Drivetrain extends Subsystem{
+public final class Drivetrain extends Subsystem {
 
     /**
-     * DriveMode Class
-     * Used to determine the type of driving we are doing
+     * DriveMode Class Used to determine the type of driving we are doing
      */
     private final static class DriveMode {
         public final Command m_command;
         public final String m_name;
 
-        public DriveMode(Command command, String name){
+        public DriveMode(Command command, String name) {
             m_command = command;
             m_name = name;
         }
 
-        public String toString(){return m_name;}
+        public String toString() {
+            return m_name;
+        }
     }
 
     private static Talon m_motorFrontLeft;
@@ -60,16 +61,14 @@ public final class Drivetrain extends Subsystem{
 
     private static final Drivetrain m_instance = new Drivetrain();
 
-    public static void initialize(){
+    public static void initialize() {
 
         m_motorFrontLeft = RobotMap.getModule("motor_drive_front_left");
         m_motorFrontRight = RobotMap.getModule("motor_drive_front_right");
         m_motorRearLeft = RobotMap.getModule("motor_drive_back_left");
         m_motorRearRight = RobotMap.getModule("motor_drive_back_right");
 
-        m_driveBase = new DriveBase(
-                m_motorFrontLeft, m_motorFrontRight,
-                m_motorRearLeft, m_motorRearRight);
+        m_driveBase = new DriveBase(m_motorFrontLeft, m_motorFrontRight, m_motorRearLeft, m_motorRearRight);
 
         m_driveBase.setSafetyEnabled(false);
 
@@ -78,101 +77,115 @@ public final class Drivetrain extends Subsystem{
         TANK = new DriveMode(m_instance.new TankMode(), "Tank Drive");
     }
 
-    public static Drivetrain getInstance(){
+    public static Drivetrain getInstance() {
         return m_instance;
     }
 
-    private Drivetrain(){
+    private Drivetrain() {
         super("Drive Base Subsystem");
     }
 
-    public static Command setDriveMode(final DriveMode mode){
+    public static Command setDriveMode(final DriveMode mode) {
         return m_instance.new CMDChangeDrivemode(mode);
     }
 
     public void initDefaultCommand() {
-//        setDefaultCommand(MECANUM.m_command);
+        // setDefaultCommand(MECANUM.m_command);
     }
 
-    public static Command mecanumDrive(final double x, final double y, final double rot){
+    public static Command mecanumDrive(final double x, final double y, final double rot) {
         return m_instance.new CMDMecanumDrive(x, y, rot);
     }
 
     private final class CMDMecanumDrive extends ContinuousCommand {
         final double xMove, yMove, rotMove;
-        public CMDMecanumDrive(double x, double y, double rot){
+
+        public CMDMecanumDrive(double x, double y, double rot) {
             requires(m_instance);
             xMove = x;
             yMove = y;
             rotMove = rot;
         }
-//        protected void initialize(){}
-        protected void execute(){m_driveBase.mecanum(xMove, yMove, rotMove);}
-//        protected boolean isFinished(){return false;}
-        protected void end(){m_driveBase.stopMotor();}
-        protected void interrupted(){m_driveBase.stopMotor();}
+
+        // protected void initialize(){}
+        protected void execute() {
+            m_driveBase.mecanum(xMove, yMove, rotMove);
+        }
+
+        // protected boolean isFinished(){return false;}
+        protected void end() {
+            m_driveBase.stopMotor();
+        }
+
+        protected void interrupted() {
+            m_driveBase.stopMotor();
+        }
     }
 
     private final class CMDChangeDrivemode extends SingleActionCommand {
         private final DriveMode m_mode;
-        public CMDChangeDrivemode(final DriveMode mode){
+
+        public CMDChangeDrivemode(final DriveMode mode) {
             super("C_ChangeDrivemode - " + mode);
             requires(m_instance);
             m_mode = mode;
         }
-        protected void execute(){
-            if(m_mode == null){
+
+        protected void execute() {
+            if (m_mode == null) {
                 m_instance.setDefaultCommand(null);
-            }else{
+            } else {
                 m_instance.setDefaultCommand(m_mode.m_command);
             }
         }
     }
 
     private final class ArcadeMode extends ContinuousCommand {
-        public ArcadeMode(){requires(m_instance);}
+        public ArcadeMode() {
+            requires(m_instance);
+        }
+
         protected void execute() {
             double scale = (OI.BTN_SPEED_SCALE.getState() ? 0.75 : 1.0);
-            m_driveBase.arcade(
-                    OI.AXIS_DRIVER_LEFT_Y.get() * scale,
-                    OI.AXIS_DRIVER_RIGHT_X.get() * scale, true);
+            m_driveBase.arcade(OI.AXIS_DRIVER_LEFT_Y.get() * scale, OI.AXIS_DRIVER_RIGHT_X.get() * scale, true);
         }
     }
 
     private final class MecanumMode extends ContinuousCommand {
         private double slow = 1;
         private boolean pressed = false;
-        public MecanumMode(){
+
+        public MecanumMode() {
             setInterruptible(true);
-            requires(m_instance);}
+            requires(m_instance);
+        }
+
         protected void execute() {
-            if(OI.BTN_SPEED_SCALE.getState()){
-                if(!pressed){
+            if (OI.BTN_SPEED_SCALE.getState()) {
+                if (!pressed) {
                     pressed = true;
-                    if(slow == 1)
+                    if (slow == 1)
                         slow = 0.65;
                     else
                         slow = 1;
                 }
-            }else{
+            } else {
                 pressed = false;
             }
-            m_driveBase.mecanum(
-                    OI.AXIS_DRIVER_LEFT_X.get() * slow,
-                    OI.AXIS_DRIVER_LEFT_Y.get() * slow,
+            m_driveBase.mecanum(OI.AXIS_DRIVER_LEFT_X.get() * slow, OI.AXIS_DRIVER_LEFT_Y.get() * slow,
                     OI.AXIS_DRIVER_RIGHT_X.get() * slow, true);
         }
 
     }
 
     private final class TankMode extends ContinuousCommand {
-        public TankMode(){requires(m_instance);}
+        public TankMode() {
+            requires(m_instance);
+        }
+
         protected void execute() {
             double scale = (OI.BTN_SPEED_SCALE.getState() ? 0.75 : 1.0);
-            m_driveBase.tank(
-                    OI.AXIS_DRIVER_LEFT_Y.get() * scale,
-                    OI.AXIS_DRIVER_RIGHT_Y.get() * scale, true);
+            m_driveBase.tank(OI.AXIS_DRIVER_LEFT_Y.get() * scale, OI.AXIS_DRIVER_RIGHT_Y.get() * scale, true);
         }
     }
 }
-

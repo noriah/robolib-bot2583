@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Westwood Robotics <code.westwoodrobotics@gmail.com>.
+ * Copyright (c) 2015-2020 noriah reuland <code@noriah.dev>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -24,7 +24,7 @@ import io.github.robolib.command.CommandGroup;
  */
 public class CGEjectBoxes extends CommandGroup {
 
-    public CGEjectBoxes(){
+    public CGEjectBoxes() {
         addSequential(Drawer.extend());
         addSequential(Wait(0.5));
         addSequential(Tailgate.lower());

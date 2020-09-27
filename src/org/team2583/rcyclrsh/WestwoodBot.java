@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Westwood Robotics <code.westwoodrobotics@gmail.com>.
+ * Copyright (c) 2015-2020 noriah reuland <code@noriah.dev>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -37,19 +37,16 @@ import io.github.robolib.util.mapper.RobotMap;
  * @author noriah reuland <code@noriah.dev>
  */
 public class WestwoodBot extends RoboLib {
-//    private LCDManager m_lcdManager;
+    // private LCDManager m_lcdManager;
 
-    public WestwoodBot(){
+    public WestwoodBot() {
         super("Tetris", "1.0.0");
         RobotMap.setMapFile("/home/lvuser/rmap.json");
         enableDebug(true);
-//        m_lcdManager = new LCDManager();
-//        m_lcdManager.startThread();
+        // m_lcdManager = new LCDManager();
+        // m_lcdManager.startThread();
 
-
-
-
-//        TableSender.setEnabled(false);
+        // TableSender.setEnabled(false);
 
         Drivetrain.initialize();
         Drawer.initialize();
@@ -64,22 +61,22 @@ public class WestwoodBot extends RoboLib {
         new OI();
     }
 
-    public void robotInit(){
-        new TeleopMode("Teleop", true){
+    public void robotInit() {
+        new TeleopMode("Teleop", true) {
             final Command m_teleopDrive = Drivetrain.setDriveMode(Drivetrain.MECANUM);
             final Command m_teleopClear = Drivetrain.setDriveMode(null);
 
-            protected void init(){
+            protected void init() {
                 m_teleopDrive.start();
             }
 
-            protected void end(){
+            protected void end() {
                 m_teleopClear.start();
             }
         };
 
         new AutonCommandMode(new BasicAuton(), "Strat 1", true);
 
-//        new AutonCommandMode(new AdvancedAuton(), "Strat 2");
+        // new AutonCommandMode(new AdvancedAuton(), "Strat 2");
     }
 }

@@ -6,10 +6,8 @@ import io.github.robolib.command.CommandGroup;
  *
  */
 public class CGAutonInit extends CommandGroup {
-    
-    public  CGAutonInit() {
-        
-        
-        
+
+    public CGAutonInit() {
+
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Westwood Robotics <code.westwoodrobotics@gmail.com>.
+ * Copyright (c) 2015-2020 noriah reuland <code@noriah.dev>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -31,65 +31,74 @@ public final class Ejector extends Subsystem {
 
     static boolean m_extended;
 
-    public static void initialize(){
+    public static void initialize() {
         m_boxEjector = RobotMap.getModule("solenoid_boxEjector");
     }
 
     static final Ejector m_instance = new Ejector();
 
-    public static Ejector getInstance(){
+    public static Ejector getInstance() {
         return m_instance;
     }
 
-    private Ejector(){
+    private Ejector() {
         super("Ejector Subsystem");
     }
 
-    public static Command extend(){
+    public static Command extend() {
         return m_instance.new CMDExtendEjector();
     }
 
-    public static Command retract(){
+    public static Command retract() {
         return m_instance.new CMDRetractEjector();
     }
 
-    public static Command toggle(){
+    public static Command toggle() {
         return m_instance.new CMDToggleEjector();
     }
 
-    public static boolean isExtended(){
+    public static boolean isExtended() {
         return m_extended;
     }
 
-    public void initDefaultCommand() {}
+    public void initDefaultCommand() {
+    }
 
     private class CMDExtendEjector extends SingleActionCommand {
-        public CMDExtendEjector(){requires(m_instance);}
-        protected void execute(){
+        public CMDExtendEjector() {
+            requires(m_instance);
+        }
+
+        protected void execute() {
             m_boxEjector.set(Solenoid.Value.ON);
             m_extended = true;
         }
     }
 
     private class CMDRetractEjector extends SingleActionCommand {
-        public CMDRetractEjector(){requires(m_instance);}
-        protected void execute(){
+        public CMDRetractEjector() {
+            requires(m_instance);
+        }
+
+        protected void execute() {
             m_boxEjector.set(Solenoid.Value.OFF);
             m_extended = false;
         }
     }
 
     private class CMDToggleEjector extends SingleActionCommand {
-        public CMDToggleEjector(){requires(m_instance);}
-        protected void execute(){
-            if(m_extended){
+        public CMDToggleEjector() {
+            requires(m_instance);
+        }
+
+        protected void execute() {
+            if (m_extended) {
                 m_boxEjector.set(Solenoid.Value.OFF);
                 m_extended = false;
-            }else{
+            } else {
                 m_boxEjector.set(Solenoid.Value.ON);
                 m_extended = true;
             }
         }
     }
 }
-

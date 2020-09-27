@@ -104,7 +104,7 @@
       todir="${username}@${target}:${deploy.dir}"
       password="${password}"
       trust="true" />
-  	
+
   	<echo>[Project-deploy] Copying RMap file to RoboRIO.</echo>
   	<scp file="${rmap.file}"
   	      todir="${username}@${target}:${deploy.dir}"
@@ -141,7 +141,7 @@
     <scp file="${wpilib.ant.dir}/robotDebugCommand" todir="${username}@${target}:${command.dir}" password="${password}" trust="true"/>
     <!-- The frcdebug file is used as a flag for /usr/local/frc/bin/frcRunRobot.sh to run the robot program in debug mode -->
     <scp file="${wpilib.ant.dir}/frcdebug" todir="${username}@${target}:${debug.flag.dir}" password="${password}" trust="true"/>
-    
+
     <sshexec host="${target}"
       username="${username}"
       password="${password}"
@@ -166,13 +166,13 @@
     </post>
     <loadfile srcFile="sysProps.xml" encoding="UTF-16LE" property="roboRIOSysValues"/>
     <propertyregex property="roboRIOImage" input="${roboRIOSysValues}" regexp="FRC_roboRIO_2015_v([0-9]+)" select="\1" defaultValue="ImageRegExFail"/>
-    
+
     <assert message="roboRIO Image does not match plugin, allowed image version: ${roboRIOAllowedImages}">
       <bool>
         <contains string="${roboRIOAllowedImages}" substring="${roboRIOImage}"/>
       </bool>
     </assert>
-    
+
     <echo>roboRIO image version validated</echo>
     <sshexec host="${target}"
       username="${username}"

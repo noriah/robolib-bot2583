@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Westwood Robotics <code.westwoodrobotics@gmail.com>.
+ * Copyright (c) 2015-2020 noriah reuland <code@noriah.dev>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -33,7 +33,7 @@ public final class LeftElevator extends Subsystem {
 
     static double lift_speed;
 
-    public static void initialize(){
+    public static void initialize() {
         m_motor = RobotMap.getModule("motor_elevator_left");
 
         lift_speed = RobotMap.getNumber("armlift_speed");
@@ -42,83 +42,142 @@ public final class LeftElevator extends Subsystem {
 
     static final LeftElevator m_instance = new LeftElevator();
 
-    public static LeftElevator getInstance(){
+    public static LeftElevator getInstance() {
         return m_instance;
     }
 
-    private LeftElevator(){
+    private LeftElevator() {
         super("Elevator");
     }
 
-    public static Command up(){
+    public static Command up() {
         return m_instance.new CMDLeftElevatorUp();
     }
 
-    public static Command down(){
+    public static Command down() {
         return m_instance.new CMDLeftElevatorDown();
     }
 
-    public static Command upContinue(){
+    public static Command upContinue() {
         return m_instance.new CMDLeftElevatorUpContinue();
     }
 
-    public static Command downContinue(){
+    public static Command downContinue() {
         return m_instance.new CMDLeftElevatorDownContinue();
     }
 
-    public static Command stop(){
+    public static Command stop() {
         return m_instance.new CMDLeftElevatorStop();
     }
 
-    public static boolean isAtTopLimit(){
+    public static boolean isAtTopLimit() {
         return !m_motor.getForwardLimitOK();
     }
 
-    public static boolean isAtBottomLimit(){
+    public static boolean isAtBottomLimit() {
         return !m_motor.getReverseLimitOK();
     }
 
-    static void setMotor(double value){
+    static void setMotor(double value) {
         m_motor.setSpeed(0);
     }
 
-    public void initDefaultCommand(){}
+    public void initDefaultCommand() {
+    }
 
     private final class CMDLeftElevatorUp extends Command {
-        public CMDLeftElevatorUp(){requires(m_instance);}
-        protected void initialize(){}
-        protected void execute(){m_motor.setSpeed(lift_speed);}
-        protected boolean isFinished(){return isAtTopLimit();}
-        protected void end(){m_motor.setSpeed(0);}
-        protected void interrupted(){m_motor.setSpeed(0);}
+        public CMDLeftElevatorUp() {
+            requires(m_instance);
+        }
+
+        protected void initialize() {
+        }
+
+        protected void execute() {
+            m_motor.setSpeed(lift_speed);
+        }
+
+        protected boolean isFinished() {
+            return isAtTopLimit();
+        }
+
+        protected void end() {
+            m_motor.setSpeed(0);
+        }
+
+        protected void interrupted() {
+            m_motor.setSpeed(0);
+        }
     }
 
     private final class CMDLeftElevatorDown extends Command {
-        public CMDLeftElevatorDown(){requires(m_instance);}
-        protected void initialize(){}
-        protected void execute(){m_motor.setSpeed(-lift_speed);}
-        protected boolean isFinished(){return isAtBottomLimit();}
-        protected void end(){m_motor.setSpeed(0);}
-        protected void interrupted(){m_motor.setSpeed(0);}
+        public CMDLeftElevatorDown() {
+            requires(m_instance);
+        }
+
+        protected void initialize() {
+        }
+
+        protected void execute() {
+            m_motor.setSpeed(-lift_speed);
+        }
+
+        protected boolean isFinished() {
+            return isAtBottomLimit();
+        }
+
+        protected void end() {
+            m_motor.setSpeed(0);
+        }
+
+        protected void interrupted() {
+            m_motor.setSpeed(0);
+        }
     }
 
     private final class CMDLeftElevatorUpContinue extends ContinuousCommand {
-        public CMDLeftElevatorUpContinue(){requires(m_instance);}
-        protected void execute(){m_motor.setSpeed(lift_speed);}
-        protected void end(){m_motor.setSpeed(0);}
-        protected void interrupted(){m_motor.setSpeed(0);}
+        public CMDLeftElevatorUpContinue() {
+            requires(m_instance);
+        }
+
+        protected void execute() {
+            m_motor.setSpeed(lift_speed);
+        }
+
+        protected void end() {
+            m_motor.setSpeed(0);
+        }
+
+        protected void interrupted() {
+            m_motor.setSpeed(0);
+        }
     }
 
     private final class CMDLeftElevatorDownContinue extends ContinuousCommand {
-        public CMDLeftElevatorDownContinue(){requires(m_instance);}
-        protected void execute(){m_motor.setSpeed(-lift_speed);}
-        protected void end(){m_motor.setSpeed(0);}
-        protected void interrupted(){m_motor.setSpeed(0);}
+        public CMDLeftElevatorDownContinue() {
+            requires(m_instance);
+        }
+
+        protected void execute() {
+            m_motor.setSpeed(-lift_speed);
+        }
+
+        protected void end() {
+            m_motor.setSpeed(0);
+        }
+
+        protected void interrupted() {
+            m_motor.setSpeed(0);
+        }
     }
 
     private final class CMDLeftElevatorStop extends SingleActionCommand {
-        public CMDLeftElevatorStop(){requires(m_instance);}
-        protected void execute(){m_motor.setSpeed(0);}
+        public CMDLeftElevatorStop() {
+            requires(m_instance);
+        }
+
+        protected void execute() {
+            m_motor.setSpeed(0);
+        }
     }
 }
-

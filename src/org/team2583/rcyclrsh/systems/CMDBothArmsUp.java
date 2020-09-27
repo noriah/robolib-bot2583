@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Westwood Robotics <code.westwoodrobotics@gmail.com>.
+ * Copyright (c) 2015-2020 noriah reuland <code@noriah.dev>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -18,24 +18,27 @@ package org.team2583.rcyclrsh.systems;
 import io.github.robolib.command.ContinuousCommand;
 
 /**
-*
-* @author noriah reuland <code@noriah.dev>
-*/
+ *
+ * @author noriah reuland <code@noriah.dev>
+ */
 public class CMDBothArmsUp extends ContinuousCommand {
 
-    public CMDBothArmsUp(){
+    public CMDBothArmsUp() {
         requires(LeftElevator.getInstance());
         requires(RightElevator.getInstance());
     }
-    protected void execute(){
+
+    protected void execute() {
         LeftElevator.setMotor(LeftElevator.lift_speed);
         RightElevator.setMotor(RightElevator.lift_speed);
     }
-    protected void end(){
+
+    protected void end() {
         LeftElevator.setMotor(0);
         RightElevator.setMotor(0);
     }
-    protected void interrupted(){
+
+    protected void interrupted() {
         LeftElevator.setMotor(0);
         RightElevator.setMotor(0);
     }
